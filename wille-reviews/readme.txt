@@ -8,13 +8,23 @@ Stable tag: 1.0.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-Show your Google reviews in six layouts and five styles. Live preview, shortcode builder, block. Cached on your server, no visitor requests to Google.
+Show your Google reviews on your site – in a clean design that fits your theme. Six layouts, five styles, live preview. Free, no subscription.
 
 == Description ==
 
-**Your Google rating, where your visitors decide.** Wille Reviews loads your rating, the number of reviews and the latest reviews of your Google Business Profile and shows them in the design that fits your site – picked with a live preview, not by trial and error.
+**Most visitors check your Google rating before they get in touch.** Wille Reviews puts it on your own site: your average rating, the number of reviews and your latest reviews from your Google Business Profile – as a reviews section, a slider, a testimonial wall or a small badge next to your contact button.
 
-**Free. No subscription, no premium version, no account with us.** You connect your own Google API key; the plugin talks to Google from your server only.
+Review widgets often look like a foreign object on a carefully designed site. Wille Reviews is built the other way round: calm, typographic cards that take over your theme's font, hairline borders instead of loud shadows, your own accent colour and corner radius – and a design page where you see every change before it goes live.
+
+**Free. No subscription, no premium version, no account with us, no widget service in between.** You connect your own Google API key; your server talks to Google directly.
+
+= What makes it different =
+
+* **Designed to blend in.** Six layouts × five styles, each combinable with your accent colour and corner radius. The type scale is fixed and calm, so the widget looks the same on a theme with an 18 px body font as on one with 14 px.
+* **Pick the design by looking at it.** The design page shows every layout live with sample data or your real reviews, also on a dark page background, and writes the matching shortcode for you.
+* **Your visitors never contact Google.** Reviews are fetched and cached on your server, profile photos are copied to your site. No external scripts, no cookies, no iframe.
+* **Fast.** One small stylesheet and one small deferred script, loaded only on pages that show a widget. Works without JavaScript.
+* **Honest numbers.** Rating and total count always show your real Google values – even when you choose to show only reviews with four stars or more.
 
 = Six layouts =
 
@@ -23,33 +33,49 @@ Show your Google reviews in six layouts and five styles. Live preview, shortcode
 * **List** – full-width rows, easy to read, good for long texts and sidebars.
 * **Wall** – cards of different heights stacked without gaps (masonry), a testimonial wall.
 * **Badge** – compact rating badge for headers, footers, checkout and landing pages.
-* **Social proof** – overlapping reviewer photos, stars, rating and total count – ideal next to a call to action.
+* **Social proof** – reviewer photos, stars, rating and total count in one line – ideal next to a call to action.
 
 = Five styles =
 
-**Light**, **Dark**, **Minimal**, **Speech bubble** and **Accent color** – each combinable with every layout, with your own accent color and corner radius. Styles are pure CSS custom properties, so your theme can fine-tune anything.
+* **Light** – white cards with a hairline border, for most themes.
+* **Dark** – a neutral dark panel for dark sections and dark themes.
+* **Minimal** – no boxes at all, only typography and fine lines.
+* **Quote** – the review as a quotation on a soft tint, the reviewer below it.
+* **Accent color** – a light tint of your brand colour as background, the colour on rating and buttons.
 
-= Designed in a minute =
+Styles are pure CSS custom properties, so your theme can fine-tune anything.
 
-* **Design page with live preview**: click through layouts and styles, change color, columns, number of reviews, minimum stars and text length – the preview updates instantly, also against a dark page background.
-* **Shortcode builder**: copy the shortcode for exactly the design you see – or save it as the default for every widget.
+= Everywhere you need it =
+
+* **Shortcode** `[wille_reviews]` – copy it from the design page with exactly the design you see, or use the saved default.
 * **Block "Google Reviews"** with layout and style pickers in the sidebar and a real preview in the editor.
 * **Floating badge** (optional): a small rating badge in a corner of every page; visitors can close it.
 * **Dashboard widget** with your current rating and the latest reviews.
+* **"Write a review" button** that opens Google's review form for your business directly – the easiest way to collect new reviews.
 
-= Fast and privacy-friendly =
+= Reliable =
 
-* **No requests from your visitors to Google.** Reviews are fetched on your server and cached; a background job (WP-Cron) refreshes them, so no visitor ever waits for the API.
-* **Profile photos are copied to your site** once (uploads/wille-reviews/) – or switched off entirely. Visitors' browsers never load images from Google.
+* A background job (WP-Cron) refreshes the reviews, so no visitor ever waits for the API.
 * **Stays online during API outages**: the last good result bridges errors – but never longer than the 30 days Google allows for caching.
-* Tiny front end: one small stylesheet and one small deferred script, loaded only on pages that show a widget. Works without JavaScript, too.
+* Clear status on the settings page: last request, next refresh, and Google's error messages explained in plain language.
 * Accessible: stars announced as "4.8 out of 5 stars", keyboard-operable slider, reduced-motion support, right-to-left aware.
+
+= Privacy =
+
+* No requests from your visitors' browsers to Google – not even for profile photos (or switch photos off entirely).
+* No cookies, no tracking, no data about your visitors is stored or sent anywhere.
+* The only external service is the Google Places API, called from your server – see "External services" below.
+* Data is only removed on uninstall if you opt in.
 
 = For developers =
 
-* Shortcode `[wille_reviews]` with options `layout`, `style`, `accent`, `radius`, `columns`, `limit`, `min_rating`, `sort`, `lines`, `header`, `cta`, `avatars`, `link`, `align`, `id`, `class` – all documented on the design page.
+* Shortcode options `layout`, `style`, `accent`, `radius`, `columns`, `limit`, `min_rating`, `sort`, `lines`, `header`, `cta`, `avatars`, `link`, `align`, `id`, `class` – all documented on the design page.
 * Filters `willerev_html` (widget HTML) and `willerev_show_floating_badge`, action `willerev_refreshed`.
 * WP-CLI: `wp willerev status`, `refresh`, `flush`, `selftest`.
+
+= About the author =
+
+Wille Reviews is developed and maintained by Lucas Wille, a web developer from Magdeburg, Germany, who builds websites and AI automations: https://lucaswille.de/
 
 == Installation ==
 
@@ -106,14 +132,14 @@ Google Maps Platform Terms of Service: https://cloud.google.com/maps-platform/te
 
 1. Design page: pick a layout and a style, see the result instantly and copy the shortcode.
 2. Slider layout in the dark style.
-3. Wall (masonry) layout in the speech bubble style.
+3. Wall (masonry) layout in the quote style.
 4. Badge and social proof.
 5. Settings with step-by-step connection guide and status.
 
 == Changelog ==
 
 = 1.0.0 =
-* First release: six layouts (grid, slider, list, wall, badge, social proof), five styles (light, dark, minimal, speech bubble, accent color), design page with live preview and shortcode builder, block "Google Reviews", floating badge, dashboard widget, Places API (New) with server-side cache, outage backup and local profile photos, WP-CLI commands.
+* First release: six layouts (grid, slider, list, wall, badge, social proof), five styles (light, dark, minimal, quote, accent color), design page with live preview and shortcode builder, block "Google Reviews", floating badge, dashboard widget, Places API (New) with server-side cache, outage backup and local profile photos, WP-CLI commands.
 
 == Upgrade Notice ==
 

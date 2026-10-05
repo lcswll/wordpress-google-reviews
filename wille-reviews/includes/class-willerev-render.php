@@ -25,7 +25,7 @@ class WILLEREV_Render {
 	/**
 	 * Style slugs.
 	 */
-	const STYLES = array( 'light', 'dark', 'minimal', 'bubble', 'accent' );
+	const STYLES = array( 'light', 'dark', 'minimal', 'quote', 'accent' );
 
 	/**
 	 * Most reviews one widget shows (the Places API returns up to five).
@@ -88,7 +88,7 @@ class WILLEREV_Render {
 			'light'   => __( 'Light', 'wille-reviews' ),
 			'dark'    => __( 'Dark', 'wille-reviews' ),
 			'minimal' => __( 'Minimal', 'wille-reviews' ),
-			'bubble'  => __( 'Speech bubble', 'wille-reviews' ),
+			'quote'   => __( 'Quote', 'wille-reviews' ),
 			'accent'  => __( 'Accent color', 'wille-reviews' ),
 		);
 	}
@@ -120,6 +120,7 @@ class WILLEREV_Render {
 
 		$layout = sanitize_key( (string) $pick( 'layout', $defaults['layout'] ) );
 		$style  = sanitize_key( (string) $pick( 'style', $defaults['style'] ) );
+		$style  = 'bubble' === $style ? 'quote' : $style; // Name of the quote style in pre-release builds.
 		$accent = (string) $pick( 'accent', $defaults['accent'] );
 		$sort   = sanitize_key( (string) $pick( 'sort', 'newest' ) );
 		$align  = sanitize_key( (string) $pick( 'align', 'left' ) );

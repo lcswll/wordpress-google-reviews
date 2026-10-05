@@ -31,7 +31,7 @@ class WILLEREV_Frontend {
 	}
 
 	/**
-	 * [wille_reviews layout="grid|carousel|list|masonry|badge|social" style="light|dark|minimal|bubble|accent" …].
+	 * [wille_reviews layout="grid|carousel|list|masonry|badge|social" style="light|dark|minimal|quote|accent" …].
 	 *
 	 * @param array<string,mixed>|string $atts Attributes.
 	 * @return string

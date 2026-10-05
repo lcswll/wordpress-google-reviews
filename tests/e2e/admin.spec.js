@@ -92,7 +92,7 @@ test('layout, style and options update the preview and the shortcode instantly',
 test('saving the design changes the default of every widget', async ({ page }) => {
 	await page.goto(DESIGN);
 	await page.locator('.willerev-choice', { hasText: 'Wall' }).click();
-	await page.locator('.willerev-choice', { hasText: 'Speech bubble' }).click();
+	await page.locator('.willerev-choice', { hasText: 'Quote' }).click();
 	await Promise.all([page.waitForURL(/settings-updated=true/), page.getByRole('button', { name: 'Save as default design' }).click()]);
 	await expect(page.getByText('Design saved as default.')).toBeVisible();
 	await expect(page.locator('input[value="masonry"]')).toBeChecked();
@@ -100,7 +100,7 @@ test('saving the design changes the default of every widget', async ({ page }) =
 	await page.goto('/google-reviews/');
 	const section = page.locator('#google-reviews');
 	await expect(section).toHaveClass(/willerev--layout-masonry/);
-	await expect(section).toHaveClass(/willerev--style-bubble/);
+	await expect(section).toHaveClass(/willerev--style-quote/);
 
 	// The connection survived the design save.
 	await page.goto(SETTINGS);

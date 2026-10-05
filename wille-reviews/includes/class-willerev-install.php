@@ -33,7 +33,7 @@ class WILLEREV_Install {
 			'layout'              => 'grid',
 			'style'               => 'light',
 			'accent'              => '#1a73e8',
-			'radius'              => 14,
+			'radius'              => 12,
 			'columns'             => 3,
 			'limit'               => 5,
 			'min_rating'          => 0,

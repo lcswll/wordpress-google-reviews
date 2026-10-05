@@ -219,9 +219,6 @@ msgstr ""
 msgid "I have been a customer for years and have never been disappointed. Always reachable, always helpful."
 msgstr ""
 
-msgid "If Wille Reviews helps you, would you leave a short review on WordPress.org? It takes a minute and helps other site owners find it. Thank you!"
-msgstr ""
-
 msgid "Language"
 msgstr ""
 
@@ -357,6 +354,9 @@ msgstr ""
 msgid "Profile photos"
 msgstr ""
 
+msgid "Quote"
+msgstr ""
+
 msgid "Rate Wille Reviews on WordPress.org (opens in a new tab)"
 msgstr ""
 
@@ -452,9 +452,6 @@ msgstr ""
 msgid "Sorry, you are not allowed to do that."
 msgstr ""
 
-msgid "Speech bubble"
-msgstr ""
-
 msgid "Status"
 msgstr ""
 
@@ -539,11 +536,16 @@ msgstr ""
 msgid "Write a review"
 msgstr ""
 
+msgid "You know best how much a good review is worth. If Wille Reviews helps you, would you leave one on WordPress.org? It takes a minute and helps other site owners find the plugin. Thank you!"
+msgstr ""
+
 msgid "Your Google rating and latest reviews in the layout and style of your choice."
 msgstr ""
 
-msgid "Your Google reviews have been on your site for two weeks now."
-msgstr ""
+msgid "Your Google rating of %1$s %2$s from %3$s review has been on your site for two weeks now."
+msgid_plural "Your Google rating of %1$s %2$s from %3$s reviews has been on your site for two weeks now."
+msgstr[0] ""
+msgstr[1] ""
 
 msgid "Your business"
 msgstr ""

@@ -220,9 +220,6 @@ msgstr "Habe ich schon"
 msgid "I have been a customer for years and have never been disappointed. Always reachable, always helpful."
 msgstr "Ich bin seit Jahren Kunde und wurde nie enttäuscht. Immer erreichbar, immer hilfsbereit."
 
-msgid "If Wille Reviews helps you, would you leave a short review on WordPress.org? It takes a minute and helps other site owners find it. Thank you!"
-msgstr "Wenn dir Wille Reviews hilft: Würdest du eine kurze Bewertung auf WordPress.org hinterlassen? Das dauert eine Minute und hilft anderen, das Plugin zu finden. Danke!"
-
 msgid "Language"
 msgstr "Sprache"
 
@@ -358,6 +355,9 @@ msgstr "Professionell, pünktlich und sauber gearbeitet. Genau wie abgesprochen.
 msgid "Profile photos"
 msgstr "Profilbilder"
 
+msgid "Quote"
+msgstr "Zitat"
+
 msgid "Rate Wille Reviews on WordPress.org (opens in a new tab)"
 msgstr "Wille Reviews auf WordPress.org bewerten (öffnet in einem neuen Tab)"
 
@@ -453,9 +453,6 @@ msgstr "Social Proof"
 msgid "Sorry, you are not allowed to do that."
 msgstr "Das darfst du leider nicht."
 
-msgid "Speech bubble"
-msgstr "Sprechblase"
-
 msgid "Status"
 msgstr "Status"
 
@@ -540,11 +537,16 @@ msgstr "Mit der Standard-Aktualisierung alle 12 Stunden stellt das Plugin etwa 6
 msgid "Write a review"
 msgstr "Bewertung schreiben"
 
+msgid "You know best how much a good review is worth. If Wille Reviews helps you, would you leave one on WordPress.org? It takes a minute and helps other site owners find the plugin. Thank you!"
+msgstr "Du weißt selbst am besten, wie viel eine gute Bewertung wert ist. Wenn dir Wille Reviews hilft, hinterlässt du eine auf WordPress.org? Das dauert eine Minute und hilft anderen, das Plugin zu finden. Danke!"
+
 msgid "Your Google rating and latest reviews in the layout and style of your choice."
 msgstr "Deine Google-Bewertung und die neuesten Rezensionen in Layout und Style deiner Wahl."
 
-msgid "Your Google reviews have been on your site for two weeks now."
-msgstr "Deine Google-Bewertungen sind jetzt seit zwei Wochen auf deiner Website."
+msgid "Your Google rating of %1$s %2$s from %3$s review has been on your site for two weeks now."
+msgid_plural "Your Google rating of %1$s %2$s from %3$s reviews has been on your site for two weeks now."
+msgstr[0] "Deine Google-Bewertung von %1$s %2$s aus %3$s Rezension ist jetzt seit zwei Wochen auf deiner Website."
+msgstr[1] "Deine Google-Bewertung von %1$s %2$s aus %3$s Rezensionen ist jetzt seit zwei Wochen auf deiner Website."
 
 msgid "Your business"
 msgstr "Dein Unternehmen"

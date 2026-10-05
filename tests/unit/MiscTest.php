@@ -82,13 +82,13 @@ final class MiscTest extends TestCase {
 			array(
 				'_section' => 'design',
 				'layout'   => 'social',
-				'style'    => 'bubble',
+				'style'    => 'quote',
 				'accent'   => '#FF0000',
 				'columns'  => '7',
 			)
 		);
 		$this->assertSame( 'social', $design['layout'] );
-		$this->assertSame( 'bubble', $design['style'] );
+		$this->assertSame( 'quote', $design['style'] );
 		$this->assertSame( '#ff0000', $design['accent'] );
 		$this->assertSame( 4, $design['columns'] );
 		$this->assertSame( 0, $design['show_header'], 'unchecked box on the design page' );

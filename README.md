@@ -35,7 +35,7 @@ Alles außerhalb von `wille-reviews/` ist Entwicklungswerkzeug und wird nie mit 
 
 ## Kernkonzepte
 
-**Layouts × Styles:** Layouts (`grid`, `carousel`, `list`, `masonry`, `badge`, `social`) bestimmen das Markup, Styles (`light`, `dark`, `minimal`, `bubble`, `accent`) tauschen nur CSS Custom Properties (`.willerev--style-*`). Deshalb kann die Design-Seite jedes Layout einmal rendern und Style, Farbe, Spalten, Anzahl, Mindeststerne und Schalter rein im Browser umschalten. Akzentfarbe, Eckenradius, Spalten und Zeilenkürzung kommen als Inline-Variablen; die Textfarbe auf der Akzentfarbe wird per Kontrast berechnet (`WILLEREV_Render::ink_on()`).
+**Layouts × Styles:** Layouts (`grid`, `carousel`, `list`, `masonry`, `badge`, `social`) bestimmen das Markup, Styles (`light`, `dark`, `minimal`, `quote`, `accent`) tauschen nur CSS Custom Properties (`.willerev--style-*`). Deshalb kann die Design-Seite jedes Layout einmal rendern und Style, Farbe, Spalten, Anzahl, Mindeststerne und Schalter rein im Browser umschalten. Akzentfarbe, Eckenradius, Spalten und Zeilenkürzung kommen als Inline-Variablen; die Textfarbe auf der Akzentfarbe wird per Kontrast berechnet (`WILLEREV_Render::ink_on()`).
 
 **Standards & Überschreiben:** Die Design-Seite speichert die Standard-Optionen; Shortcode-Attribute und Block-Einstellungen überschreiben sie einzeln. Der Shortcode-Generator schreibt nur Optionen, die vom aktuellen Standard abweichen.
 

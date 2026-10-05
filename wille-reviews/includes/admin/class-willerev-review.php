@@ -31,6 +31,24 @@ class WILLEREV_Review {
 	const SNOOZE = 30 * DAY_IN_SECONDS;
 
 	/**
+	 * Markup allowed in the title (the star row of WILLEREV_Render::stars()).
+	 */
+	const STARS_HTML = array(
+		'span' => array(
+			'class'      => true,
+			'role'       => true,
+			'aria-label' => true,
+			'style'      => true,
+		),
+		'svg'  => array(
+			'viewbox'     => true,
+			'aria-hidden' => true,
+			'focusable'   => true,
+		),
+		'path' => array( 'd' => true ),
+	);
+
+	/**
 	 * Hook up.
 	 *
 	 * @return void
@@ -75,7 +93,7 @@ class WILLEREV_Review {
 		$choice = get_option( self::OPTION, array() );
 		$choice = is_array( $choice ) ? $choice : array();
 		$data   = WILLEREV_Places::is_configured() ? WILLEREV_Places::backup() : null;
-		if ( ! self::should_ask( $choice, time(), (int) get_option( 'willerev_activated_at', 0 ), null !== $data && (int) $data['count'] > 0 ) ) {
+		if ( null === $data || ! self::should_ask( $choice, time(), (int) get_option( 'willerev_activated_at', 0 ), (int) $data['count'] > 0 ) ) {
 			return;
 		}
 
@@ -84,15 +102,32 @@ class WILLEREV_Review {
 		};
 		?>
 		<div class="notice willerev-review" role="region" aria-label="<?php esc_attr_e( 'Review Wille Reviews', 'wille-reviews' ); ?>">
-			<p>
-				<strong><?php esc_html_e( 'Your Google reviews have been on your site for two weeks now.', 'wille-reviews' ); ?></strong>
-				<?php esc_html_e( 'If Wille Reviews helps you, would you leave a short review on WordPress.org? It takes a minute and helps other site owners find it. Thank you!', 'wille-reviews' ); ?>
-			</p>
-			<p>
-				<a class="button button-primary" href="<?php echo esc_url( $link( 'rate' ) ); ?>" target="_blank" rel="noopener"><?php esc_html_e( 'Sure, write a review', 'wille-reviews' ); ?></a>
-				<a class="button" href="<?php echo esc_url( $link( 'later' ) ); ?>"><?php esc_html_e( 'Maybe later', 'wille-reviews' ); ?></a>
-				<a href="<?php echo esc_url( $link( 'done' ) ); ?>"><?php esc_html_e( 'I already did', 'wille-reviews' ); ?></a>
-			</p>
+			<svg class="willerev-review__mark" viewBox="0 0 40 40" aria-hidden="true" focusable="false">
+				<rect width="40" height="40" rx="10" fill="#4b5bdc"/>
+				<path d="M20 9.5l3.1 6.3 6.9 1-5 4.9 1.2 6.9L20 25.3l-6.2 3.3 1.2-6.9-5-4.9 6.9-1z" fill="#fff"/>
+			</svg>
+			<div>
+				<p class="willerev-review__title">
+					<?php
+					echo wp_kses(
+						sprintf(
+							/* translators: 1: Google rating, e.g. 4.8, 2: stars, 3: number of reviews */
+							_n( 'Your Google rating of %1$s %2$s from %3$s review has been on your site for two weeks now.', 'Your Google rating of %1$s %2$s from %3$s reviews has been on your site for two weeks now.', (int) $data['count'], 'wille-reviews' ),
+							esc_html( number_format_i18n( (float) $data['rating'], 1 ) ),
+							WILLEREV_Render::stars( (float) $data['rating'] ),
+							esc_html( number_format_i18n( (int) $data['count'] ) )
+						),
+						self::STARS_HTML
+					);
+					?>
+				</p>
+				<p><?php esc_html_e( 'You know best how much a good review is worth. If Wille Reviews helps you, would you leave one on WordPress.org? It takes a minute and helps other site owners find the plugin. Thank you!', 'wille-reviews' ); ?></p>
+				<p class="willerev-review__actions">
+					<a class="button button-primary" href="<?php echo esc_url( $link( 'rate' ) ); ?>" target="_blank" rel="noopener"><?php esc_html_e( 'Sure, write a review', 'wille-reviews' ); ?></a>
+					<a class="button" href="<?php echo esc_url( $link( 'later' ) ); ?>"><?php esc_html_e( 'Maybe later', 'wille-reviews' ); ?></a>
+					<a class="willerev-review__done" href="<?php echo esc_url( $link( 'done' ) ); ?>"><?php esc_html_e( 'I already did', 'wille-reviews' ); ?></a>
+				</p>
+			</div>
 		</div>
 		<?php
 	}

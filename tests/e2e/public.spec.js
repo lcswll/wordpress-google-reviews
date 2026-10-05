@@ -36,7 +36,7 @@ test('every layout renders for visitors without loading anything from Google', a
 	await expect(v.page.locator('#grid.willerev--layout-grid.willerev--style-light')).toBeVisible();
 	await expect(v.page.locator('#slider.willerev--layout-carousel.willerev--style-dark')).toBeVisible();
 	await expect(v.page.locator('#list.willerev--layout-list.willerev--style-minimal')).toBeVisible();
-	await expect(v.page.locator('#wall.willerev--layout-masonry.willerev--style-bubble')).toBeVisible();
+	await expect(v.page.locator('#wall.willerev--layout-masonry.willerev--style-quote')).toBeVisible();
 	await expect(v.page.locator('.willerev--layout-badge.willerev--style-accent .willerev-badge')).toBeVisible();
 	await expect(v.page.locator('.willerev--layout-social .willerev-social')).toBeVisible();
 

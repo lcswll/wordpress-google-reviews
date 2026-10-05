@@ -193,7 +193,7 @@ $willerev_icons = array(
 			<thead><tr><th><?php esc_html_e( 'Option', 'wille-reviews' ); ?></th><th><?php esc_html_e( 'Values', 'wille-reviews' ); ?></th><th><?php esc_html_e( 'Effect', 'wille-reviews' ); ?></th></tr></thead>
 			<tbody>
 				<tr><td><code>layout</code></td><td><code>grid</code> <code>carousel</code> <code>list</code> <code>masonry</code> <code>badge</code> <code>social</code></td><td><?php esc_html_e( 'Structure of the widget.', 'wille-reviews' ); ?></td></tr>
-				<tr><td><code>style</code></td><td><code>light</code> <code>dark</code> <code>minimal</code> <code>bubble</code> <code>accent</code></td><td><?php esc_html_e( 'Visual style.', 'wille-reviews' ); ?></td></tr>
+				<tr><td><code>style</code></td><td><code>light</code> <code>dark</code> <code>minimal</code> <code>quote</code> <code>accent</code></td><td><?php esc_html_e( 'Visual style.', 'wille-reviews' ); ?></td></tr>
 				<tr><td><code>accent</code></td><td><code>#1a73e8</code></td><td><?php esc_html_e( 'Accent color for buttons, links and the accent style.', 'wille-reviews' ); ?></td></tr>
 				<tr><td><code>radius</code></td><td>0–32</td><td><?php esc_html_e( 'Corner radius in pixels.', 'wille-reviews' ); ?></td></tr>
 				<tr><td><code>columns</code></td><td>1–4</td><td><?php esc_html_e( 'Columns of grid, slider and wall (fewer on small screens automatically).', 'wille-reviews' ); ?></td></tr>

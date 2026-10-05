@@ -5,39 +5,51 @@
  * below. Per widget: --willerev-accent, --willerev-accent-ink, --willerev-radius, --willerev-cols, --willerev-lines
  * (set inline from the settings / shortcode / block). Override anything from your theme, e.g.
  *   .willerev { --willerev-star: #f59e0b; }
+ *
+ * Design rules: the theme's font family, but a fixed, calm type scale (themes with an 18–20 px body would otherwise
+ * blow the cards up); hairline borders instead of heavy shadows; no decoration that competes with the reviews.
  */
 
 .willerev {
 	--willerev-accent: #1a73e8;
 	--willerev-accent-ink: #fff;
-	--willerev-radius: 14px;
+	--willerev-radius: 12px;
 	--willerev-cols: 3;
 	--willerev-lines: 5;
 	--willerev-gap: 16px;
 	--willerev-bg: transparent;
 	--willerev-pad: 0;
-	--willerev-ink: #1f2328;
-	--willerev-muted: #5f6368;
+	/*
+	 * Text outside of boxes follows the theme's text colour (light and dark themes alike); the shades are mixed
+	 * from it. Boxes with their own background (white cards, badges) set fixed colours below.
+	 */
+	--willerev-ink: currentColor;
+	--willerev-muted: color-mix(in srgb, currentColor 64%, transparent);
+	--willerev-line: color-mix(in srgb, currentColor 14%, transparent);
 	--willerev-link: var(--willerev-accent);
 	--willerev-card-bg: #fff;
-	--willerev-card-border: #e3e5e8;
-	--willerev-card-shadow: 0 1px 2px rgba(16, 24, 40, 0.04), 0 6px 18px rgba(16, 24, 40, 0.06);
-	--willerev-head-bg: var(--willerev-card-bg);
-	--willerev-star: #fbbc04;
-	--willerev-star-empty: #dadce0;
-	--willerev-star-size: 18px;
-	--willerev-button-bg: #fff;
+	--willerev-card-border: #e6e8eb;
+	--willerev-card-shadow: 0 1px 2px rgba(16, 24, 40, 0.04);
+	--willerev-star: #f5b400;
+	--willerev-star-empty: color-mix(in srgb, currentColor 20%, transparent);
+	--willerev-star-size: 15px;
+	--willerev-button-bg: transparent;
 	--willerev-button-ink: var(--willerev-ink);
-	--willerev-button-border: #dadce0;
+	--willerev-button-border: color-mix(in srgb, currentColor 28%, transparent);
 	--willerev-face-ring: #fff;
+	--willerev-avatar-l: 93%;
+	--willerev-avatar-ink-l: 32%;
 
 	box-sizing: border-box;
 	margin: 0 0 1.5em;
 	padding: var(--willerev-pad);
-	border-radius: calc(var(--willerev-radius) + 6px);
+	border-radius: calc(var(--willerev-radius) + 4px);
 	background: var(--willerev-bg);
 	color: var(--willerev-ink);
+	font-size: clamp(14px, 0.875em, 16px);
+	font-weight: 400;
 	line-height: 1.5;
+	letter-spacing: normal;
 	text-align: left;
 }
 
@@ -83,7 +95,7 @@
 }
 
 .willerev-stars svg + svg {
-	margin-inline-start: 2px;
+	margin-inline-start: 1px;
 }
 
 .willerev-stars__empty {
@@ -112,15 +124,16 @@
 	flex: none;
 	align-items: center;
 	justify-content: center;
-	width: 40px;
-	height: 40px;
+	width: 36px;
+	height: 36px;
 	max-width: none;
 	margin: 0;
 	border-radius: 50%;
 	object-fit: cover;
-	background: hsl(var(--willerev-hue, 210) 42% 46%);
-	color: #fff;
-	font-size: 17px;
+	/* Initials: a quiet tint of a colour derived from the name, not a loud fill. */
+	background: hsl(var(--willerev-hue, 210) 30% var(--willerev-avatar-l));
+	color: hsl(var(--willerev-hue, 210) 35% var(--willerev-avatar-ink-l));
+	font-size: 14px;
 	font-weight: 600;
 	line-height: 1;
 	box-shadow: none;
@@ -132,17 +145,18 @@
 
 /* ----------------------------------------------------------------- header */
 
+/*
+ * Summary above the reviews: brand line, then the score; the buttons sit on the right. No box around it –
+ * a hairline separates it from the cards, so the reviews stay the focus.
+ */
 .willerev__header {
-	display: flex;
-	flex-wrap: wrap;
-	align-items: center;
-	gap: 12px 24px;
+	display: grid;
+	grid-template-columns: minmax(0, 1fr) auto;
+	align-items: end;
+	gap: 6px 24px;
 	margin: 0 0 20px;
-	padding: 18px 22px;
-	border: 1px solid var(--willerev-card-border);
-	border-radius: var(--willerev-radius);
-	background: var(--willerev-head-bg);
-	box-shadow: var(--willerev-card-shadow);
+	padding: 0 0 20px;
+	border-bottom: 1px solid var(--willerev-line);
 }
 
 .willerev--no-header .willerev__header {
@@ -151,50 +165,59 @@
 
 .willerev__brand {
 	display: flex;
+	grid-column: 1;
 	align-items: center;
 	gap: 8px;
-	font-weight: 600;
+	color: var(--willerev-muted);
+	font-size: 0.875em;
+	font-weight: 500;
 }
 
 .willerev__demo {
-	padding: 2px 8px;
-	border-radius: 999px;
-	background: #fef7e0;
-	color: #8a5a00;
+	padding: 1px 7px;
+	border: 1px solid #ecd9a6;
+	border-radius: 4px;
+	background: #fdf8e8;
+	color: #7a5800;
 	font-size: 11px;
 	font-weight: 600;
-	letter-spacing: 0.04em;
-	text-transform: uppercase;
 }
 
 .willerev__score {
 	display: flex;
+	grid-column: 1;
 	flex-wrap: wrap;
 	align-items: center;
-	gap: 6px 10px;
+	gap: 4px 12px;
 }
 
 .willerev__rating {
-	font-size: 2em;
-	font-weight: 700;
-	line-height: 1;
+	font-size: 2.25em;
+	font-weight: 600;
+	letter-spacing: -0.02em;
+	line-height: 1.1;
 	font-variant-numeric: tabular-nums;
 }
 
 .willerev__score .willerev-stars {
-	--willerev-star-size: 22px;
+	--willerev-star-size: 18px;
+
+	align-self: center;
 }
 
 .willerev__count {
 	color: var(--willerev-muted);
-	font-size: 0.9em;
+	font-size: 0.875em;
 }
 
 .willerev__actions {
 	display: flex;
+	grid-row: 1 / span 2;
+	grid-column: 2;
 	flex-wrap: wrap;
+	align-items: center;
+	align-self: center;
 	gap: 8px;
-	margin-inline-start: auto;
 }
 
 .willerev--no-cta .willerev__actions {
@@ -204,27 +227,34 @@
 .willerev .willerev__button {
 	display: inline-flex;
 	align-items: center;
-	padding: 0.55em 1.15em;
+	min-height: 38px;
+	padding: 0 16px;
 	border: 1px solid var(--willerev-button-border);
-	border-radius: 999px;
+	border-radius: min(var(--willerev-radius), 8px);
 	background: var(--willerev-button-bg);
+	box-shadow: none;
 	color: var(--willerev-button-ink);
-	font-size: 0.9em;
-	font-weight: 600;
+	font-size: 0.875em;
+	font-weight: 500;
 	line-height: 1.2;
 	text-decoration: none;
-	transition: filter 0.15s ease, transform 0.15s ease;
+	white-space: nowrap;
+	transition: background-color 0.15s ease, border-color 0.15s ease, filter 0.15s ease;
 }
 
 .willerev .willerev__button:hover {
-	filter: brightness(0.96);
-	transform: translateY(-1px);
+	border-color: color-mix(in srgb, var(--willerev-button-border) 60%, var(--willerev-ink));
 }
 
 .willerev .willerev__button--primary {
-	border-color: transparent;
+	border-color: var(--willerev-accent);
 	background: var(--willerev-accent);
 	color: var(--willerev-accent-ink);
+}
+
+.willerev .willerev__button--primary:hover {
+	border-color: var(--willerev-accent);
+	filter: brightness(0.93);
 }
 
 /* ------------------------------------------------------------------ cards */
@@ -232,9 +262,9 @@
 .willerev-card {
 	display: flex;
 	flex-direction: column;
-	gap: 12px;
+	gap: 14px;
 	min-width: 0;
-	padding: 18px 20px;
+	padding: 20px;
 	border: 1px solid var(--willerev-card-border);
 	border-radius: var(--willerev-radius);
 	background: var(--willerev-card-bg);
@@ -249,10 +279,16 @@
 	min-width: 0;
 }
 
+.willerev-card__head .willerev-g {
+	align-self: flex-start;
+	margin-top: 2px;
+}
+
 .willerev-card__meta {
 	display: flex;
 	flex: 1;
 	flex-direction: column;
+	gap: 1px;
 	min-width: 0;
 	line-height: 1.3;
 }
@@ -260,6 +296,7 @@
 .willerev .willerev-card__author {
 	overflow: hidden;
 	color: inherit;
+	font-size: 0.9375em;
 	font-weight: 600;
 	text-decoration: none;
 	text-overflow: ellipsis;
@@ -268,11 +305,12 @@
 
 .willerev a.willerev-card__author:hover {
 	text-decoration: underline;
+	text-underline-offset: 2px;
 }
 
 .willerev-card__time {
 	color: var(--willerev-muted);
-	font-size: 0.85em;
+	font-size: 0.8125em;
 }
 
 .willerev-card__body {
@@ -283,7 +321,7 @@
 
 .willerev .willerev-card__text {
 	margin: 0;
-	font-size: 0.95em;
+	font-size: 0.9375em;
 	line-height: 1.6;
 	overflow-wrap: anywhere;
 }
@@ -307,8 +345,8 @@
 	box-shadow: none;
 	color: var(--willerev-link);
 	font: inherit;
-	font-size: 0.9em;
-	font-weight: 600;
+	font-size: 0.875em;
+	font-weight: 500;
 	letter-spacing: normal;
 	text-transform: none;
 	cursor: pointer;
@@ -321,6 +359,7 @@
 
 .willerev .willerev-card__more:hover {
 	text-decoration: underline;
+	text-underline-offset: 2px;
 }
 
 /* ------------------------------------------------------------------- grid */
@@ -344,8 +383,8 @@
 	grid-auto-flow: column;
 	gap: var(--willerev-gap);
 	align-items: stretch;
-	margin: -6px -4px;
-	padding: 6px 4px 10px;
+	margin: -4px;
+	padding: 4px;
 	overflow-x: auto;
 	overscroll-behavior-x: contain;
 	scroll-padding-inline: 4px; /* = padding, so the first card snaps to scrollLeft 0 */
@@ -368,17 +407,21 @@
 	display: none;
 	align-items: center;
 	justify-content: center;
-	width: 40px;
-	height: 40px;
-	margin: -20px 0 0;
+	width: 36px;
+	height: 36px;
+	margin: -18px 0 0;
 	padding: 0;
 	border: 1px solid var(--willerev-card-border);
 	border-radius: 50%;
 	background: var(--willerev-card-bg);
-	box-shadow: 0 4px 14px rgba(16, 24, 40, 0.14);
+	box-shadow: 0 1px 3px rgba(16, 24, 40, 0.1);
 	color: var(--willerev-ink);
 	cursor: pointer;
-	transition: opacity 0.15s ease;
+	transition: opacity 0.15s ease, border-color 0.15s ease;
+}
+
+.willerev .willerev__nav:hover {
+	border-color: var(--willerev-button-border);
 }
 
 .willerev.is-scrollable .willerev__nav {
@@ -391,11 +434,11 @@
 }
 
 .willerev .willerev__nav--prev {
-	left: -14px;
+	left: -12px;
 }
 
 .willerev .willerev__nav--next {
-	right: -14px;
+	right: -12px;
 }
 
 .willerev.is-rtl .willerev__nav svg {
@@ -411,10 +454,10 @@
 }
 
 @container (min-width: 640px) {
-	.willerev--layout-list:not(.willerev--style-bubble) .willerev-card {
+	.willerev--layout-list:not(.willerev--style-quote) .willerev-card {
 		display: grid;
 		grid-template-columns: minmax(180px, 240px) minmax(0, 1fr);
-		gap: 20px;
+		gap: 24px;
 		align-items: start;
 	}
 }
@@ -448,10 +491,6 @@
 	.willerev--cols-4.willerev--layout-carousel .willerev__items {
 		grid-auto-columns: calc((100% - var(--willerev-gap)) / 2);
 	}
-
-	.willerev__actions {
-		margin-inline-start: 0;
-	}
 }
 
 /* :is() matches the specificity of the column rules above, so one column wins on narrow containers. */
@@ -477,7 +516,13 @@
 	}
 
 	.willerev__header {
-		padding: 16px;
+		grid-template-columns: minmax(0, 1fr);
+	}
+
+	.willerev__actions {
+		grid-row: auto;
+		grid-column: 1;
+		margin-top: 10px;
 	}
 }
 
@@ -502,52 +547,50 @@
 	display: inline-flex;
 	align-items: center;
 	gap: 12px;
-	padding: 10px 18px 10px 12px;
+	padding: 10px 16px 10px 12px;
 	border: 1px solid var(--willerev-card-border);
 	border-radius: var(--willerev-radius);
 	background: var(--willerev-card-bg);
 	box-shadow: var(--willerev-card-shadow);
 	color: var(--willerev-ink);
-	line-height: 1.2;
+	line-height: 1.25;
 	text-align: left;
 	text-decoration: none;
-	transition: transform 0.15s ease, box-shadow 0.15s ease;
+	transition: border-color 0.15s ease, box-shadow 0.15s ease;
 }
 
 .willerev a.willerev-badge:hover {
-	box-shadow: 0 2px 4px rgba(16, 24, 40, 0.06), 0 12px 28px rgba(16, 24, 40, 0.12);
-	transform: translateY(-1px);
+	border-color: var(--willerev-button-border);
+	box-shadow: 0 2px 8px rgba(16, 24, 40, 0.08);
 }
 
 .willerev-badge__body {
 	display: flex;
 	flex-direction: column;
-	gap: 3px;
+	gap: 2px;
 }
 
 .willerev-badge__title {
 	color: var(--willerev-muted);
-	font-size: 0.72em;
-	font-weight: 700;
-	letter-spacing: 0.05em;
-	text-transform: uppercase;
+	font-size: 0.8125em;
+	font-weight: 500;
 }
 
 .willerev-badge__score {
 	display: flex;
 	align-items: center;
-	gap: 6px;
+	gap: 8px;
 }
 
 .willerev-badge__rating {
-	font-size: 1.35em;
-	font-weight: 700;
+	font-size: 1.25em;
+	font-weight: 600;
 	font-variant-numeric: tabular-nums;
 }
 
 .willerev-badge__count {
 	color: var(--willerev-muted);
-	font-size: 0.8em;
+	font-size: 0.8125em;
 }
 
 /* ------------------------------------------------------------ social proof */
@@ -567,11 +610,10 @@
 }
 
 .willerev .willerev-social__faces .willerev-avatar {
-	width: 42px;
-	height: 42px;
-	margin-inline-start: -12px;
+	width: 38px;
+	height: 38px;
+	margin-inline-start: -10px;
 	border: 2px solid var(--willerev-face-ring);
-	box-shadow: 0 2px 6px rgba(16, 24, 40, 0.12);
 }
 
 .willerev .willerev-social__faces .willerev-avatar:first-child {
@@ -581,7 +623,7 @@
 .willerev-social__body {
 	display: flex;
 	flex-direction: column;
-	gap: 4px;
+	gap: 3px;
 }
 
 .willerev-social__score {
@@ -591,13 +633,13 @@
 }
 
 .willerev-social__rating {
-	font-weight: 700;
+	font-weight: 600;
 	font-variant-numeric: tabular-nums;
 }
 
 .willerev-social__max {
 	color: var(--willerev-muted);
-	font-weight: 500;
+	font-weight: 400;
 }
 
 .willerev-social__caption {
@@ -605,11 +647,13 @@
 	align-items: center;
 	gap: 6px;
 	color: var(--willerev-muted);
-	font-size: 0.9em;
+	font-size: 0.875em;
 }
 
 .willerev-social__caption strong {
-	color: var(--willerev-ink);
+	/* Not var(--willerev-ink): that is currentColor here, i.e. the muted caption colour. Bold is enough. */
+	color: inherit;
+	font-weight: 600;
 }
 
 /* --------------------------------------------------------- floating badge */
@@ -619,7 +663,7 @@
 	bottom: 20px;
 	z-index: 99990;
 	margin: 0;
-	animation: willerev-in 0.4s ease 0.6s both;
+	animation: willerev-in 0.3s ease 0.6s both;
 }
 
 .willerev--floating-right {
@@ -631,24 +675,24 @@
 }
 
 .willerev--floating .willerev-badge {
-	box-shadow: 0 2px 6px rgba(16, 24, 40, 0.08), 0 14px 36px rgba(16, 24, 40, 0.18);
+	box-shadow: 0 1px 3px rgba(16, 24, 40, 0.06), 0 8px 24px rgba(16, 24, 40, 0.12);
 }
 
 .willerev .willerev-badge__close {
 	position: absolute;
-	top: -9px;
-	right: -9px;
+	top: -8px;
+	right: -8px;
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	width: 24px;
-	height: 24px;
+	width: 22px;
+	height: 22px;
 	margin: 0;
 	padding: 0;
 	border: 1px solid var(--willerev-card-border);
 	border-radius: 50%;
 	background: var(--willerev-card-bg);
-	box-shadow: 0 2px 6px rgba(16, 24, 40, 0.15);
+	box-shadow: 0 1px 3px rgba(16, 24, 40, 0.12);
 	color: var(--willerev-muted);
 	cursor: pointer;
 	opacity: 0;
@@ -684,7 +728,7 @@
 @keyframes willerev-in {
 	from {
 		opacity: 0;
-		transform: translateY(14px);
+		transform: translateY(8px);
 	}
 
 	to {
@@ -695,58 +739,82 @@
 
 /* ================================================================= styles */
 
-/* Dark */
+/* Elements on their own white surface: fixed dark text, whatever the page around them looks like. */
+.willerev--style-light :is(.willerev-card, .willerev-badge),
+.willerev--style-accent .willerev-card,
+.willerev--style-quote .willerev-badge,
+.willerev:not(.willerev--style-dark) :is(.willerev__nav, .willerev-badge__close) {
+	--willerev-ink: #1f2328;
+	--willerev-muted: #646b73;
+	--willerev-line: #e6e8eb;
+	--willerev-star-empty: #dfe2e6;
+	--willerev-button-border: #d4d8dd;
+	--willerev-avatar-l: 93%;
+	--willerev-avatar-ink-l: 32%;
+}
+
+/* Dark: a neutral, near-black panel (not navy), cards one step lighter. */
 .willerev--style-dark {
-	--willerev-ink: #e8edf5;
-	--willerev-muted: #9aa5b5;
+	--willerev-ink: #eceef1;
+	--willerev-muted: #9ba3ad;
+	--willerev-line: #2a2f36;
 	--willerev-link: color-mix(in srgb, var(--willerev-accent) 55%, #fff);
-	--willerev-card-bg: #182235;
-	--willerev-card-border: #27344c;
+	--willerev-card-bg: #1b1f24;
+	--willerev-card-border: #2a2f36;
 	--willerev-card-shadow: none;
-	--willerev-head-bg: #182235;
-	--willerev-star-empty: #3a475e;
-	--willerev-button-bg: transparent;
-	--willerev-button-border: #3a475e;
-	--willerev-face-ring: #0f1729;
+	--willerev-star-empty: #3a4049;
+	--willerev-button-border: #3a4049;
+	--willerev-face-ring: #121519;
+	--willerev-avatar-l: 26%;
+	--willerev-avatar-ink-l: 82%;
 }
 
 .willerev--style-dark:not(.willerev--layout-badge):not(.willerev--layout-social) {
-	--willerev-bg: #0f1729;
-	--willerev-pad: 24px;
+	--willerev-bg: #121519;
+	--willerev-pad: 28px;
 }
 
 .willerev--style-dark .willerev-social {
-	padding: 10px 18px 10px 12px;
-	border-radius: 999px;
-	background: #0f1729;
+	padding: 8px 16px 8px 8px;
+	border-radius: var(--willerev-radius);
+	background: #121519;
 }
 
-/* Minimal */
+/* Minimal: no boxes – typography and hairlines only. */
 .willerev--style-minimal {
 	--willerev-card-bg: transparent;
 	--willerev-card-border: transparent;
 	--willerev-card-shadow: none;
-	--willerev-head-bg: transparent;
-}
-
-.willerev--style-minimal .willerev__header {
-	padding: 0 0 18px;
-	border-width: 0 0 1px;
-	border-color: #e3e5e8;
-	border-radius: 0;
 }
 
 .willerev--style-minimal .willerev-card {
-	padding: 4px 0 4px 18px;
-	border-width: 0 0 0 3px;
-	border-color: var(--willerev-accent);
+	padding: 0;
+	border: 0;
 	border-radius: 0;
 }
 
+.willerev--style-minimal.willerev--layout-grid .willerev__items,
+.willerev--style-minimal.willerev--layout-masonry .willerev__items {
+	gap: 32px;
+	column-gap: 32px;
+}
+
+.willerev--style-minimal.willerev--layout-masonry .willerev-card {
+	margin-bottom: 32px;
+}
+
+.willerev--style-minimal.willerev--layout-carousel .willerev__items {
+	gap: 32px;
+	grid-auto-columns: calc((100% - (var(--willerev-cols) - 1) * 32px) / var(--willerev-cols));
+}
+
+.willerev--style-minimal.willerev--layout-list .willerev__items {
+	gap: 0;
+}
+
 .willerev--style-minimal.willerev--layout-list .willerev-card {
-	padding: 18px 0 0;
-	border-width: 1px 0 0;
-	border-color: #e3e5e8;
+	padding: 20px 0;
+	border-top: 1px solid var(--willerev-line);
 }
 
 .willerev--style-minimal.willerev--layout-list .willerev-card:first-child {
@@ -754,16 +822,27 @@
 	border-top: 0;
 }
 
+.willerev--style-minimal .willerev__nav {
+	border-color: var(--willerev-line);
+	background: #fff;
+}
+
 .willerev--style-minimal .willerev-badge {
 	padding: 4px 0;
+	border: 0;
+	box-shadow: none;
 }
 
-/* Speech bubble */
-.willerev--style-bubble {
-	--willerev-bubble: #fff;
+/*
+ * Quote: the review as a quotation on a soft tint, the reviewer below it – the classic
+ * testimonial. No speech-bubble tail, no decorative quote marks.
+ */
+.willerev--style-quote {
+	/* Derived from the text colour, so the tint works on white, grey and dark page backgrounds alike. */
+	--willerev-quote-bg: color-mix(in srgb, var(--willerev-ink) 5%, transparent);
 }
 
-.willerev--style-bubble .willerev-card {
+.willerev--style-quote .willerev-card {
 	gap: 14px;
 	padding: 0;
 	border: 0;
@@ -771,86 +850,40 @@
 	box-shadow: none;
 }
 
-.willerev--style-bubble .willerev-card__head {
+.willerev--style-quote .willerev-card__head {
 	order: 2;
-	padding-inline-start: 14px;
+	padding-inline-start: 4px;
 }
 
-.willerev--style-bubble .willerev-card__body {
-	position: relative;
-	padding: 20px 22px 18px;
-	border: 1px solid #e3e5e8;
+.willerev--style-quote .willerev-card__body {
+	gap: 10px;
+	padding: 20px 22px;
 	border-radius: var(--willerev-radius);
-	background: var(--willerev-bubble);
-	box-shadow: 0 1px 2px rgba(16, 24, 40, 0.04), 0 8px 22px rgba(16, 24, 40, 0.07);
+	background: var(--willerev-quote-bg);
 }
 
-.willerev--style-bubble .willerev-card__body::before {
-	content: "\201C";
-	position: absolute;
-	top: 2px;
-	inset-inline-end: 16px;
-	color: var(--willerev-accent);
-	font-family: Georgia, "Times New Roman", serif;
-	font-size: 64px;
-	line-height: 1;
-	opacity: 0.18;
+.willerev--style-quote .willerev-card__text {
+	font-size: 1em;
+	line-height: 1.65;
 }
 
-.willerev--style-bubble .willerev-card__body::after {
-	content: "";
-	position: absolute;
-	bottom: -8px;
-	inset-inline-start: 28px;
-	width: 15px;
-	height: 15px;
-	border: 1px solid #e3e5e8;
-	border-width: 0 1px 1px 0;
-	background: var(--willerev-bubble);
-	transform: rotate(45deg);
+/* Accent color: a light tint of the accent as the section background, the accent on the score and buttons. */
+.willerev--style-accent {
+	--willerev-card-border: color-mix(in srgb, var(--willerev-accent) 14%, #e6e8eb);
+	--willerev-line: color-mix(in srgb, var(--willerev-accent) 18%, #e6e8eb);
 }
 
-.willerev--style-bubble .willerev-badge {
-	border-radius: 999px;
-}
-
-/* Accent color */
 .willerev--style-accent:not(.willerev--layout-badge):not(.willerev--layout-social) {
-	--willerev-bg: color-mix(in srgb, var(--willerev-accent) 7%, #fff);
-	--willerev-pad: 24px;
+	--willerev-bg: color-mix(in srgb, var(--willerev-accent) 6%, #fff);
+	--willerev-pad: 28px;
+	--willerev-ink: #1f2328;
+	--willerev-muted: #646b73;
+	--willerev-star-empty: #dfe2e6;
+	--willerev-button-border: #d4d8dd;
 }
 
-.willerev--style-accent .willerev__header {
-	--willerev-ink: var(--willerev-accent-ink);
-	--willerev-muted: color-mix(in srgb, var(--willerev-accent-ink) 78%, var(--willerev-accent));
-	--willerev-star-empty: color-mix(in srgb, var(--willerev-accent-ink) 30%, var(--willerev-accent));
-
-	border-color: transparent;
-	background: var(--willerev-accent);
-	color: var(--willerev-accent-ink);
-}
-
-.willerev--style-accent .willerev__header .willerev-g {
-	padding: 3px;
-	border-radius: 50%;
-	background: #fff;
-	box-sizing: content-box;
-}
-
-.willerev--style-accent .willerev__header .willerev__button {
-	border-color: color-mix(in srgb, var(--willerev-accent-ink) 45%, transparent);
-	background: transparent;
-	color: var(--willerev-accent-ink);
-}
-
-.willerev--style-accent .willerev__header .willerev__button--primary {
-	border-color: transparent;
-	background: var(--willerev-accent-ink);
+.willerev--style-accent .willerev__rating {
 	color: var(--willerev-accent);
-}
-
-.willerev--style-accent .willerev-card {
-	border-top: 3px solid var(--willerev-accent);
 }
 
 .willerev--style-accent .willerev-badge,
@@ -865,8 +898,8 @@
 }
 
 .willerev--style-accent .willerev-social {
-	padding: 10px 18px 10px 12px;
-	border-radius: 999px;
+	padding: 8px 16px 8px 8px;
+	border-radius: var(--willerev-radius);
 }
 
 .willerev--style-accent .willerev-badge .willerev-g,

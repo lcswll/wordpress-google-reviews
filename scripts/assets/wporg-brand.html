@@ -3,97 +3,72 @@
 <head>
 <meta charset="utf-8">
 <!--
-	Source for the wordpress.org icon and banners, rendered by scripts/wporg-assets.mjs into .wordpress-org/:
-	  ?asset=icon     the icon (static, square)
-	  ?asset=banner   the banner
+	Source of the Wille Reviews brand assets, rendered by scripts/wporg-assets.mjs into .wordpress-org/:
+	  ?asset=icon&frame=N  – one frame of the animated icon (window.iconFrames lists the frame delays)
+	  ?asset=banner        – the directory banner
+	The mark: a speech bubble (a review) in which five stars light up one after the other, then it rests.
 -->
 <style>
 	:root {
+		--night: #0f1530;
+		--indigo: #2a3bb8;
 		--blue: #1a73e8;
-		--violet: #5b4ce0;
-		--pink: #b84ad8;
-		--night: #111a3a;
-		--star: #fbbc04;
+		--star: #f5b400;
+		--ink: #1f2328;
+		--muted: #646b73;
+		--line: #e6e8eb;
 	}
 	* { box-sizing: border-box; margin: 0; }
 	[hidden] { display: none !important; }
-	html, body { width: 100%; height: 100%; overflow: hidden; }
+	html, body { width: 100%; height: 100%; overflow: hidden; background: var(--night); }
 	body { font-family: "Segoe UI Variable Display", "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto, sans-serif; }
 
-	/* ------------------------------------------------------------- icon */
-	.icon {
-		width: 100%;
-		height: 100%;
-		display: grid;
-		place-items: center;
-		background:
-			radial-gradient(circle at 28% 18%, rgba(255, 255, 255, 0.24), transparent 46%),
-			linear-gradient(140deg, var(--blue) 0%, var(--violet) 55%, var(--pink) 100%);
-	}
-	.icon svg { width: 80%; height: 80%; filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.25)); }
+	#icon, #icon svg { display: block; width: 100%; height: 100%; }
 
 	/* ----------------------------------------------------------- banner */
 	.banner {
 		position: relative;
 		width: 100%;
 		height: 100%;
+		overflow: hidden;
 		display: flex;
 		align-items: center;
-		gap: 5%;
+		gap: 4.5%;
 		padding: 0 5.5%;
 		background:
-			radial-gradient(circle at 88% 6%, rgba(255, 255, 255, 0.18), transparent 38%),
-			radial-gradient(circle at 4% 120%, rgba(26, 115, 232, 0.55), transparent 45%),
-			linear-gradient(115deg, var(--night) 0%, #2d2a8f 55%, var(--violet) 100%);
+			radial-gradient(circle at 10% 10%, rgba(42, 59, 184, 0.75), transparent 45%),
+			radial-gradient(circle at 95% 120%, rgba(26, 115, 232, 0.35), transparent 50%),
+			var(--night);
 		color: #fff;
-		overflow: hidden;
 	}
-	.copy { flex: 0 0 44%; }
-	.copy h1 { font-size: 5.2vw; line-height: 1.05; font-weight: 700; letter-spacing: -0.03em; }
-	.copy p { margin-top: 2.2vh; font-size: 1.95vw; line-height: 1.35; color: rgba(255, 255, 255, 0.82); }
-	.copy .chips { display: flex; flex-wrap: wrap; gap: 0.8vw; margin-top: 3.4vh; }
-	.copy .chips span { padding: 0.45vw 1.1vw; border-radius: 99px; background: rgba(255, 255, 255, 0.14); font-size: 1.35vw; font-weight: 600; }
+	.banner .mark { flex: 0 0 auto; width: 13%; aspect-ratio: 1; border-radius: 22%; overflow: hidden; box-shadow: 0 1.4vw 3vw rgba(0, 0, 0, 0.35); }
+	.banner .mark svg { display: block; width: 100%; height: 100%; }
+	.banner .copy { flex: 1 1 auto; }
+	.banner h1 { font-size: 5.4vw; font-weight: 650; letter-spacing: -0.03em; line-height: 1.02; }
+	.banner p { margin-top: 1.4vw; max-width: 32vw; font-size: 1.9vw; line-height: 1.35; color: #c9d1f0; }
 
-	.cards { position: relative; flex: 1; height: 82%; }
+	.stack { position: relative; flex: 0 0 38%; display: flex; flex-direction: column; gap: 1.1vw; }
 	.card {
-		position: absolute;
-		width: 52%;
-		padding: 1.6vw 1.8vw;
-		border-radius: 1.4vw;
 		background: #fff;
-		color: #1f2328;
-		box-shadow: 0 1.4vw 3.6vw rgba(5, 10, 40, 0.35);
+		color: var(--ink);
+		border-radius: 1vw;
+		padding: 1.4vw 1.6vw;
+		box-shadow: 0 1.6vw 4vw rgba(3, 6, 25, 0.45);
 	}
-	.card.dark { background: #182235; color: #e8edf5; }
-	.card.bubble { border: 0; }
-	.card .head { display: flex; align-items: center; gap: 0.9vw; }
-	.card .avatar { width: 3vw; height: 3vw; border-radius: 50%; display: grid; place-items: center; color: #fff; font-weight: 700; font-size: 1.4vw; }
-	.card .name { font-weight: 700; font-size: 1.4vw; }
-	.card .when { font-size: 1.05vw; opacity: 0.65; }
-	.card .g { margin-left: auto; width: 1.9vw; height: 1.9vw; }
-	.card .stars { margin: 1vw 0 0.6vw; color: var(--star); font-size: 1.7vw; letter-spacing: 0.15vw; }
-	.card .text { font-size: 1.25vw; line-height: 1.45; opacity: 0.88; }
-	.c1 { left: 0; top: 4%; transform: rotate(-4deg); }
-	.c2 { left: 40%; top: 0; z-index: 2; }
-	.c3 { left: 18%; top: 52%; z-index: 3; transform: rotate(2.5deg); }
-	.badge {
-		position: absolute;
-		right: 2%;
-		bottom: 6%;
-		z-index: 4;
-		display: flex;
-		align-items: center;
-		gap: 1vw;
-		padding: 1vw 1.6vw 1vw 1.1vw;
-		border-radius: 1.2vw;
-		background: #fff;
-		color: #1f2328;
-		box-shadow: 0 1.2vw 3vw rgba(5, 10, 40, 0.35);
-	}
-	.badge .g { width: 2.6vw; height: 2.6vw; }
-	.badge strong { font-size: 2.4vw; }
-	.badge .stars { color: var(--star); font-size: 1.6vw; }
-	.badge small { display: block; font-size: 1vw; opacity: 0.65; }
+	.summary { display: flex; align-items: center; gap: 1.1vw; }
+	.summary .num { font-size: 3vw; font-weight: 650; letter-spacing: -0.02em; line-height: 1; }
+	.summary small { display: block; margin-top: 0.3vw; color: var(--muted); font-size: 1vw; }
+	.summary .g { margin-left: auto; width: 2.2vw; height: 2.2vw; }
+	.review .head { display: flex; align-items: center; gap: 0.9vw; }
+	.review .avatar { width: 2.6vw; height: 2.6vw; border-radius: 50%; display: grid; place-items: center; background: hsl(150 30% 92%); color: hsl(150 35% 30%); font-weight: 600; font-size: 1.1vw; }
+	.review b { display: block; font-size: 1.15vw; font-weight: 600; }
+	.review i { font-style: normal; color: var(--muted); font-size: 0.9vw; }
+	.review .g { margin-left: auto; align-self: flex-start; width: 1.5vw; height: 1.5vw; }
+	.review .stars { margin: 1vw 0 0.6vw; }
+	.banner .review p { max-width: none; margin: 0; color: var(--ink); font-size: 1.1vw; line-height: 1.55; }
+	.stars { display: flex; gap: 0.15vw; }
+	.stars svg { width: 1.4vw; height: 1.4vw; fill: var(--star); }
+	.summary .stars svg { width: 1.6vw; height: 1.6vw; }
 </style>
 </head>
 <body>
@@ -105,48 +80,112 @@
 			<path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
 			<path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
 		</symbol>
+		<symbol id="star" viewBox="0 0 20 20"><path d="M10 1.6l2.35 4.76 5.25.76-3.8 3.7.9 5.23L10 14.5l-4.7 2.55.9-5.23-3.8-3.7 5.25-.76L10 1.6z"/></symbol>
 	</defs>
 </svg>
 
-<div class="icon" id="icon" hidden>
-	<svg viewBox="0 0 100 100" aria-hidden="true">
-		<path d="M16 12h68a12 12 0 0 1 12 12v42a12 12 0 0 1-12 12H44L24 94V78h-8A12 12 0 0 1 4 66V24a12 12 0 0 1 12-12Z" fill="#fff"/>
-		<path d="M50 22l7.6 15.4 17 2.5-12.3 12 2.9 16.9L50 60.8l-15.2 8 2.9-16.9-12.3-12 17-2.5Z" fill="#fbbc04"/>
-	</svg>
-</div>
+<div id="icon" hidden></div>
 
-<div class="banner" id="banner" hidden>
+<div id="banner" class="banner" hidden>
+	<div class="mark"></div>
 	<div class="copy">
-		<h1>Your Google reviews.<br>Your design.</h1>
-		<p>Six layouts, five styles, live preview – cached on your server, no visitor requests to Google.</p>
-		<div class="chips"><span>Grid</span><span>Slider</span><span>Wall</span><span>Badge</span><span>Social proof</span></div>
+		<h1>Wille Reviews</h1>
+		<p>Your Google reviews on your site – in a design that fits.</p>
 	</div>
-	<div class="cards">
-		<div class="card c1">
-			<div class="head"><span class="avatar" style="background:#2f7d5b">J</span><div><div class="name">Jonas W.</div><div class="when">1 week ago</div></div><svg class="g"><use href="#g"/></svg></div>
-			<div class="stars">★★★★★</div>
-			<div class="text">Fast, friendly and fair prices. Appointment the same week.</div>
-		</div>
-		<div class="card dark c2">
-			<div class="head"><span class="avatar" style="background:#7a4fb8">M</span><div><div class="name">Mira S.</div><div class="when">2 weeks ago</div></div><svg class="g"><use href="#g"/></svg></div>
-			<div class="stars">★★★★★</div>
-			<div class="text">Very good advice and a pleasant atmosphere – we will definitely come back!</div>
-		</div>
-		<div class="card c3">
-			<div class="head"><span class="avatar" style="background:#b8573d">A</span><div><div class="name">Anna B.</div><div class="when">3 days ago</div></div><svg class="g"><use href="#g"/></svg></div>
-			<div class="stars">★★★★★</div>
-			<div class="text">Fantastic service from start to finish. Clear recommendation!</div>
-		</div>
-		<div class="badge">
+	<div class="stack" aria-hidden="true">
+		<div class="card summary">
+			<span class="num">4.8</span>
+			<span><span class="stars"></span><small>Based on 127 reviews</small></span>
 			<svg class="g"><use href="#g"/></svg>
-			<div><strong>4.9</strong> <span class="stars">★★★★★</span><small>312 reviews</small></div>
+		</div>
+		<div class="card review">
+			<div class="head"><span class="avatar">A</span><span><b>Anna Becker</b><i>3 days ago</i></span><svg class="g"><use href="#g"/></svg></div>
+			<div class="stars"></div>
+			<p>Fantastic service from start to finish. The team took time for our questions – clear recommendation!</p>
 		</div>
 	</div>
 </div>
 
 <script>
-	const asset = new URLSearchParams(location.search).get('asset') || 'banner';
-	document.getElementById(asset).hidden = false;
+	const C = { night: '#0f1530', indigo: '#2a3bb8', blue: '#1a73e8', star: '#f5b400', empty: '#d9def0', paper: '#ffffff' };
+	const STAR = 'M10 1.6l2.35 4.76 5.25.76-3.8 3.7.9 5.23L10 14.5l-4.7 2.55.9-5.23-3.8-3.7 5.25-.76L10 1.6z';
+	const ease = (t) => 1 - Math.pow(1 - t, 3);
+	const back = (t) => { const s = 1.6; return 1 + (s + 1) * Math.pow(t - 1, 3) + s * Math.pow(t - 1, 2); };
+
+	/**
+	 * The mark at one moment.
+	 * @param {number[]} fill    0..1 per star – how far each star has lit up (scale overshoots slightly).
+	 * @param {boolean}  rounded Rounded square (banner) or full square (icon; wordpress.org adds no mask).
+	 */
+	function mark(fill = [1, 1, 1, 1, 1], rounded = false) {
+		const size = 13;
+		const gap = 1.4;
+		const width = 5 * size + 4 * gap;
+		const x0 = 50 - width / 2;
+		const y = 44 - size / 2;
+		const stars = fill.map((f, i) => {
+			const cx = x0 + i * (size + gap) + size / 2;
+			const cy = y + size / 2;
+			const lit = Math.max(0, Math.min(1, f));
+			const scale = f > 0 ? 0.82 + 0.18 * back(lit) : 1;
+			const k = (size / 20) * scale;
+			return `<g transform="translate(${cx.toFixed(2)} ${cy.toFixed(2)}) scale(${k.toFixed(4)}) translate(-10 -10)">
+				<path d="${STAR}" fill="${C.empty}"/>
+				<path d="${STAR}" fill="${C.star}" opacity="${ease(lit).toFixed(3)}"/>
+			</g>`;
+		}).join('');
+
+		return `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+			<defs>
+				<linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+					<stop offset="0" stop-color="#3346c9"/>
+					<stop offset="0.6" stop-color="${C.indigo}"/>
+					<stop offset="1" stop-color="#1c2a8c"/>
+				</linearGradient>
+				<radialGradient id="glow" cx="0.2" cy="0.1" r="0.8">
+					<stop offset="0" stop-color="#ffffff" stop-opacity="0.18"/>
+					<stop offset="1" stop-color="#ffffff" stop-opacity="0"/>
+				</radialGradient>
+				<clipPath id="clip"><rect width="100" height="100" rx="${rounded ? 22 : 0}"/></clipPath>
+			</defs>
+			<g clip-path="url(#clip)">
+				<rect width="100" height="100" fill="url(#bg)"/>
+				<rect width="100" height="100" fill="url(#glow)"/>
+				<path d="M21 23h58a11 11 0 0 1 11 11v20a11 11 0 0 1-11 11H45L31 79V65H21a11 11 0 0 1-11-11V34a11 11 0 0 1 11-11Z" fill="${C.paper}"/>
+				${stars}
+			</g>
+		</svg>`;
+	}
+
+	// Animation: finished mark (held), stars go out together, then light up one by one.
+	const frames = [{ fill: [1, 1, 1, 1, 1], delay: 2600 }];
+	for (let i = 1; i <= 3; i++) frames.push({ fill: Array(5).fill(1 - i / 3), delay: 60 });
+	frames[frames.length - 1].fill = [0, 0, 0, 0, 0];
+	frames[frames.length - 1].delay = 300;
+	const STEPS = 4;
+	for (let s = 0; s < 5; s++) {
+		for (let k = 1; k <= STEPS; k++) {
+			const fill = [0, 1, 2, 3, 4].map((i) => (i < s ? 1 : i === s ? k / STEPS : 0));
+			frames.push({ fill, delay: 45 });
+		}
+	}
+	window.iconFrames = frames.map((f) => f.delay);
+
+	const starRow = (el) => { el.innerHTML = '<svg><use href="#star"/></svg>'.repeat(5); };
+
+	const params = new URLSearchParams(location.search);
+	const asset = params.get('asset') || 'banner';
+	if (asset === 'icon') {
+		const frame = frames[Number(params.get('frame') || 0)] || frames[0];
+		document.getElementById('icon').innerHTML = mark(frame.fill);
+		document.getElementById('icon').hidden = false;
+	} else {
+		const banner = document.getElementById('banner');
+		banner.querySelector('.mark').innerHTML = mark([1, 1, 1, 1, 1], true);
+		banner.querySelectorAll('.stars').forEach(starRow);
+		banner.hidden = false;
+	}
+	document.documentElement.dataset.ready = '1';
 </script>
 </body>
 </html>

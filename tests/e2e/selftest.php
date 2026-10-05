@@ -186,7 +186,7 @@ try {
 		array(
 			'_section' => 'design',
 			'layout'   => 'carousel',
-			'style'    => 'bubble',
+			'style'    => 'quote',
 		)
 	);
 	check( 'carousel' === $design['layout'] && 'TEST-KEY' === $design['api_key'], 'saving the design keeps the connection', $design );

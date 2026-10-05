@@ -68,6 +68,10 @@ final class RenderTest extends TestCase {
 		$this->assertSame( 'a bx', $args['class'] );
 	}
 
+	public function test_pre_release_style_name_bubble_means_quote(): void {
+		$this->assertSame( 'quote', WILLEREV_Render::args( array( 'style' => 'bubble' ), WILLEREV_Install::defaults() )['style'] );
+	}
+
 	public function test_hidden_avatars_setting_wins_over_attribute(): void {
 		$defaults = array_merge( WILLEREV_Install::defaults(), array( 'hide_avatars' => 1 ) );
 		$this->assertFalse( WILLEREV_Render::args( array( 'avatars' => 'yes' ), $defaults )['avatars'] );
