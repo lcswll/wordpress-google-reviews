@@ -49,9 +49,20 @@ jobs:
           TAG: ${{ github.ref_name }}
         run: node scripts/repo-checks.mjs --online --tag "$TAG"
 
+      - name: Artifact name of the plugin ZIP
+        id: zip
+        env:
+          TAG: ${{ github.ref_name }}
+        run: echo "name=wille-reviews-${TAG#v}.zip" >> "$GITHUB_OUTPUT"
+
       - uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
         with:
-          name: plugin-zip
+          name: ${{ steps.zip.outputs.name }}
+          path: dist
+
+      - uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
+        with:
+          name: plugin-zip-checksums
           path: dist
 
       - name: Verify checksum
@@ -96,9 +107,20 @@ jobs:
         with:
           persist-credentials: false
 
+      - name: Artifact name of the plugin ZIP
+        id: zip
+        env:
+          TAG: ${{ github.ref_name }}
+        run: echo "name=wille-reviews-${TAG#v}.zip" >> "$GITHUB_OUTPUT"
+
       - uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
         with:
-          name: plugin-zip
+          name: ${{ steps.zip.outputs.name }}
+          path: dist
+
+      - uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
+        with:
+          name: plugin-zip-checksums
           path: dist
 
       - name: Unpack the verified ZIP

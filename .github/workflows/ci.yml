@@ -337,12 +337,21 @@ jobs:
             echo '```'
           } >> "$GITHUB_STEP_SUMMARY"
 
-      - name: Upload
+      # The plugin ZIP is uploaded unwrapped (archive: false): the download is directly the installable
+      # wille-reviews-<version>.zip, not a ZIP around it. Artifact name = file name.
+      - name: Upload the plugin ZIP
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
-          name: plugin-zip
+          path: dist/wille-reviews-*.zip
+          archive: false
+          if-no-files-found: error
+          retention-days: 30
+
+      - name: Upload checksum + manifest
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: plugin-zip-checksums
           path: |
-            dist/*.zip
             dist/*.sha256
             dist/manifest.json
           if-no-files-found: error
