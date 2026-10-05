@@ -1,0 +1,119 @@
+#!/usr/bin/env node
+/**
+ * Translations: extracts the plugin's strings into languages/<slug>.pot (shipped) and builds i18n/<locale>.po from
+ * i18n/<locale>.json (NOT shipped – import it on translate.wordpress.org, which delivers language packs).
+ *
+ *   npm run i18n               # rebuild the language files from i18n/<locale>.json
+ *   npm run i18n -- --check    # CI: fail on missing/unused translations or outdated generated files
+ *   npm run i18n -- --prune    # drop translations whose string no longer exists in the code
+ *
+ * Plural strings (_n) are stored as "singular": ["translated singular", "translated plural"] in i18n/<locale>.json.
+ *
+ * The plugin bundles no translation files (wordpress.org review requirement); WordPress loads the language packs
+ * just in time. Script strings are passed from PHP (wp_localize_script / block registration), so the PHP files are
+ * the only source.
+ */
+import fs from 'node:fs';
+import path from 'node:path';
+import { PLUGIN_SLUG, pluginDir, root } from './lib/php.mjs';
+
+const check = process.argv.includes('--check');
+const prune = process.argv.includes('--prune');
+const FUNCS = '(?:__|_e|esc_html__|esc_html_e|esc_attr__|esc_attr_e)';
+const re = new RegExp(`\\b${FUNCS}\\(\\s*(?:'((?:[^'\\\\]|\\\\.)*)'|"((?:[^"\\\\]|\\\\.)*)")\\s*,\\s*'${PLUGIN_SLUG}'\\s*\\)`, 'g');
+
+function walk(dir, out = []) {
+	for (const e of fs.readdirSync(dir, { withFileTypes: true })) {
+		const p = path.join(dir, e.name);
+		if (e.isDirectory()) {
+			if (e.name !== 'languages') walk(p, out);
+		} else if (p.endsWith('.php')) {
+			out.push(p);
+		}
+	}
+	return out;
+}
+
+// _n( 'singular', 'plural', $count, 'slug' ) – the count may be any expression.
+const SQ = "'((?:[^'\\\\]|\\\\.)*)'";
+const reN = new RegExp(`\\b_n\\(\\s*${SQ}\\s*,\\s*${SQ}\\s*,[^;]*?,\\s*'${PLUGIN_SLUG}'\\s*\\)`, 'g');
+const unquote = (q) => q.replace(/\\'/g, "'").replace(/\\\\/g, '\\');
+
+const strings = new Set();
+const plurals = new Map(); // singular → plural
+for (const file of walk(pluginDir).sort()) {
+	const code = fs.readFileSync(file, 'utf8');
+	for (const m of code.matchAll(re)) {
+		strings.add(m[1] !== undefined ? unquote(m[1]) : m[2].replace(/\\"/g, '"').replace(/\\\\/g, '\\'));
+	}
+	for (const m of code.matchAll(reN)) {
+		strings.add(unquote(m[1]));
+		plurals.set(unquote(m[1]), unquote(m[2]));
+	}
+}
+const sorted = [...strings].sort();
+
+const po = (s) => '"' + s.replace(/\\/g, '\\\\').replace(/"/g, '\\"').replace(/\n/g, '\\n') + '"';
+
+const problems = [];
+const files = {};
+const i18nDir = path.join(root, 'i18n');
+for (const jsonFile of fs.readdirSync(i18nDir).filter((f) => f.endsWith('.json')).sort()) {
+	const locale = path.basename(jsonFile, '.json');
+	const jsonPath = path.join(i18nDir, jsonFile);
+	const map = JSON.parse(fs.readFileSync(jsonPath, 'utf8'));
+	for (const s of sorted) {
+		if (!(s in map)) problems.push(`${locale}: missing translation for "${s}"`);
+		else if (plurals.has(s) !== Array.isArray(map[s])) problems.push(`${locale}: "${s}" needs ${plurals.has(s) ? 'a [singular, plural] array' : 'a plain string'}`);
+	}
+	const unused = Object.keys(map).filter((s) => !strings.has(s));
+	if (prune && unused.length) {
+		for (const s of unused) delete map[s];
+		fs.writeFileSync(jsonPath, JSON.stringify(map, null, '\t') + '\n');
+		console.log(`${locale}: removed ${unused.length} unused translation(s).`);
+	} else {
+		for (const s of unused) problems.push(`${locale}: unused translation "${s}" (npm run i18n -- --prune)`);
+	}
+
+	files[path.join(i18nDir, `${locale}.po`)] = 'msgid ""\nmsgstr ""\n"Content-Type: text/plain; charset=UTF-8\\n"\n' +
+		`"Language: ${locale}\\n"\n"Plural-Forms: nplurals=2; plural=(n != 1);\\n"\n"X-Domain: ${PLUGIN_SLUG}\\n"\n\n` +
+		sorted.filter((s) => s in map).map((s) => (plurals.has(s) && Array.isArray(map[s])
+			? `msgid ${po(s)}\nmsgid_plural ${po(plurals.get(s))}\n` + map[s].map((t, n) => `msgstr[${n}] ${po(t)}\n`).join('')
+			: `msgid ${po(s)}\nmsgstr ${po(String(map[s]))}\n`)).join('\n');
+}
+
+// Template for translators (and the wordpress.org import as a cross-check).
+files[path.join(pluginDir, 'languages', `${PLUGIN_SLUG}.pot`)] = 'msgid ""\nmsgstr ""\n"Content-Type: text/plain; charset=UTF-8\\n"\n' +
+	`"Plural-Forms: nplurals=2; plural=(n != 1);\\n"\n"X-Domain: ${PLUGIN_SLUG}\\n"\n\n` +
+	sorted.map((s) => (plurals.has(s)
+		? `msgid ${po(s)}\nmsgid_plural ${po(plurals.get(s))}\nmsgstr[0] ""\nmsgstr[1] ""\n`
+		: `msgid ${po(s)}\nmsgstr ""\n`)).join('\n');
+
+// Nothing but the .pot may ship in languages/ (old bundled .po/.l10n.php/.mo files must not linger in the release).
+const languagesDir = path.join(pluginDir, 'languages');
+const stale = fs.existsSync(languagesDir)
+	? fs.readdirSync(languagesDir).map((f) => path.join(languagesDir, f)).filter((f) => !(f in files))
+	: [];
+
+if (check) {
+	for (const [file, content] of Object.entries(files)) {
+		const current = fs.existsSync(file) ? fs.readFileSync(file, 'utf8').replace(/\r\n/g, '\n') : null;
+		if (current !== content) problems.push(`${path.relative(root, file)} is outdated – run \`npm run i18n\``);
+	}
+	for (const file of stale) problems.push(`${path.relative(root, file)} is not generated by scripts/i18n.mjs – run \`npm run i18n\``);
+	if (problems.length) {
+		console.error(problems.join('\n'));
+		process.exit(1);
+	}
+	console.log(`i18n: ${strings.size} strings, ${Object.keys(files).length - 1} locale(s) complete and up to date.`);
+	process.exit(0);
+}
+
+if (problems.length) {
+	console.error(problems.join('\n'));
+	process.exit(1);
+}
+fs.mkdirSync(languagesDir, { recursive: true });
+for (const file of stale) fs.rmSync(file);
+for (const [file, content] of Object.entries(files)) fs.writeFileSync(file, content);
+console.log(`${strings.size} strings written for ${Object.keys(files).length - 1} locale(s).`);

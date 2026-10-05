@@ -1,0 +1,35 @@
+{
+	"$schema": "https://playground.wordpress.net/blueprint-schema.json",
+	"steps": [
+		{
+			"step": "setSiteOptions",
+			"options": {
+				"blogname": "Wille Reviews Test Site",
+				"permalink_structure": "/%postname%/"
+			}
+		},
+		{
+			"step": "runPHP",
+			"code": "<?php if ( ! is_dir( '/wordpress/wp-content/mu-plugins' ) ) { mkdir( '/wordpress/wp-content/mu-plugins', 0777, true ); } copy( '/e2e/fake-google.php', '/wordpress/wp-content/mu-plugins/fake-google.php' );"
+		},
+		{
+			"step": "activatePlugin",
+			"pluginPath": "wille-reviews/wille-reviews.php"
+		},
+		{
+			"step": "installPlugin",
+			"pluginData": {
+				"resource": "wordpress.org/plugins",
+				"slug": "plugin-check"
+			}
+		},
+		{
+			"step": "runPHP",
+			"code": "<?php require '/e2e/plugin-check.php';"
+		},
+		{
+			"step": "runPHP",
+			"code": "<?php require '/e2e/selftest.php';"
+		}
+	]
+}

@@ -1,0 +1,27 @@
+{
+	"$schema": "https://playground.wordpress.net/blueprint-schema.json",
+	"landingPage": "/wp-admin/admin.php?page=wille-reviews",
+	"login": true,
+	"steps": [
+		{
+			"step": "setSiteOptions",
+			"options": {
+				"blogname": "Café Sonnenschein",
+				"blogdescription": "Coffee and cake since 1998",
+				"permalink_structure": "/%postname%/"
+			}
+		},
+		{
+			"step": "runPHP",
+			"code": "<?php if ( ! is_dir( '/wordpress/wp-content/mu-plugins' ) ) { mkdir( '/wordpress/wp-content/mu-plugins', 0777, true ); } copy( '/e2e/fake-google.php', '/wordpress/wp-content/mu-plugins/fake-google.php' );"
+		},
+		{
+			"step": "activatePlugin",
+			"pluginPath": "wille-reviews/wille-reviews.php"
+		},
+		{
+			"step": "runPHP",
+			"code": "<?php require '/e2e/seed.php';"
+		}
+	]
+}

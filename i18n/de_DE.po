@@ -1,0 +1,562 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=UTF-8\n"
+"Language: de_DE\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Domain: wille-reviews\n"
+
+msgid "%1$s reviews, average %2$s"
+msgstr "%1$s Bewertungen, Durchschnitt %2$s"
+
+msgid "%d line"
+msgid_plural "%d lines"
+msgstr[0] "%d Zeile"
+msgstr[1] "%d Zeilen"
+
+msgid "%s ago"
+msgstr "vor %s"
+
+msgid "%s out of 5 stars"
+msgstr "%s von 5 Sternen"
+
+msgid "%s review"
+msgid_plural "%s reviews"
+msgstr[0] "%s Bewertung"
+msgstr[1] "%s Bewertungen"
+
+msgid "%s review on Google"
+msgid_plural "%s reviews on Google"
+msgstr[0] "%s Bewertung auf Google"
+msgstr[1] "%s Bewertungen auf Google"
+
+msgid "(opens in a new tab)"
+msgstr "(öffnet in einem neuen Tab)"
+
+msgid "A Google Cloud API key with the \"Places API (New)\" enabled."
+msgstr "Ein Google-Cloud-API-Schlüssel mit aktivierter „Places API (New)“."
+
+msgid "A small rating badge in a corner of every page – trust at the moment a visitor decides. Visitors can close it for their session."
+msgstr "Ein kleines Bewertungs-Badge in einer Ecke jeder Seite – Vertrauen genau in dem Moment, in dem Besucher sich entscheiden. Besucher können es für ihre Sitzung schließen."
+
+msgid "API key"
+msgstr "API-Schlüssel"
+
+msgid "Accent color"
+msgstr "Akzentfarbe"
+
+msgid "Accent color for buttons, links and the accent style."
+msgstr "Akzentfarbe für Buttons, Links und den Stil „Akzentfarbe“."
+
+msgid "Alignment"
+msgstr "Ausrichtung"
+
+msgid "Alignment of badge and social proof."
+msgstr "Ausrichtung von Badge und Social Proof."
+
+msgid "All reviews"
+msgstr "Alle Bewertungen"
+
+msgid "All shortcode options"
+msgstr "Alle Shortcode-Optionen"
+
+msgid "Anchor and extra CSS classes. The first reviews section on a page gets the anchor #google-reviews automatically."
+msgstr "Anker und zusätzliche CSS-Klassen. Der erste Bewertungsbereich einer Seite bekommt automatisch den Anker #google-reviews."
+
+msgid "Anywhere else: the shortcode"
+msgstr "Überall sonst: der Shortcode"
+
+msgid "Badge"
+msgstr "Badge"
+
+msgid "Based on %s review"
+msgid_plural "Based on %s reviews"
+msgstr[0] "Basierend auf %s Bewertung"
+msgstr[1] "Basierend auf %s Bewertungen"
+
+msgid "Best first"
+msgstr "Beste zuerst"
+
+msgid "Block editor: add the block \"Google Reviews\"."
+msgstr "Block-Editor: Block „Google-Bewertungen“ einfügen."
+
+msgid "Bottom left"
+msgstr "Unten links"
+
+msgid "Bottom right"
+msgstr "Unten rechts"
+
+msgid "Browse the styles"
+msgstr "Styles ansehen"
+
+msgid "Buttons \"Write a review\" and \"See all on Google\""
+msgstr "Buttons „Bewertung schreiben“ und „Alle auf Google ansehen“"
+
+msgid "Cache cleared. The next page view loads the reviews from Google again."
+msgstr "Cache geleert. Der nächste Seitenaufruf lädt die Bewertungen neu von Google."
+
+msgid "Cards in columns – the classic for a reviews section."
+msgstr "Karten in Spalten – der Klassiker für einen Bewertungsbereich."
+
+msgid "Cards of different heights stacked without gaps – a testimonial wall."
+msgstr "Unterschiedlich hohe Karten lückenlos gestapelt – eine Testimonial-Wand."
+
+msgid "Center"
+msgstr "Mitte"
+
+msgid "Choose layout and style"
+msgstr "Layout und Style wählen"
+
+msgid "Clear cache"
+msgstr "Cache leeren"
+
+msgid "Columns"
+msgstr "Spalten"
+
+msgid "Columns of grid, slider and wall (fewer on small screens automatically)."
+msgstr "Spalten von Raster, Slider und Wand (auf kleinen Bildschirmen automatisch weniger)."
+
+msgid "Compact rating badge for headers, footers and checkout pages."
+msgstr "Kompaktes Bewertungs-Badge für Header, Footer und Checkout-Seiten."
+
+msgid "Connect now"
+msgstr "Jetzt verbinden"
+
+msgid "Connect your Google business"
+msgstr "Dein Google-Unternehmen verbinden"
+
+msgid "Connect your Google business in two minutes, then pick a layout and a style."
+msgstr "Verbinde dein Google-Unternehmen in zwei Minuten und wähle dann Layout und Style."
+
+msgid "Connect your Google business to see your own."
+msgstr "Verbinde dein Google-Unternehmen, um deine eigenen zu sehen."
+
+msgid "Connection works – the reviews were loaded from Google."
+msgstr "Verbindung funktioniert – die Bewertungen wurden von Google geladen."
+
+msgid "Content"
+msgstr "Inhalt"
+
+msgid "Copied!"
+msgstr "Kopiert!"
+
+msgid "Copy"
+msgstr "Kopieren"
+
+msgid "Corner radius"
+msgstr "Eckenradius"
+
+msgid "Corner radius in pixels."
+msgstr "Eckenradius in Pixeln."
+
+msgid "Dark"
+msgstr "Dunkel"
+
+msgid "Dark page"
+msgstr "Dunkle Seite"
+
+msgid "Delete all settings, cached reviews and photos when the plugin is deleted"
+msgstr "Beim Löschen des Plugins alle Einstellungen, zwischengespeicherten Bewertungen und Fotos entfernen"
+
+msgid "Design"
+msgstr "Design"
+
+msgid "Design & shortcode"
+msgstr "Design & Shortcode"
+
+msgid "Design saved as default. Shortcodes and blocks without their own options use it now."
+msgstr "Design als Standard gespeichert. Shortcodes und Blöcke ohne eigene Optionen verwenden es ab jetzt."
+
+msgid "Do not download or show reviewers' profile photos"
+msgstr "Profilbilder der Bewertenden nicht herunterladen und nicht anzeigen"
+
+msgid "Effect"
+msgstr "Wirkung"
+
+msgid "Fantastic service from start to finish. The team took time for our questions and the result exceeded our expectations. Clear recommendation!"
+msgstr "Fantastischer Service von Anfang bis Ende. Das Team hat sich Zeit für unsere Fragen genommen und das Ergebnis hat unsere Erwartungen übertroffen. Klare Empfehlung!"
+
+msgid "Fast, friendly and fair prices. Appointment the same week."
+msgstr "Schnell, freundlich und faire Preise. Termin noch in derselben Woche."
+
+msgid "Floating badge"
+msgstr "Schwebendes Badge"
+
+msgid "Full-width rows, easy to read – good for sidebars and long texts."
+msgstr "Zeilen über die volle Breite, gut lesbar – ideal für Seitenleisten und lange Texte."
+
+msgid "Google Maps Platform pricing"
+msgstr "Preise der Google Maps Platform"
+
+msgid "Google Reviews"
+msgstr "Google-Bewertungen"
+
+msgid "Google Reviews settings"
+msgstr "Einstellungen Google-Bewertungen"
+
+msgid "Google did not return any data. See the error under \"Status\" below."
+msgstr "Google hat keine Daten geliefert. Den Fehler siehst du unten unter „Status“."
+
+msgid "Google rating"
+msgstr "Google-Bewertung"
+
+msgid "Google reviews"
+msgstr "Google-Bewertungen"
+
+msgid "Google user"
+msgstr "Google-Nutzer"
+
+msgid "Grid"
+msgstr "Raster"
+
+msgid "Hide rating"
+msgstr "Bewertung ausblenden"
+
+msgid "How do I get an API key? (5 minutes)"
+msgstr "Wie bekomme ich einen API-Schlüssel? (5 Minuten)"
+
+msgid "I already did"
+msgstr "Habe ich schon"
+
+msgid "I have been a customer for years and have never been disappointed. Always reachable, always helpful."
+msgstr "Ich bin seit Jahren Kunde und wurde nie enttäuscht. Immer erreichbar, immer hilfsbereit."
+
+msgid "If Wille Reviews helps you, would you leave a short review on WordPress.org? It takes a minute and helps other site owners find it. Thank you!"
+msgstr "Wenn dir Wille Reviews hilft: Würdest du eine kurze Bewertung auf WordPress.org hinterlassen? Das dauert eine Minute und hilft anderen, das Plugin zu finden. Danke!"
+
+msgid "Language"
+msgstr "Sprache"
+
+msgid "Language code such as de or en. Empty = the language of your site."
+msgstr "Sprachcode wie de oder en. Leer = die Sprache deiner Website."
+
+msgid "Last request failed"
+msgstr "Letzte Abfrage fehlgeschlagen"
+
+msgid "Last request successful"
+msgstr "Letzte Abfrage erfolgreich"
+
+msgid "Layout"
+msgstr "Layout"
+
+msgid "Left"
+msgstr "Links"
+
+msgid "Light"
+msgstr "Hell"
+
+msgid "Light page"
+msgstr "Helle Seite"
+
+msgid "List"
+msgstr "Liste"
+
+msgid "Maximum number of reviews. Google provides up to five per place."
+msgstr "Höchstzahl der Bewertungen. Google liefert bis zu fünf pro Unternehmen."
+
+msgid "Maybe later"
+msgstr "Vielleicht später"
+
+msgid "Minimal"
+msgstr "Minimal"
+
+msgid "Minimum stars"
+msgstr "Mindestens Sterne"
+
+msgid "Never (full text)"
+msgstr "Nie (voller Text)"
+
+msgid "New reviews appear after at most this long. Shorter means more API requests."
+msgstr "Neue Bewertungen erscheinen spätestens nach dieser Zeit. Kürzer bedeutet mehr API-Abfragen."
+
+msgid "Newest first"
+msgstr "Neueste zuerst"
+
+msgid "Next automatic refresh: %s"
+msgstr "Nächste automatische Aktualisierung: %s"
+
+msgid "Next reviews"
+msgstr "Nächste Bewertungen"
+
+msgid "No data available – the last request to Google failed."
+msgstr "Keine Daten verfügbar – die letzte Abfrage bei Google ist fehlgeschlagen."
+
+msgid "No request yet. Test the connection."
+msgstr "Noch keine Abfrage. Teste die Verbindung."
+
+msgid "Not connected yet – add your API key and place ID to show your Google reviews."
+msgstr "Noch nicht verbunden – hinterlege API-Schlüssel und Place ID, um deine Google-Bewertungen anzuzeigen."
+
+msgid "Not connected – enter API key and Place ID."
+msgstr "Nicht verbunden – API-Schlüssel und Place ID eintragen."
+
+msgid "Number of reviews"
+msgstr "Anzahl Bewertungen"
+
+msgid "Off = Google's automatic translation into the language above."
+msgstr "Aus = automatische Übersetzung von Google in die Sprache oben."
+
+msgid "One row that visitors swipe or click through – saves space."
+msgstr "Eine Reihe zum Wischen oder Durchklicken – spart Platz."
+
+msgid "Only show reviews with at least this many stars."
+msgstr "Nur Bewertungen mit mindestens so vielen Sternen zeigen."
+
+msgid "Open settings"
+msgstr "Einstellungen öffnen"
+
+msgid "Open the %s and create a project (or pick an existing one). Google asks for a billing account – the plugin's few requests normally stay within the free monthly usage."
+msgstr "Öffne die %s und lege ein Projekt an (oder wähle ein bestehendes). Google verlangt ein Rechnungskonto – die wenigen Abfragen des Plugins bleiben normalerweise im kostenlosen Monatskontingent."
+
+msgid "Option"
+msgstr "Option"
+
+msgid "Order"
+msgstr "Reihenfolge"
+
+msgid "Order of the reviews."
+msgstr "Reihenfolge der Bewertungen."
+
+msgid "Page background"
+msgstr "Seitenhintergrund"
+
+msgid "Page that shows your reviews. Badges and social proof link there (the anchor #google-reviews is added automatically). Empty = they link to your Google profile."
+msgstr "Seite, auf der deine Bewertungen zu sehen sind. Badges und Social Proof verlinken dorthin (der Anker #google-reviews wird automatisch ergänzt). Leer = Verlinkung zu deinem Google-Profil."
+
+msgid "Paste it into any page, post or widget. In the block editor you can also add the block \"Google Reviews\" and pick the design in its sidebar."
+msgstr "Füge ihn in jede Seite, jeden Beitrag oder jedes Widget ein. Im Block-Editor kannst du auch den Block „Google-Bewertungen“ einfügen und das Design in der Seitenleiste wählen."
+
+msgid "Paste key and Place ID here, save, then click \"Test connection & load reviews\"."
+msgstr "Schlüssel und Place ID hier einfügen, speichern und auf „Verbindung testen & Bewertungen laden“ klicken."
+
+msgid "Photos are otherwise copied to your uploads folder once, so visitors' browsers never load images from Google. Initials are shown instead when this is on."
+msgstr "Sonst werden die Fotos einmalig in deinen Uploads-Ordner kopiert, sodass Browser deiner Besucher nie Bilder von Google laden. Ist die Option aktiv, erscheinen stattdessen Initialen."
+
+msgid "Pick a layout and a style – the preview updates instantly. Save your choice as the default, or copy the shortcode to use a different design on a single page."
+msgstr "Wähle Layout und Style – die Vorschau aktualisiert sich sofort. Speichere die Auswahl als Standard oder kopiere den Shortcode, um auf einer einzelnen Seite ein anderes Design zu nutzen."
+
+msgid "Place ID"
+msgstr "Place ID"
+
+msgid "Place ID Finder"
+msgstr "Place ID Finder"
+
+msgid "Position"
+msgstr "Position"
+
+msgid "Preview"
+msgstr "Vorschau"
+
+msgid "Previous reviews"
+msgstr "Vorherige Bewertungen"
+
+msgid "Privacy & data"
+msgstr "Datenschutz & Daten"
+
+msgid "Professional, punctual and tidy work. Exactly as agreed."
+msgstr "Professionell, pünktlich und sauber gearbeitet. Genau wie abgesprochen."
+
+msgid "Profile photos"
+msgstr "Profilbilder"
+
+msgid "Rate Wille Reviews on WordPress.org (opens in a new tab)"
+msgstr "Wille Reviews auf WordPress.org bewerten (öffnet in einem neuen Tab)"
+
+msgid "Rate ★★★★★"
+msgstr "Bewerten ★★★★★"
+
+msgid "Rated %1$s out of 5 on Google, %2$s review"
+msgid_plural "Rated %1$s out of 5 on Google, %2$s reviews"
+msgstr[0] "Auf Google mit %1$s von 5 bewertet, %2$s Bewertung"
+msgstr[1] "Auf Google mit %1$s von 5 bewertet, %2$s Bewertungen"
+
+msgid "Read more"
+msgstr "Mehr lesen"
+
+msgid "Recommended: restrict the key to \"Places API (New)\" and, if your host has a fixed IP address, to that IP."
+msgstr "Empfohlen: Beschränke den Schlüssel auf „Places API (New)“ und – falls dein Hosting eine feste IP-Adresse hat – auf diese IP."
+
+msgid "Refresh every"
+msgstr "Aktualisieren alle"
+
+msgid "Review Wille Reviews"
+msgstr "Wille Reviews bewerten"
+
+msgid "Review text"
+msgstr "Bewertungstext"
+
+msgid "Reviewer photos, stars and total count – ideal next to a call to action."
+msgstr "Fotos der Bewertenden, Sterne und Gesamtzahl – ideal neben einem Call-to-Action."
+
+msgid "Reviews"
+msgstr "Bewertungen"
+
+msgid "Reviews, scroll horizontally"
+msgstr "Bewertungen, horizontal scrollen"
+
+msgid "Right"
+msgstr "Rechts"
+
+msgid "Sample data"
+msgstr "Beispieldaten"
+
+msgid "Save as default design"
+msgstr "Als Standard-Design speichern"
+
+msgid "Save settings"
+msgstr "Einstellungen speichern"
+
+msgid "See all on Google"
+msgstr "Alle auf Google ansehen"
+
+msgid "Settings"
+msgstr "Einstellungen"
+
+msgid "Settings saved."
+msgstr "Einstellungen gespeichert."
+
+msgid "Shortcode for this design"
+msgstr "Shortcode für dieses Design"
+
+msgid "Shorten long reviews after"
+msgstr "Lange Bewertungen kürzen nach"
+
+msgid "Shorten long reviews after this many lines with a \"Read more\" button (0 = full text)."
+msgstr "Lange Bewertungen nach so vielen Zeilen mit „Mehr lesen“-Button kürzen (0 = voller Text)."
+
+msgid "Show"
+msgstr "Anzeigen"
+
+msgid "Show buttons to Google"
+msgstr "Buttons zu Google anzeigen"
+
+msgid "Show less"
+msgstr "Weniger anzeigen"
+
+msgid "Show profile photos"
+msgstr "Profilbilder anzeigen"
+
+msgid "Show reviews in the language they were written in"
+msgstr "Bewertungen in der Sprache zeigen, in der sie geschrieben wurden"
+
+msgid "Show summary header"
+msgstr "Kopfbereich mit Zusammenfassung anzeigen"
+
+msgid "Show the floating badge on all front-end pages"
+msgstr "Schwebendes Badge auf allen Seiten der Website zeigen"
+
+msgid "Slider"
+msgstr "Slider"
+
+msgid "Social proof"
+msgstr "Social Proof"
+
+msgid "Sorry, you are not allowed to do that."
+msgstr "Das darfst du leider nicht."
+
+msgid "Speech bubble"
+msgstr "Sprechblase"
+
+msgid "Status"
+msgstr "Status"
+
+msgid "Structure of the widget."
+msgstr "Aufbau des Widgets."
+
+msgid "Style"
+msgstr "Style"
+
+msgid "Style and accent color follow the default design."
+msgstr "Style und Akzentfarbe folgen dem Standard-Design."
+
+msgid "Summary header with rating and count"
+msgstr "Kopfbereich mit Bewertung und Anzahl"
+
+msgid "Summary header, buttons to Google, profile photos."
+msgstr "Kopfbereich, Buttons zu Google, Profilbilder."
+
+msgid "Sure, write a review"
+msgstr "Klar, Bewertung schreiben"
+
+msgid "Target of badge and social proof. auto = your reviews page (settings), else the Google profile."
+msgstr "Ziel von Badge und Social Proof. auto = deine Bewertungsseite (Einstellungen), sonst das Google-Profil."
+
+msgid "Test connection & load reviews"
+msgstr "Verbindung testen & Bewertungen laden"
+
+msgid "The ID of your Google Business Profile. Find it with Google's %s."
+msgstr "Die ID deines Google-Unternehmensprofils. Du findest sie mit Googles %s."
+
+msgid "The plugin loads rating, review count and the latest reviews from the Google Places API on your server. Your visitors never connect to Google."
+msgstr "Das Plugin lädt Bewertung, Anzahl und die neuesten Bewertungen über die Google Places API auf deinem Server. Deine Besucher verbinden sich nie mit Google."
+
+msgid "The preview shows sample reviews."
+msgstr "Die Vorschau zeigt Beispielbewertungen."
+
+msgid "Under \"APIs & Services → Credentials\", create an API key."
+msgstr "Unter „APIs & Dienste → Anmeldedaten“ einen API-Schlüssel erstellen."
+
+msgid "Under \"APIs & Services → Library\", enable \"Places API (New)\"."
+msgstr "Unter „APIs & Dienste → Bibliothek“ die „Places API (New)“ aktivieren."
+
+msgid "Uninstall"
+msgstr "Deinstallation"
+
+msgid "Unset options follow the defaults on the Wille Reviews design page."
+msgstr "Nicht gesetzte Optionen folgen den Standards auf der Design-Seite von Wille Reviews."
+
+msgid "Use it"
+msgstr "Verwenden"
+
+msgid "Values"
+msgstr "Werte"
+
+msgid "Very good advice and a pleasant atmosphere. Parking is a bit tight, otherwise everything was perfect – we will definitely come back and have already recommended the shop to friends and family. Thanks again to the whole team for the great support!"
+msgstr "Sehr gute Beratung und angenehme Atmosphäre. Parken ist etwas eng, sonst war alles perfekt – wir kommen auf jeden Fall wieder und haben den Laden schon Freunden und Familie empfohlen. Nochmals danke an das ganze Team für die tolle Unterstützung!"
+
+msgid "Visual style."
+msgstr "Optischer Stil."
+
+msgid "Wall"
+msgstr "Wand"
+
+msgid "Wille Reviews"
+msgstr "Wille Reviews"
+
+msgid "Wille Reviews is active."
+msgstr "Wille Reviews ist aktiv."
+
+msgid "Wille Reviews is made by %1$s. Does it help you? A %2$s review on WordPress.org helps others find it – thank you!"
+msgstr "Wille Reviews wird von %1$s entwickelt. Hilft es dir? Eine %2$s-Bewertung auf WordPress.org hilft anderen, es zu finden – danke!"
+
+msgid "Wille Reviews refresh interval"
+msgstr "Aktualisierungsintervall von Wille Reviews"
+
+msgid "Wille Reviews: no reviews to show yet. Connect your Google business in the %s. (Only administrators see this note.)"
+msgstr "Wille Reviews: noch keine Bewertungen zum Anzeigen. Verbinde dein Google-Unternehmen in den %s. (Diesen Hinweis sehen nur Administratoren.)"
+
+msgid "With the default refresh every 12 hours the plugin makes about 60 requests a month, no matter how many visitors you have. Current prices and free usage: %s."
+msgstr "Mit der Standard-Aktualisierung alle 12 Stunden stellt das Plugin etwa 60 Abfragen im Monat – egal, wie viele Besucher du hast. Aktuelle Preise und kostenloses Kontingent: %s."
+
+msgid "Write a review"
+msgstr "Bewertung schreiben"
+
+msgid "Your Google rating and latest reviews in the layout and style of your choice."
+msgstr "Deine Google-Bewertung und die neuesten Rezensionen in Layout und Style deiner Wahl."
+
+msgid "Your Google reviews have been on your site for two weeks now."
+msgstr "Deine Google-Bewertungen sind jetzt seit zwei Wochen auf deiner Website."
+
+msgid "Your business"
+msgstr "Dein Unternehmen"
+
+msgid "Your reviews page"
+msgstr "Deine Bewertungsseite"
+
+msgid "by %s"
+msgstr "von %s"
+
+msgid "hours"
+msgstr "Stunden"
+
+msgid "plugin settings"
+msgstr "Plugin-Einstellungen"

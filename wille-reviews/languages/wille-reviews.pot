@@ -1,0 +1,561 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=UTF-8\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Domain: wille-reviews\n"
+
+msgid "%1$s reviews, average %2$s"
+msgstr ""
+
+msgid "%d line"
+msgid_plural "%d lines"
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "%s ago"
+msgstr ""
+
+msgid "%s out of 5 stars"
+msgstr ""
+
+msgid "%s review"
+msgid_plural "%s reviews"
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "%s review on Google"
+msgid_plural "%s reviews on Google"
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "(opens in a new tab)"
+msgstr ""
+
+msgid "A Google Cloud API key with the \"Places API (New)\" enabled."
+msgstr ""
+
+msgid "A small rating badge in a corner of every page – trust at the moment a visitor decides. Visitors can close it for their session."
+msgstr ""
+
+msgid "API key"
+msgstr ""
+
+msgid "Accent color"
+msgstr ""
+
+msgid "Accent color for buttons, links and the accent style."
+msgstr ""
+
+msgid "Alignment"
+msgstr ""
+
+msgid "Alignment of badge and social proof."
+msgstr ""
+
+msgid "All reviews"
+msgstr ""
+
+msgid "All shortcode options"
+msgstr ""
+
+msgid "Anchor and extra CSS classes. The first reviews section on a page gets the anchor #google-reviews automatically."
+msgstr ""
+
+msgid "Anywhere else: the shortcode"
+msgstr ""
+
+msgid "Badge"
+msgstr ""
+
+msgid "Based on %s review"
+msgid_plural "Based on %s reviews"
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "Best first"
+msgstr ""
+
+msgid "Block editor: add the block \"Google Reviews\"."
+msgstr ""
+
+msgid "Bottom left"
+msgstr ""
+
+msgid "Bottom right"
+msgstr ""
+
+msgid "Browse the styles"
+msgstr ""
+
+msgid "Buttons \"Write a review\" and \"See all on Google\""
+msgstr ""
+
+msgid "Cache cleared. The next page view loads the reviews from Google again."
+msgstr ""
+
+msgid "Cards in columns – the classic for a reviews section."
+msgstr ""
+
+msgid "Cards of different heights stacked without gaps – a testimonial wall."
+msgstr ""
+
+msgid "Center"
+msgstr ""
+
+msgid "Choose layout and style"
+msgstr ""
+
+msgid "Clear cache"
+msgstr ""
+
+msgid "Columns"
+msgstr ""
+
+msgid "Columns of grid, slider and wall (fewer on small screens automatically)."
+msgstr ""
+
+msgid "Compact rating badge for headers, footers and checkout pages."
+msgstr ""
+
+msgid "Connect now"
+msgstr ""
+
+msgid "Connect your Google business"
+msgstr ""
+
+msgid "Connect your Google business in two minutes, then pick a layout and a style."
+msgstr ""
+
+msgid "Connect your Google business to see your own."
+msgstr ""
+
+msgid "Connection works – the reviews were loaded from Google."
+msgstr ""
+
+msgid "Content"
+msgstr ""
+
+msgid "Copied!"
+msgstr ""
+
+msgid "Copy"
+msgstr ""
+
+msgid "Corner radius"
+msgstr ""
+
+msgid "Corner radius in pixels."
+msgstr ""
+
+msgid "Dark"
+msgstr ""
+
+msgid "Dark page"
+msgstr ""
+
+msgid "Delete all settings, cached reviews and photos when the plugin is deleted"
+msgstr ""
+
+msgid "Design"
+msgstr ""
+
+msgid "Design & shortcode"
+msgstr ""
+
+msgid "Design saved as default. Shortcodes and blocks without their own options use it now."
+msgstr ""
+
+msgid "Do not download or show reviewers' profile photos"
+msgstr ""
+
+msgid "Effect"
+msgstr ""
+
+msgid "Fantastic service from start to finish. The team took time for our questions and the result exceeded our expectations. Clear recommendation!"
+msgstr ""
+
+msgid "Fast, friendly and fair prices. Appointment the same week."
+msgstr ""
+
+msgid "Floating badge"
+msgstr ""
+
+msgid "Full-width rows, easy to read – good for sidebars and long texts."
+msgstr ""
+
+msgid "Google Maps Platform pricing"
+msgstr ""
+
+msgid "Google Reviews"
+msgstr ""
+
+msgid "Google Reviews settings"
+msgstr ""
+
+msgid "Google did not return any data. See the error under \"Status\" below."
+msgstr ""
+
+msgid "Google rating"
+msgstr ""
+
+msgid "Google reviews"
+msgstr ""
+
+msgid "Google user"
+msgstr ""
+
+msgid "Grid"
+msgstr ""
+
+msgid "Hide rating"
+msgstr ""
+
+msgid "How do I get an API key? (5 minutes)"
+msgstr ""
+
+msgid "I already did"
+msgstr ""
+
+msgid "I have been a customer for years and have never been disappointed. Always reachable, always helpful."
+msgstr ""
+
+msgid "If Wille Reviews helps you, would you leave a short review on WordPress.org? It takes a minute and helps other site owners find it. Thank you!"
+msgstr ""
+
+msgid "Language"
+msgstr ""
+
+msgid "Language code such as de or en. Empty = the language of your site."
+msgstr ""
+
+msgid "Last request failed"
+msgstr ""
+
+msgid "Last request successful"
+msgstr ""
+
+msgid "Layout"
+msgstr ""
+
+msgid "Left"
+msgstr ""
+
+msgid "Light"
+msgstr ""
+
+msgid "Light page"
+msgstr ""
+
+msgid "List"
+msgstr ""
+
+msgid "Maximum number of reviews. Google provides up to five per place."
+msgstr ""
+
+msgid "Maybe later"
+msgstr ""
+
+msgid "Minimal"
+msgstr ""
+
+msgid "Minimum stars"
+msgstr ""
+
+msgid "Never (full text)"
+msgstr ""
+
+msgid "New reviews appear after at most this long. Shorter means more API requests."
+msgstr ""
+
+msgid "Newest first"
+msgstr ""
+
+msgid "Next automatic refresh: %s"
+msgstr ""
+
+msgid "Next reviews"
+msgstr ""
+
+msgid "No data available – the last request to Google failed."
+msgstr ""
+
+msgid "No request yet. Test the connection."
+msgstr ""
+
+msgid "Not connected yet – add your API key and place ID to show your Google reviews."
+msgstr ""
+
+msgid "Not connected – enter API key and Place ID."
+msgstr ""
+
+msgid "Number of reviews"
+msgstr ""
+
+msgid "Off = Google's automatic translation into the language above."
+msgstr ""
+
+msgid "One row that visitors swipe or click through – saves space."
+msgstr ""
+
+msgid "Only show reviews with at least this many stars."
+msgstr ""
+
+msgid "Open settings"
+msgstr ""
+
+msgid "Open the %s and create a project (or pick an existing one). Google asks for a billing account – the plugin's few requests normally stay within the free monthly usage."
+msgstr ""
+
+msgid "Option"
+msgstr ""
+
+msgid "Order"
+msgstr ""
+
+msgid "Order of the reviews."
+msgstr ""
+
+msgid "Page background"
+msgstr ""
+
+msgid "Page that shows your reviews. Badges and social proof link there (the anchor #google-reviews is added automatically). Empty = they link to your Google profile."
+msgstr ""
+
+msgid "Paste it into any page, post or widget. In the block editor you can also add the block \"Google Reviews\" and pick the design in its sidebar."
+msgstr ""
+
+msgid "Paste key and Place ID here, save, then click \"Test connection & load reviews\"."
+msgstr ""
+
+msgid "Photos are otherwise copied to your uploads folder once, so visitors' browsers never load images from Google. Initials are shown instead when this is on."
+msgstr ""
+
+msgid "Pick a layout and a style – the preview updates instantly. Save your choice as the default, or copy the shortcode to use a different design on a single page."
+msgstr ""
+
+msgid "Place ID"
+msgstr ""
+
+msgid "Place ID Finder"
+msgstr ""
+
+msgid "Position"
+msgstr ""
+
+msgid "Preview"
+msgstr ""
+
+msgid "Previous reviews"
+msgstr ""
+
+msgid "Privacy & data"
+msgstr ""
+
+msgid "Professional, punctual and tidy work. Exactly as agreed."
+msgstr ""
+
+msgid "Profile photos"
+msgstr ""
+
+msgid "Rate Wille Reviews on WordPress.org (opens in a new tab)"
+msgstr ""
+
+msgid "Rate ★★★★★"
+msgstr ""
+
+msgid "Rated %1$s out of 5 on Google, %2$s review"
+msgid_plural "Rated %1$s out of 5 on Google, %2$s reviews"
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "Read more"
+msgstr ""
+
+msgid "Recommended: restrict the key to \"Places API (New)\" and, if your host has a fixed IP address, to that IP."
+msgstr ""
+
+msgid "Refresh every"
+msgstr ""
+
+msgid "Review Wille Reviews"
+msgstr ""
+
+msgid "Review text"
+msgstr ""
+
+msgid "Reviewer photos, stars and total count – ideal next to a call to action."
+msgstr ""
+
+msgid "Reviews"
+msgstr ""
+
+msgid "Reviews, scroll horizontally"
+msgstr ""
+
+msgid "Right"
+msgstr ""
+
+msgid "Sample data"
+msgstr ""
+
+msgid "Save as default design"
+msgstr ""
+
+msgid "Save settings"
+msgstr ""
+
+msgid "See all on Google"
+msgstr ""
+
+msgid "Settings"
+msgstr ""
+
+msgid "Settings saved."
+msgstr ""
+
+msgid "Shortcode for this design"
+msgstr ""
+
+msgid "Shorten long reviews after"
+msgstr ""
+
+msgid "Shorten long reviews after this many lines with a \"Read more\" button (0 = full text)."
+msgstr ""
+
+msgid "Show"
+msgstr ""
+
+msgid "Show buttons to Google"
+msgstr ""
+
+msgid "Show less"
+msgstr ""
+
+msgid "Show profile photos"
+msgstr ""
+
+msgid "Show reviews in the language they were written in"
+msgstr ""
+
+msgid "Show summary header"
+msgstr ""
+
+msgid "Show the floating badge on all front-end pages"
+msgstr ""
+
+msgid "Slider"
+msgstr ""
+
+msgid "Social proof"
+msgstr ""
+
+msgid "Sorry, you are not allowed to do that."
+msgstr ""
+
+msgid "Speech bubble"
+msgstr ""
+
+msgid "Status"
+msgstr ""
+
+msgid "Structure of the widget."
+msgstr ""
+
+msgid "Style"
+msgstr ""
+
+msgid "Style and accent color follow the default design."
+msgstr ""
+
+msgid "Summary header with rating and count"
+msgstr ""
+
+msgid "Summary header, buttons to Google, profile photos."
+msgstr ""
+
+msgid "Sure, write a review"
+msgstr ""
+
+msgid "Target of badge and social proof. auto = your reviews page (settings), else the Google profile."
+msgstr ""
+
+msgid "Test connection & load reviews"
+msgstr ""
+
+msgid "The ID of your Google Business Profile. Find it with Google's %s."
+msgstr ""
+
+msgid "The plugin loads rating, review count and the latest reviews from the Google Places API on your server. Your visitors never connect to Google."
+msgstr ""
+
+msgid "The preview shows sample reviews."
+msgstr ""
+
+msgid "Under \"APIs & Services → Credentials\", create an API key."
+msgstr ""
+
+msgid "Under \"APIs & Services → Library\", enable \"Places API (New)\"."
+msgstr ""
+
+msgid "Uninstall"
+msgstr ""
+
+msgid "Unset options follow the defaults on the Wille Reviews design page."
+msgstr ""
+
+msgid "Use it"
+msgstr ""
+
+msgid "Values"
+msgstr ""
+
+msgid "Very good advice and a pleasant atmosphere. Parking is a bit tight, otherwise everything was perfect – we will definitely come back and have already recommended the shop to friends and family. Thanks again to the whole team for the great support!"
+msgstr ""
+
+msgid "Visual style."
+msgstr ""
+
+msgid "Wall"
+msgstr ""
+
+msgid "Wille Reviews"
+msgstr ""
+
+msgid "Wille Reviews is active."
+msgstr ""
+
+msgid "Wille Reviews is made by %1$s. Does it help you? A %2$s review on WordPress.org helps others find it – thank you!"
+msgstr ""
+
+msgid "Wille Reviews refresh interval"
+msgstr ""
+
+msgid "Wille Reviews: no reviews to show yet. Connect your Google business in the %s. (Only administrators see this note.)"
+msgstr ""
+
+msgid "With the default refresh every 12 hours the plugin makes about 60 requests a month, no matter how many visitors you have. Current prices and free usage: %s."
+msgstr ""
+
+msgid "Write a review"
+msgstr ""
+
+msgid "Your Google rating and latest reviews in the layout and style of your choice."
+msgstr ""
+
+msgid "Your Google reviews have been on your site for two weeks now."
+msgstr ""
+
+msgid "Your business"
+msgstr ""
+
+msgid "Your reviews page"
+msgstr ""
+
+msgid "by %s"
+msgstr ""
+
+msgid "hours"
+msgstr ""
+
+msgid "plugin settings"
+msgstr ""
