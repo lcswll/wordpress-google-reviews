@@ -185,6 +185,10 @@ $willerev_saved     = isset( $_GET['settings-updated'] );
 						<?php echo 'ok' === $willerev_status['state'] ? esc_html__( 'Last request successful', 'wille-reviews' ) : esc_html__( 'Last request failed', 'wille-reviews' ); ?>
 					</p>
 					<p><code class="willerev-status-message"><?php echo esc_html( $willerev_status['message'] ); ?></code></p>
+					<?php $willerev_hint = 'ok' === $willerev_status['state'] ? '' : WILLEREV_Places::hint( $willerev_status['message'] ); ?>
+					<?php if ( '' !== $willerev_hint ) : ?>
+						<p class="willerev-status-hint"><?php echo esc_html( $willerev_hint ); ?></p>
+					<?php endif; ?>
 					<p class="description"><?php echo esc_html( (string) wp_date( $willerev_format, $willerev_status['time'] ) ); // wp_date() is false only for invalid timestamps. ?></p>
 				<?php endif; ?>
 

@@ -569,6 +569,12 @@
 	overflow-wrap: anywhere;
 }
 
+.willerev-status-hint {
+	padding: 10px 12px;
+	border-left: 3px solid #d63638;
+	background: #fcf0f1;
+}
+
 .willerev-status-place .willerev-stars {
 	--willerev-star: #fbbc04;
 	--willerev-star-empty: #dcdcde;

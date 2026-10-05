@@ -193,8 +193,14 @@ msgstr "Google-Bewertungen"
 msgid "Google Reviews settings"
 msgstr "Einstellungen Google-Bewertungen"
 
+msgid "Google cannot find this Place ID. A Place ID usually starts with \"ChIJ\" – look it up with the Place ID Finder linked above; a Maps link or a CID does not work."
+msgstr "Google findet diese Place ID nicht. Eine Place ID beginnt meist mit „ChIJ“ – suche sie mit dem oben verlinkten Place ID Finder; ein Maps-Link oder eine CID funktioniert nicht."
+
 msgid "Google did not return any data. See the error under \"Status\" below."
 msgstr "Google hat keine Daten geliefert. Den Fehler siehst du unten unter „Status“."
+
+msgid "Google does not accept the API key. Copy it again from the Google Cloud Console (Credentials) without spaces and save the settings."
+msgstr "Google akzeptiert den API-Schlüssel nicht. Kopiere ihn erneut aus der Google Cloud Console (Anmeldedaten), ohne Leerzeichen, und speichere die Einstellungen."
 
 msgid "Google rating"
 msgstr "Google-Bewertung"
@@ -480,14 +486,32 @@ msgstr "Ziel von Badge und Social Proof. auto = deine Bewertungsseite (Einstellu
 msgid "Test connection & load reviews"
 msgstr "Verbindung testen & Bewertungen laden"
 
+msgid "The API key is restricted to IP addresses that do not include your web server. Add your server's outgoing IP address to the key in the Google Cloud Console, or remove the IP restriction."
+msgstr "Der API-Schlüssel ist auf IP-Adressen beschränkt, zu denen dein Webserver nicht gehört. Trage die ausgehende IP-Adresse deines Servers in der Google Cloud Console beim Schlüssel ein oder entferne die IP-Beschränkung."
+
+msgid "The API key is restricted to websites (HTTP referrers). The plugin calls Google from your server, which sends no referrer. In the Google Cloud Console, set the key's application restriction to \"None\" or to your server's IP address, and restrict it to the Places API (New) instead."
+msgstr "Der API-Schlüssel ist auf Websites (HTTP-Verweis-URLs) beschränkt. Das Plugin ruft Google aber von deinem Server aus auf, und der sendet keine Verweis-URL. Stelle in der Google Cloud Console die Anwendungsbeschränkung des Schlüssels auf „Keine“ oder auf die IP-Adresse deines Servers und beschränke ihn stattdessen auf die Places API (New)."
+
+msgid "The Google Cloud project has no active billing account. Google requires one for the Places API, even within the free monthly usage."
+msgstr "Das Google-Cloud-Projekt hat kein aktives Rechnungskonto. Google verlangt eines für die Places API, auch wenn du im kostenlosen Monatskontingent bleibst."
+
 msgid "The ID of your Google Business Profile. Find it with Google's %s."
 msgstr "Die ID deines Google-Unternehmensprofils. Du findest sie mit Googles %s."
+
+msgid "The Places API (New) is not enabled in the key's Google Cloud project. Enable \"Places API (New)\" in the API library – the older \"Places API\" is not enough – and try again after a few minutes."
+msgstr "Die Places API (New) ist im Google-Cloud-Projekt des Schlüssels nicht aktiviert. Aktiviere „Places API (New)“ in der API-Bibliothek – die ältere „Places API“ reicht nicht – und versuche es nach ein paar Minuten erneut."
+
+msgid "The key's API restrictions do not include the Places API (New). In the Google Cloud Console, edit the key and add \"Places API (New)\" to the allowed APIs."
+msgstr "Die API-Beschränkungen des Schlüssels enthalten die Places API (New) nicht. Bearbeite den Schlüssel in der Google Cloud Console und füge „Places API (New)“ zu den erlaubten APIs hinzu."
 
 msgid "The plugin loads rating, review count and the latest reviews from the Google Places API on your server. Your visitors never connect to Google."
 msgstr "Das Plugin lädt Bewertung, Anzahl und die neuesten Bewertungen über die Google Places API auf deinem Server. Deine Besucher verbinden sich nie mit Google."
 
 msgid "The preview shows sample reviews."
 msgstr "Die Vorschau zeigt Beispielbewertungen."
+
+msgid "The project's quota is used up. Check the quotas of the Places API (New) in the Google Cloud Console; the plugin tries again automatically."
+msgstr "Das Kontingent des Projekts ist aufgebraucht. Prüfe die Kontingente der Places API (New) in der Google Cloud Console; das Plugin versucht es automatisch erneut."
 
 msgid "Under \"APIs & Services → Credentials\", create an API key."
 msgstr "Unter „APIs & Dienste → Anmeldedaten“ einen API-Schlüssel erstellen."
@@ -553,6 +577,9 @@ msgstr "Dein Unternehmen"
 
 msgid "Your reviews page"
 msgstr "Deine Bewertungsseite"
+
+msgid "Your server could not reach Google. Ask your host whether outgoing connections to places.googleapis.com are allowed."
+msgstr "Dein Server konnte Google nicht erreichen. Frag deinen Hoster, ob ausgehende Verbindungen zu places.googleapis.com erlaubt sind."
 
 msgid "by %s"
 msgstr "von %s"

@@ -302,8 +302,40 @@ class WILLEREV_Places {
 		$error   = is_array( $body ) && isset( $body['error'] ) && is_array( $body['error'] ) ? $body['error'] : array();
 		$status  = isset( $error['status'] ) ? (string) $error['status'] : '';
 		$message = isset( $error['message'] ) ? (string) $error['message'] : '';
-		$text    = trim( 'HTTP ' . $code . ' ' . $status . ( '' !== $message ? ': ' . $message : '' ) );
+		$reason  = '';
+		foreach ( isset( $error['details'] ) && is_array( $error['details'] ) ? $error['details'] : array() as $detail ) {
+			if ( is_array( $detail ) && isset( $detail['reason'] ) && '' === $reason ) {
+				$reason = (string) $detail['reason'];
+			}
+		}
+		$text = trim( 'HTTP ' . $code . ' ' . $status . ( '' !== $message ? ': ' . $message : '' ) . ( '' !== $reason ? ' (' . $reason . ')' : '' ) );
 		return sanitize_text_field( $text );
+	}
+
+	/**
+	 * What to do about a failed request, in plain language (pure; '' when the error is unknown).
+	 *
+	 * @param string $message Stored error message (see error_message() or a WP_Error from the HTTP API).
+	 * @return string
+	 */
+	public static function hint( $message ) {
+		$rules = array(
+			'/REFERRER_BLOCKED|referer/i'                  => __( 'The API key is restricted to websites (HTTP referrers). The plugin calls Google from your server, which sends no referrer. In the Google Cloud Console, set the key\'s application restriction to "None" or to your server\'s IP address, and restrict it to the Places API (New) instead.', 'wille-reviews' ),
+			'/IP_ADDRESS_BLOCKED|IP address restriction/i' => __( 'The API key is restricted to IP addresses that do not include your web server. Add your server\'s outgoing IP address to the key in the Google Cloud Console, or remove the IP restriction.', 'wille-reviews' ),
+			'/SERVICE_BLOCKED|not authorized to use this/i' => __( 'The key\'s API restrictions do not include the Places API (New). In the Google Cloud Console, edit the key and add "Places API (New)" to the allowed APIs.', 'wille-reviews' ),
+			'/BILLING|billing/i'                           => __( 'The Google Cloud project has no active billing account. Google requires one for the Places API, even within the free monthly usage.', 'wille-reviews' ),
+			'/SERVICE_DISABLED|has not been used|disabled/i' => __( 'The Places API (New) is not enabled in the key\'s Google Cloud project. Enable "Places API (New)" in the API library – the older "Places API" is not enough – and try again after a few minutes.', 'wille-reviews' ),
+			'/API_KEY_INVALID|API key not valid|expired/i' => __( 'Google does not accept the API key. Copy it again from the Google Cloud Console (Credentials) without spaces and save the settings.', 'wille-reviews' ),
+			'/HTTP 404|NOT_FOUND|Place ID|place_id/i'      => __( 'Google cannot find this Place ID. A Place ID usually starts with "ChIJ" – look it up with the Place ID Finder linked above; a Maps link or a CID does not work.', 'wille-reviews' ),
+			'/HTTP 429|RESOURCE_EXHAUSTED|quota/i'         => __( 'The project\'s quota is used up. Check the quotas of the Places API (New) in the Google Cloud Console; the plugin tries again automatically.', 'wille-reviews' ),
+			'/cURL error|timed out|resolve host/i'         => __( 'Your server could not reach Google. Ask your host whether outgoing connections to places.googleapis.com are allowed.', 'wille-reviews' ),
+		);
+		foreach ( $rules as $pattern => $hint ) {
+			if ( preg_match( $pattern, (string) $message ) ) {
+				return $hint;
+			}
+		}
+		return '';
 	}
 
 	/**

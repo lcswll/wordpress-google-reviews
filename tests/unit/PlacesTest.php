@@ -117,4 +117,37 @@ final class PlacesTest extends TestCase {
 		);
 		$this->assertSame( 'HTTP 502', WILLEREV_Places::error_message( 502, null ) );
 	}
+
+	public function test_error_message_appends_reason(): void {
+		$this->assertSame(
+			'HTTP 403 PERMISSION_DENIED: Requests from referer are blocked. (API_KEY_HTTP_REFERRER_BLOCKED)',
+			WILLEREV_Places::error_message(
+				403,
+				array(
+					'error' => array(
+						'status'  => 'PERMISSION_DENIED',
+						'message' => 'Requests from referer <empty> are blocked.',
+						'details' => array( array( 'reason' => 'API_KEY_HTTP_REFERRER_BLOCKED' ) ),
+					),
+				)
+			)
+		);
+	}
+
+	public function test_hint(): void {
+		$cases = array(
+			'HTTP 403 PERMISSION_DENIED: Requests from referer <empty> are blocked. (API_KEY_HTTP_REFERRER_BLOCKED)' => 'HTTP referrers',
+			'HTTP 403 PERMISSION_DENIED: Places API (New) has not been used in project 1 before or it is disabled.' => 'not enabled',
+			'HTTP 403 PERMISSION_DENIED: This API method requires billing to be enabled. (BILLING_DISABLED)' => 'billing account',
+			'HTTP 400 INVALID_ARGUMENT: API key not valid. Please pass a valid API key. (API_KEY_INVALID)' => 'does not accept the API key',
+			'HTTP 403 PERMISSION_DENIED: This API key is not authorized to use this service or API.' => 'API restrictions',
+			'HTTP 400 INVALID_ARGUMENT: Not a valid Place ID: foo' => 'cannot find this Place ID',
+			'HTTP 404 NOT_FOUND' => 'cannot find this Place ID',
+			'cURL error 28: Operation timed out after 12001 milliseconds' => 'could not reach Google',
+		);
+		foreach ( $cases as $message => $expected ) {
+			$this->assertStringContainsString( $expected, WILLEREV_Places::hint( $message ), $message );
+		}
+		$this->assertSame( '', WILLEREV_Places::hint( 'HTTP 500 INTERNAL' ) );
+	}
 }

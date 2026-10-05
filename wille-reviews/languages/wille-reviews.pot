@@ -192,7 +192,13 @@ msgstr ""
 msgid "Google Reviews settings"
 msgstr ""
 
+msgid "Google cannot find this Place ID. A Place ID usually starts with \"ChIJ\" – look it up with the Place ID Finder linked above; a Maps link or a CID does not work."
+msgstr ""
+
 msgid "Google did not return any data. See the error under \"Status\" below."
+msgstr ""
+
+msgid "Google does not accept the API key. Copy it again from the Google Cloud Console (Credentials) without spaces and save the settings."
 msgstr ""
 
 msgid "Google rating"
@@ -479,13 +485,31 @@ msgstr ""
 msgid "Test connection & load reviews"
 msgstr ""
 
+msgid "The API key is restricted to IP addresses that do not include your web server. Add your server's outgoing IP address to the key in the Google Cloud Console, or remove the IP restriction."
+msgstr ""
+
+msgid "The API key is restricted to websites (HTTP referrers). The plugin calls Google from your server, which sends no referrer. In the Google Cloud Console, set the key's application restriction to \"None\" or to your server's IP address, and restrict it to the Places API (New) instead."
+msgstr ""
+
+msgid "The Google Cloud project has no active billing account. Google requires one for the Places API, even within the free monthly usage."
+msgstr ""
+
 msgid "The ID of your Google Business Profile. Find it with Google's %s."
+msgstr ""
+
+msgid "The Places API (New) is not enabled in the key's Google Cloud project. Enable \"Places API (New)\" in the API library – the older \"Places API\" is not enough – and try again after a few minutes."
+msgstr ""
+
+msgid "The key's API restrictions do not include the Places API (New). In the Google Cloud Console, edit the key and add \"Places API (New)\" to the allowed APIs."
 msgstr ""
 
 msgid "The plugin loads rating, review count and the latest reviews from the Google Places API on your server. Your visitors never connect to Google."
 msgstr ""
 
 msgid "The preview shows sample reviews."
+msgstr ""
+
+msgid "The project's quota is used up. Check the quotas of the Places API (New) in the Google Cloud Console; the plugin tries again automatically."
 msgstr ""
 
 msgid "Under \"APIs & Services → Credentials\", create an API key."
@@ -551,6 +575,9 @@ msgid "Your business"
 msgstr ""
 
 msgid "Your reviews page"
+msgstr ""
+
+msgid "Your server could not reach Google. Ask your host whether outgoing connections to places.googleapis.com are allowed."
 msgstr ""
 
 msgid "by %s"
