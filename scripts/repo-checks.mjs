@@ -129,8 +129,9 @@ if (online) {
 	}
 
 	// Reviewers open every URI in the header and readme; dead links get the submission sent back.
-	// Documented API endpoints (External services section) only answer POST requests – a GET says nothing.
-	const API_ENDPOINTS = new Set(['https://api.indexnow.org/indexnow']);
+	// Documented API endpoints (External services section) only answer real API calls (with a Place ID and key) –
+	// a bare GET returns 404, which says nothing about the service.
+	const API_ENDPOINTS = new Set(['https://places.googleapis.com/v1/places/']);
 	const urls = new Set([
 		...['Plugin URI', 'Author URI', 'License URI', 'Update URI'].map((f) => header[f]).filter(Boolean),
 		// Trailing sentence punctuation is not part of the URL ("…/gptbot.json, …").

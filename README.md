@@ -68,11 +68,13 @@ npm run setup:php
 | `npm run build` | Release-ZIP nach `dist/` |
 | `node scripts/wporg-assets.mjs` | Icon, Banner und Screenshots für wordpress.org neu erzeugen |
 
-Pre-push-Hook einmalig aktivieren:
+Git-Hooks einmalig aktivieren (pre-commit: Secret-Scan, pre-push: schnelle Checks):
 
 ```bash
 git config core.hooksPath .githooks
 ```
+
+**Secrets:** Echte API-Keys gehören nie ins Repo – der Google-Key steht nur in den WordPress-Einstellungen der jeweiligen Seite, Tests und Playground nutzen `TEST-KEY`. Vier Schutzschichten: `.gitignore` (`.env*`, `*.pem`, `*.key`, `auth.json`, …), [`scripts/secret-scan.mjs`](scripts/secret-scan.mjs) als pre-commit-Hook und in `npm run verify` (Google-API-Keys, Tokens, private Schlüssel; Ausgabe geschwärzt), gitleaks über die gesamte History in der CI und GitHub Secret Scanning mit Push Protection. Ist doch ein Key durchgerutscht: zuerst in der Google Cloud Console rotieren, Entfernen aus Git allein reicht nicht.
 
 **Google-Attrappe:** [`tests/e2e/fake-google.php`](tests/e2e/fake-google.php) wird von den Blueprints als mu-plugin installiert und beantwortet `places.googleapis.com` (Key `TEST-KEY` → „Café Sonnenschein“, 4,7 ★, 312 Bewertungen; jeder andere Key → 403 wie bei Google) sowie die Profilbild-Server. So laufen Playground, Tests und Screenshots ohne echten API-Key.
 

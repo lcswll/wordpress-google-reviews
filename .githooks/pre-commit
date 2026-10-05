@@ -1,0 +1,4 @@
+#!/bin/sh
+# Blocks commits that contain an API key, token or private key (see scripts/secret-scan.mjs). Enable once with:
+#   git config core.hooksPath .githooks
+exec node scripts/secret-scan.mjs --staged

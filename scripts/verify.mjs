@@ -17,6 +17,7 @@ const node = process.execPath;
 const script = (name, ...args) => [node, [path.join(root, 'scripts', name), ...args]];
 
 const steps = [
+	{ name: 'Secrets (tracked files)', run: script('secret-scan.mjs') },
 	{ name: 'PHPCS (WPCS, VIP, PHPCompatibility)', run: script('php.mjs', 'vendor/bin/phpcs', '-q') },
 	{ name: 'PHPStan (level 8)', run: script('php.mjs', 'vendor/bin/phpstan', 'analyse', '--no-progress', '--memory-limit=2G') },
 	{ name: 'PHPUnit', run: script('php.mjs', 'vendor/bin/phpunit') },

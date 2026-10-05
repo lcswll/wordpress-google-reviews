@@ -18,3 +18,17 @@ Thumbs.db
 *.swp
 .idea/
 .vscode/
+
+# Secrets – never commit real credentials (scripts/secret-scan.mjs + gitleaks + GitHub push protection check this).
+# The Google API key lives only in the WordPress settings of the site that uses it; tests use "TEST-KEY".
+.env
+.env.*
+!.env.example
+auth.json
+*.pem
+*.key
+*.p12
+*.pfx
+*service-account*.json
+wp-config.php
+wp-config-local.php
