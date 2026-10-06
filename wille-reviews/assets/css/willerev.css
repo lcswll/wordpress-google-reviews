@@ -6,8 +6,9 @@
  * (set inline from the settings / shortcode / block). Override anything from your theme, e.g.
  *   .willerev { --willerev-star: #f59e0b; }
  *
- * Design rules: the theme's font family, but a fixed, calm type scale (themes with an 18–20 px body would otherwise
- * blow the cards up); hairline borders instead of heavy shadows; no decoration that competes with the reviews.
+ * Design rules: the theme's font family, but a fixed type scale (themes with an 18–20 px body would otherwise blow the
+ * cards up); a clear hierarchy – score bar, then cards (name, date, stars, text) – fine borders and soft depth, the
+ * accent colour only on actions.
  */
 
 .willerev {
@@ -26,13 +27,17 @@
 	--willerev-ink: currentColor;
 	--willerev-muted: color-mix(in srgb, currentColor 64%, transparent);
 	--willerev-line: color-mix(in srgb, currentColor 14%, transparent);
-	--willerev-link: var(--willerev-accent);
+	/* Accent as text (links, outline button): darkened a little so light accents stay readable on white. */
+	--willerev-link: color-mix(in srgb, var(--willerev-accent) 82%, #000);
 	--willerev-card-bg: #fff;
-	--willerev-card-border: #e6e8eb;
-	--willerev-card-shadow: 0 1px 2px rgba(16, 24, 40, 0.04);
-	--willerev-star: #f5b400;
+	--willerev-card-border: #e4e7eb;
+	--willerev-card-shadow: 0 1px 2px rgba(16, 24, 40, 0.04), 0 4px 14px rgba(16, 24, 40, 0.04);
+	--willerev-card-shadow-hover: 0 2px 4px rgba(16, 24, 40, 0.05), 0 10px 28px rgba(16, 24, 40, 0.08);
+	--willerev-header-bg: var(--willerev-card-bg);
+	--willerev-header-border: var(--willerev-card-border);
+	--willerev-star: #fbbc04;
 	--willerev-star-empty: color-mix(in srgb, currentColor 20%, transparent);
-	--willerev-star-size: 15px;
+	--willerev-star-size: 17px;
 	--willerev-button-bg: transparent;
 	--willerev-button-ink: var(--willerev-ink);
 	--willerev-button-border: color-mix(in srgb, currentColor 28%, transparent);
@@ -146,17 +151,21 @@
 /* ----------------------------------------------------------------- header */
 
 /*
- * Summary above the reviews: brand line, then the score; the buttons sit on the right. No box around it –
- * a hairline separates it from the cards, so the reviews stay the focus.
+ * Summary bar above the reviews, in one line: brand · score · stars · count, the buttons on the right. It sits in its
+ * own box so the trust signal (rating + number of reviews) is the first thing a visitor reads.
  */
 .willerev__header {
-	display: grid;
-	grid-template-columns: minmax(0, 1fr) auto;
-	align-items: end;
-	gap: 6px 24px;
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 12px 24px;
 	margin: 0 0 20px;
-	padding: 0 0 20px;
-	border-bottom: 1px solid var(--willerev-line);
+	padding: 14px 14px 14px 22px;
+	border: 1px solid var(--willerev-header-border);
+	border-radius: calc(var(--willerev-radius) + 4px);
+	background: var(--willerev-header-bg);
+	box-shadow: var(--willerev-card-shadow);
+	color: var(--willerev-ink);
 }
 
 .willerev--no-header .willerev__header {
@@ -165,12 +174,12 @@
 
 .willerev__brand {
 	display: flex;
-	grid-column: 1;
 	align-items: center;
-	gap: 8px;
-	color: var(--willerev-muted);
-	font-size: 0.875em;
-	font-weight: 500;
+	gap: 10px;
+	font-size: 1.0625em;
+	font-weight: 700;
+	letter-spacing: -0.01em;
+	white-space: nowrap;
 }
 
 .willerev__demo {
@@ -181,43 +190,42 @@
 	color: #7a5800;
 	font-size: 11px;
 	font-weight: 600;
+	letter-spacing: normal;
 }
 
 .willerev__score {
 	display: flex;
-	grid-column: 1;
+	flex: 1 1 auto;
 	flex-wrap: wrap;
 	align-items: center;
 	gap: 4px 12px;
 }
 
 .willerev__rating {
-	font-size: 2.25em;
-	font-weight: 600;
-	letter-spacing: -0.02em;
-	line-height: 1.1;
+	font-size: 2em;
+	font-weight: 700;
+	letter-spacing: -0.03em;
+	line-height: 1;
 	font-variant-numeric: tabular-nums;
 }
 
 .willerev__score .willerev-stars {
-	--willerev-star-size: 18px;
+	--willerev-star-size: 20px;
 
 	align-self: center;
 }
 
 .willerev__count {
 	color: var(--willerev-muted);
-	font-size: 0.875em;
+	font-size: 0.9375em;
 }
 
 .willerev__actions {
 	display: flex;
-	grid-row: 1 / span 2;
-	grid-column: 2;
 	flex-wrap: wrap;
 	align-items: center;
-	align-self: center;
 	gap: 8px;
+	margin-inline-start: auto;
 }
 
 .willerev--no-cta .willerev__actions {
@@ -227,15 +235,16 @@
 .willerev .willerev__button {
 	display: inline-flex;
 	align-items: center;
-	min-height: 38px;
-	padding: 0 16px;
-	border: 1px solid var(--willerev-button-border);
-	border-radius: min(var(--willerev-radius), 8px);
-	background: var(--willerev-button-bg);
+	justify-content: center;
+	min-height: 40px;
+	padding: 0 18px;
+	border: 1px solid color-mix(in srgb, var(--willerev-accent) 45%, transparent);
+	border-radius: 999px;
+	background: color-mix(in srgb, var(--willerev-accent) 8%, transparent);
 	box-shadow: none;
-	color: var(--willerev-button-ink);
+	color: var(--willerev-link);
 	font-size: 0.875em;
-	font-weight: 500;
+	font-weight: 600;
 	line-height: 1.2;
 	text-decoration: none;
 	white-space: nowrap;
@@ -243,7 +252,9 @@
 }
 
 .willerev .willerev__button:hover {
-	border-color: color-mix(in srgb, var(--willerev-button-border) 60%, var(--willerev-ink));
+	border-color: var(--willerev-accent);
+	background: color-mix(in srgb, var(--willerev-accent) 14%, transparent);
+	color: var(--willerev-link);
 }
 
 .willerev .willerev__button--primary {
@@ -253,8 +264,9 @@
 }
 
 .willerev .willerev__button--primary:hover {
-	border-color: var(--willerev-accent);
-	filter: brightness(0.93);
+	background: var(--willerev-accent);
+	color: var(--willerev-accent-ink);
+	filter: brightness(0.94);
 }
 
 /* ------------------------------------------------------------------ cards */
@@ -262,14 +274,19 @@
 .willerev-card {
 	display: flex;
 	flex-direction: column;
-	gap: 14px;
+	gap: 16px;
 	min-width: 0;
-	padding: 20px;
+	padding: 24px;
 	border: 1px solid var(--willerev-card-border);
-	border-radius: var(--willerev-radius);
+	border-radius: calc(var(--willerev-radius) + 4px);
 	background: var(--willerev-card-bg);
 	box-shadow: var(--willerev-card-shadow);
 	color: var(--willerev-ink);
+	transition: box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.willerev-card:hover {
+	box-shadow: var(--willerev-card-shadow-hover);
 }
 
 .willerev-card__head {
@@ -288,7 +305,7 @@
 	display: flex;
 	flex: 1;
 	flex-direction: column;
-	gap: 1px;
+	gap: 2px;
 	min-width: 0;
 	line-height: 1.3;
 }
@@ -296,8 +313,9 @@
 .willerev .willerev-card__author {
 	overflow: hidden;
 	color: inherit;
-	font-size: 0.9375em;
-	font-weight: 600;
+	font-size: 1.0625em;
+	font-weight: 700;
+	letter-spacing: -0.01em;
 	text-decoration: none;
 	text-overflow: ellipsis;
 	white-space: nowrap;
@@ -310,19 +328,19 @@
 
 .willerev-card__time {
 	color: var(--willerev-muted);
-	font-size: 0.8125em;
+	font-size: 0.875em;
 }
 
 .willerev-card__body {
 	display: flex;
 	flex-direction: column;
-	gap: 8px;
+	gap: 10px;
 }
 
 .willerev .willerev-card__text {
 	margin: 0;
-	font-size: 0.9375em;
-	line-height: 1.6;
+	font-size: 1em;
+	line-height: 1.65;
 	overflow-wrap: anywhere;
 }
 
@@ -345,8 +363,8 @@
 	box-shadow: none;
 	color: var(--willerev-link);
 	font: inherit;
-	font-size: 0.875em;
-	font-weight: 500;
+	font-size: 0.9375em;
+	font-weight: 700;
 	letter-spacing: normal;
 	text-transform: none;
 	cursor: pointer;
@@ -368,7 +386,7 @@
 	display: grid;
 	grid-template-columns: repeat(var(--willerev-cols), minmax(0, 1fr));
 	gap: var(--willerev-gap);
-	align-items: start;
+	align-items: stretch;
 }
 
 /* ----------------------------------------------------------------- slider */
@@ -400,28 +418,39 @@
 	scroll-snap-align: start;
 }
 
+/* Arrow buttons: centred below the cards, never covering a review. */
+.willerev--layout-carousel .willerev__viewport {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	gap: 20px 12px;
+}
+
+.willerev--layout-carousel .willerev__items {
+	flex: none;
+	width: calc(100% + 8px);
+}
+
 .willerev .willerev__nav {
-	position: absolute;
-	top: 50%;
-	z-index: 2;
 	display: none;
 	align-items: center;
 	justify-content: center;
-	width: 36px;
-	height: 36px;
-	margin: -18px 0 0;
+	width: 44px;
+	height: 44px;
+	margin: 0;
 	padding: 0;
 	border: 1px solid var(--willerev-card-border);
 	border-radius: 50%;
 	background: var(--willerev-card-bg);
-	box-shadow: 0 1px 3px rgba(16, 24, 40, 0.1);
+	box-shadow: var(--willerev-card-shadow);
 	color: var(--willerev-ink);
 	cursor: pointer;
-	transition: opacity 0.15s ease, border-color 0.15s ease;
+	transition: opacity 0.15s ease, border-color 0.15s ease, color 0.15s ease;
 }
 
 .willerev .willerev__nav:hover {
-	border-color: var(--willerev-button-border);
+	border-color: var(--willerev-accent);
+	color: var(--willerev-link);
 }
 
 .willerev.is-scrollable .willerev__nav {
@@ -429,16 +458,9 @@
 }
 
 .willerev .willerev__nav:disabled {
-	opacity: 0;
+	opacity: 0.4;
+	cursor: default;
 	pointer-events: none;
-}
-
-.willerev .willerev__nav--prev {
-	left: -12px;
-}
-
-.willerev .willerev__nav--next {
-	right: -12px;
 }
 
 .willerev.is-rtl .willerev__nav svg {
@@ -507,22 +529,21 @@
 		grid-auto-columns: 86%;
 	}
 
-	.willerev .willerev__nav--prev {
-		left: 4px;
-	}
-
-	.willerev .willerev__nav--next {
-		right: 4px;
-	}
-
 	.willerev__header {
-		grid-template-columns: minmax(0, 1fr);
+		padding: 18px;
 	}
 
 	.willerev__actions {
-		grid-row: auto;
-		grid-column: 1;
-		margin-top: 10px;
+		width: 100%;
+		margin-inline-start: 0;
+	}
+
+	.willerev .willerev__button {
+		flex: 1 1 auto;
+	}
+
+	.willerev-card {
+		padding: 20px;
 	}
 }
 
@@ -740,8 +761,8 @@
 /* ================================================================= styles */
 
 /* Elements on their own white surface: fixed dark text, whatever the page around them looks like. */
-.willerev--style-light :is(.willerev-card, .willerev-badge),
-.willerev--style-accent .willerev-card,
+.willerev--style-light :is(.willerev__header, .willerev-card, .willerev-badge),
+.willerev--style-accent :is(.willerev__header, .willerev-card),
 .willerev--style-quote .willerev-badge,
 .willerev:not(.willerev--style-dark) :is(.willerev__nav, .willerev-badge__close) {
 	--willerev-ink: #1f2328;
@@ -753,25 +774,37 @@
 	--willerev-avatar-ink-l: 32%;
 }
 
-/* Dark: a neutral, near-black panel (not navy), cards one step lighter. */
+/*
+ * Dark: a near-black panel with a faint light from the top left, cards and score bar as slightly lighter glass
+ * with a fine edge – depth without loud shadows.
+ */
 .willerev--style-dark {
-	--willerev-ink: #eceef1;
-	--willerev-muted: #9ba3ad;
-	--willerev-line: #2a2f36;
-	--willerev-link: color-mix(in srgb, var(--willerev-accent) 55%, #fff);
-	--willerev-card-bg: #1b1f24;
-	--willerev-card-border: #2a2f36;
-	--willerev-card-shadow: none;
-	--willerev-star-empty: #3a4049;
-	--willerev-button-border: #3a4049;
-	--willerev-face-ring: #121519;
+	--willerev-ink: #f1f2f4;
+	--willerev-muted: #a0a6ae;
+	--willerev-line: rgba(255, 255, 255, 0.09);
+	--willerev-link: color-mix(in srgb, var(--willerev-accent) 72%, #fff);
+	--willerev-card-bg: linear-gradient(180deg, rgba(255, 255, 255, 0.055), rgba(255, 255, 255, 0.025)), #15171b;
+	--willerev-card-border: rgba(255, 255, 255, 0.09);
+	--willerev-card-shadow: 0 1px 0 rgba(255, 255, 255, 0.04) inset, 0 8px 24px rgba(0, 0, 0, 0.25);
+	--willerev-card-shadow-hover: 0 1px 0 rgba(255, 255, 255, 0.06) inset, 0 12px 32px rgba(0, 0, 0, 0.35);
+	--willerev-star-empty: #3a3f47;
+	--willerev-button-border: rgba(255, 255, 255, 0.16);
+	--willerev-face-ring: #111317;
 	--willerev-avatar-l: 26%;
 	--willerev-avatar-ink-l: 82%;
 }
 
 .willerev--style-dark:not(.willerev--layout-badge):not(.willerev--layout-social) {
-	--willerev-bg: #121519;
+	--willerev-bg: radial-gradient(120% 120% at 0% 0%, #1c1f25 0%, #111317 60%);
 	--willerev-pad: 28px;
+}
+
+.willerev--style-dark .willerev-card:hover {
+	border-color: rgba(255, 255, 255, 0.16);
+}
+
+.willerev--style-dark .willerev-badge {
+	background: #16181c;
 }
 
 .willerev--style-dark .willerev-social {
@@ -785,6 +818,16 @@
 	--willerev-card-bg: transparent;
 	--willerev-card-border: transparent;
 	--willerev-card-shadow: none;
+	--willerev-card-shadow-hover: none;
+}
+
+.willerev--style-minimal .willerev__header {
+	padding: 0 0 20px;
+	border: 0;
+	border-bottom: 1px solid var(--willerev-line);
+	border-radius: 0;
+	background: none;
+	box-shadow: none;
 }
 
 .willerev--style-minimal .willerev-card {
@@ -823,8 +866,9 @@
 }
 
 .willerev--style-minimal .willerev__nav {
-	border-color: var(--willerev-line);
-	background: #fff;
+	border-color: var(--willerev-button-border);
+	background: transparent;
+	color: inherit;
 }
 
 .willerev--style-minimal .willerev-badge {
@@ -840,6 +884,12 @@
 .willerev--style-quote {
 	/* Derived from the text colour, so the tint works on white, grey and dark page backgrounds alike. */
 	--willerev-quote-bg: color-mix(in srgb, var(--willerev-ink) 5%, transparent);
+}
+
+.willerev--style-quote .willerev__header {
+	border-color: transparent;
+	background: var(--willerev-quote-bg);
+	box-shadow: none;
 }
 
 .willerev--style-quote .willerev-card {

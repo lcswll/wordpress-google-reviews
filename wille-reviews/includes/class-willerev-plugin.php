@@ -47,6 +47,7 @@ class WILLEREV_Plugin {
 	 * @return void
 	 */
 	protected function boot() {
+		add_action( 'init', array( __CLASS__, 'load_textdomain' ), 0 );
 		WILLEREV_Places::init();
 		WILLEREV_Frontend::init();
 		WILLEREV_Block::init();
@@ -55,6 +56,21 @@ class WILLEREV_Plugin {
 			WILLEREV_Admin::init();
 			WILLEREV_Review::init();
 		}
+	}
+
+	/**
+	 * Bundled translations (languages/wille-reviews-{locale}.l10n.php) as a fallback: a language pack from
+	 * translate.wordpress.org (wp-content/languages/plugins) takes precedence and is loaded by WordPress itself.
+	 *
+	 * @return void
+	 */
+	public static function load_textdomain() {
+		$locale = determine_locale();
+		if ( file_exists( WP_LANG_DIR . "/plugins/wille-reviews-{$locale}.mo" ) || file_exists( WP_LANG_DIR . "/plugins/wille-reviews-{$locale}.l10n.php" ) ) {
+			return;
+		}
+		// WordPress 6.5+ prefers the .l10n.php variant of this path.
+		load_textdomain( 'wille-reviews', WILLEREV_DIR . "languages/wille-reviews-{$locale}.mo", $locale );
 	}
 
 	/**

@@ -89,7 +89,7 @@ class WILLEREV_Render {
 			'dark'    => __( 'Dark', 'wille-reviews' ),
 			'minimal' => __( 'Minimal', 'wille-reviews' ),
 			'quote'   => __( 'Quote', 'wille-reviews' ),
-			'accent'  => __( 'Accent color', 'wille-reviews' ),
+			'accent'  => __( 'Accent', 'wille-reviews' ),
 		);
 	}
 
@@ -394,11 +394,11 @@ class WILLEREV_Render {
 				</span>
 			</div>
 			<div class="willerev__actions">
-				<?php if ( '' !== (string) $data['write_url'] ) : ?>
-					<a class="willerev__button willerev__button--primary" href="<?php echo esc_url( (string) $data['write_url'] ); ?>" target="_blank" rel="noopener"><?php esc_html_e( 'Write a review', 'wille-reviews' ); ?></a>
-				<?php endif; ?>
 				<?php if ( '' !== (string) $data['url'] ) : ?>
 					<a class="willerev__button" href="<?php echo esc_url( (string) $data['url'] ); ?>" target="_blank" rel="noopener"><?php esc_html_e( 'See all on Google', 'wille-reviews' ); ?></a>
+				<?php endif; ?>
+				<?php if ( '' !== (string) $data['write_url'] ) : ?>
+					<a class="willerev__button willerev__button--primary" href="<?php echo esc_url( (string) $data['write_url'] ); ?>" target="_blank" rel="noopener"><?php esc_html_e( 'Write a review', 'wille-reviews' ); ?></a>
 				<?php endif; ?>
 			</div>
 		</header>

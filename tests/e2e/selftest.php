@@ -60,6 +60,13 @@ try {
 	check( shortcode_exists( 'wille_reviews' ), 'shortcode registered' );
 	check( WP_Block_Type_Registry::get_instance()->is_registered( 'wille-reviews/reviews' ), 'block registered' );
 
+	// --------------------------------------------------------- bundled German translation.
+	check( load_textdomain( 'wille-reviews', WILLEREV_DIR . 'languages/wille-reviews-de_DE.mo', 'de_DE' ), 'bundled de_DE translation loads' );
+	/* translators: %s: number of reviews */
+	$german = sprintf( _n( 'Based on %s review', 'Based on %s reviews', 312, 'wille-reviews' ), '312' ) . ' | ' . __( 'Read more', 'wille-reviews' );
+	unload_textdomain( 'wille-reviews' );
+	check( 'basierend auf 312 Bewertungen | Mehr lesen' === $german, 'German strings incl. plural forms', $german );
+
 	// --------------------------------------------------------- built-in self-test.
 	$self = WILLEREV_Selftest::run();
 	check( array() === $self['failures'], "built-in self-test ({$self['passed']} assertions)", $self['failures'] );

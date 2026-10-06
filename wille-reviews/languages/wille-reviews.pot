@@ -40,6 +40,9 @@ msgstr ""
 msgid "API key"
 msgstr ""
 
+msgid "Accent"
+msgstr ""
+
 msgid "Accent color"
 msgstr ""
 

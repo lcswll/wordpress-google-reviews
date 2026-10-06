@@ -14,13 +14,14 @@ Show your Google reviews on your site – in a clean design that fits your theme
 
 **Most visitors check your Google rating before they get in touch.** Wille Reviews puts it on your own site: your average rating, the number of reviews and your latest reviews from your Google Business Profile – as a reviews section, a slider, a testimonial wall or a small badge next to your contact button.
 
-Review widgets often look like a foreign object on a carefully designed site. Wille Reviews is built the other way round: calm, typographic cards that take over your theme's font, hairline borders instead of loud shadows, your own accent colour and corner radius – and a design page where you see every change before it goes live.
+Review widgets often look like a foreign object on a carefully designed site. Wille Reviews is built the other way round: a modern, clear design that takes over your theme's font – a score bar with your rating and number of reviews at the top, clean review cards below, your own accent colour and corner radius – and a design page where you see every change before it goes live.
 
 **Free. No subscription, no premium version, no account with us, no widget service in between.** You connect your own Google API key; your server talks to Google directly.
 
 = What makes it different =
 
-* **Designed to blend in.** Six layouts × five styles, each combinable with your accent colour and corner radius. The type scale is fixed and calm, so the widget looks the same on a theme with an 18 px body font as on one with 14 px.
+* **Designed to build trust.** Rating, stars and number of reviews come first, then the reviews themselves – name, date, stars, text, each with the Google mark. Six layouts × five styles, each combinable with your accent colour and corner radius. The type scale is fixed, so the widget looks the same on a theme with an 18 px body font as on one with 14 px.
+* **German included.** Ships with a complete German translation (frontend and admin); more languages come through translate.wordpress.org.
 * **Pick the design by looking at it.** The design page shows every layout live with sample data or your real reviews, also on a dark page background, and writes the matching shortcode for you.
 * **Your visitors never contact Google.** Reviews are fetched and cached on your server, profile photos are copied to your site. No external scripts, no cookies, no iframe.
 * **Fast.** One small stylesheet and one small deferred script, loaded only on pages that show a widget. Works without JavaScript.
@@ -37,11 +38,11 @@ Review widgets often look like a foreign object on a carefully designed site. Wi
 
 = Five styles =
 
-* **Light** – white cards with a hairline border, for most themes.
-* **Dark** – a neutral dark panel for dark sections and dark themes.
+* **Light** – white cards with a fine border and soft depth, for most themes.
+* **Dark** – a near-black panel with glass-like cards, for dark sections and dark themes.
 * **Minimal** – no boxes at all, only typography and fine lines.
 * **Quote** – the review as a quotation on a soft tint, the reviewer below it.
-* **Accent color** – a light tint of your brand colour as background, the colour on rating and buttons.
+* **Accent** – a light tint of your brand colour as background, the colour on rating and buttons.
 
 Styles are pure CSS custom properties, so your theme can fine-tune anything.
 
@@ -139,7 +140,7 @@ Google Maps Platform Terms of Service: https://cloud.google.com/maps-platform/te
 == Changelog ==
 
 = 1.0.0 =
-* First release: six layouts (grid, slider, list, wall, badge, social proof), five styles (light, dark, minimal, quote, accent color), design page with live preview and shortcode builder, block "Google Reviews", floating badge, dashboard widget, Places API (New) with server-side cache, outage backup and local profile photos, WP-CLI commands.
+* First release: six layouts (grid, slider, list, wall, badge, social proof), five styles (light, dark, minimal, quote, accent), design page with live preview and shortcode builder, block "Google Reviews", floating badge, dashboard widget, Places API (New) with server-side cache, outage backup and local profile photos, WP-CLI commands, German translation included.
 
 == Upgrade Notice ==
 

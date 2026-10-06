@@ -41,6 +41,9 @@ msgstr "Ein kleines Bewertungs-Badge in einer Ecke jeder Seite – Vertrauen gen
 msgid "API key"
 msgstr "API-Schlüssel"
 
+msgid "Accent"
+msgstr "Akzent"
+
 msgid "Accent color"
 msgstr "Akzentfarbe"
 
@@ -70,8 +73,8 @@ msgstr "Badge"
 
 msgid "Based on %s review"
 msgid_plural "Based on %s reviews"
-msgstr[0] "Basierend auf %s Bewertung"
-msgstr[1] "Basierend auf %s Bewertungen"
+msgstr[0] "basierend auf %s Bewertung"
+msgstr[1] "basierend auf %s Bewertungen"
 
 msgid "Best first"
 msgstr "Beste zuerst"
