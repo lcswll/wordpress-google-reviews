@@ -141,9 +141,33 @@
 	// Re-run for widgets added later (block editor preview, AJAX-loaded content).
 	window.willerevInit = init;
 
-	if ('loading' === document.readyState) {
-		document.addEventListener('DOMContentLoaded', init);
-	} else {
+	/** Elementor's editor preview swaps a widget's HTML after every change – enhance the new markup. */
+	function watchElementorEditor() {
+		// The preview frame is loaded with ?elementor-preview=<post ID> (Elementor marks the body only later).
+		if (!window.MutationObserver || !document.body || -1 === window.location.search.indexOf('elementor-preview=')) {
+			return;
+		}
+		var queued = false;
+		new window.MutationObserver(function () {
+			if (queued) {
+				return;
+			}
+			queued = true;
+			window.requestAnimationFrame(function () {
+				queued = false;
+				init();
+			});
+		}).observe(document.body, { childList: true, subtree: true });
+	}
+
+	function start() {
 		init();
+		watchElementorEditor();
+	}
+
+	if ('loading' === document.readyState) {
+		document.addEventListener('DOMContentLoaded', start);
+	} else {
+		start();
 	}
 })();

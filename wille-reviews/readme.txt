@@ -8,7 +8,7 @@ Stable tag: 1.0.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-Show your Google reviews on your site – in a clean design that fits your theme. Six layouts, five styles, live preview. Free, no subscription.
+Your Google reviews on your site in a modern design that fits your theme. Six layouts, five styles, block and Elementor widget. Free.
 
 == Description ==
 
@@ -50,6 +50,7 @@ Styles are pure CSS custom properties, so your theme can fine-tune anything.
 
 * **Shortcode** `[wille_reviews]` – copy it from the design page with exactly the design you see, or use the saved default.
 * **Block "Google Reviews"** with layout and style pickers in the sidebar and a real preview in the editor.
+* **Elementor widget "Google Reviews"** with every shortcode option in the Elementor panel – drag it onto the page instead of pasting shortcodes.
 * **Floating badge** (optional): a small rating badge in a corner of every page; visitors can close it.
 * **Dashboard widget** with your current rating and the latest reviews.
 * **"Write a review" button** that opens Google's review form for your business directly – the easiest way to collect new reviews.
@@ -115,6 +116,10 @@ Your visitors' browsers do not contact Google: the data is fetched on your serve
 
 Open **Google Reviews → Settings**: the status box shows the last request and its error message, if any. **Test connection & load reviews** fetches immediately. If WP-Cron is disabled on your server, make sure a real cron job calls wp-cron.php.
 
+= Does it work with Elementor? =
+
+Yes. Search for "Google Reviews" in the Elementor panel and drag the widget onto your page. All options of the shortcode are available as controls; options left on "Default" follow the design you saved on the design page.
+
 = Can I change the look with my own CSS? =
 
 Yes. Every widget exposes CSS custom properties, e.g. `.willerev { --willerev-star: #f59e0b; --willerev-card-bg: #fffaf0; }`, and uses BEM-style classes such as `.willerev-card` and `.willerev__header`.
@@ -140,7 +145,7 @@ Google Maps Platform Terms of Service: https://cloud.google.com/maps-platform/te
 == Changelog ==
 
 = 1.0.0 =
-* First release: six layouts (grid, slider, list, wall, badge, social proof), five styles (light, dark, minimal, quote, accent), design page with live preview and shortcode builder, block "Google Reviews", floating badge, dashboard widget, Places API (New) with server-side cache, outage backup and local profile photos, WP-CLI commands, German translation included.
+* First release: six layouts (grid, slider, list, wall, badge, social proof), five styles (light, dark, minimal, quote, accent), design page with live preview and shortcode builder, block and Elementor widget "Google Reviews", floating badge, dashboard widget, Places API (New) with server-side cache, outage backup and local profile photos, WP-CLI commands, German translation included.
 
 == Upgrade Notice ==
 

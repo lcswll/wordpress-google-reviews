@@ -157,6 +157,9 @@ msgstr "Dunkel"
 msgid "Dark page"
 msgstr "Dunkle Seite"
 
+msgid "Default"
+msgstr "Standard"
+
 msgid "Delete all settings, cached reviews and photos when the plugin is deleted"
 msgstr "Beim Löschen des Plugins alle Einstellungen, zwischengespeicherten Bewertungen und Fotos entfernen"
 
@@ -205,6 +208,9 @@ msgstr "Google hat keine Daten geliefert. Den Fehler siehst du unten unter „St
 msgid "Google does not accept the API key. Copy it again from the Google Cloud Console (Credentials) without spaces and save the settings."
 msgstr "Google akzeptiert den API-Schlüssel nicht. Kopiere ihn erneut aus der Google Cloud Console (Anmeldedaten), ohne Leerzeichen, und speichere die Einstellungen."
 
+msgid "Google profile"
+msgstr "Google-Profil"
+
 msgid "Google rating"
 msgstr "Google-Bewertung"
 
@@ -216,6 +222,9 @@ msgstr "Google-Nutzer"
 
 msgid "Grid"
 msgstr "Raster"
+
+msgid "Hide"
+msgstr "Ausblenden"
 
 msgid "Hide rating"
 msgstr "Bewertung ausblenden"
@@ -253,6 +262,9 @@ msgstr "Hell"
 msgid "Light page"
 msgstr "Helle Seite"
 
+msgid "Link"
+msgstr "Link"
+
 msgid "List"
 msgstr "Liste"
 
@@ -286,6 +298,9 @@ msgstr "Nächste Bewertungen"
 msgid "No data available – the last request to Google failed."
 msgstr "Keine Daten verfügbar – die letzte Abfrage bei Google ist fehlgeschlagen."
 
+msgid "No link"
+msgstr "Kein Link"
+
 msgid "No request yet. Test the connection."
 msgstr "Noch keine Abfrage. Teste die Verbindung."
 
@@ -315,6 +330,9 @@ msgstr "Öffne die %s und lege ein Projekt an (oder wähle ein bestehendes). Goo
 
 msgid "Option"
 msgstr "Option"
+
+msgid "Options left on \"Default\" follow the %s."
+msgstr "Optionen auf „Standard“ folgen der %s."
 
 msgid "Order"
 msgstr "Reihenfolge"
@@ -545,6 +563,9 @@ msgstr "Wand"
 
 msgid "Wille Reviews"
 msgstr "Wille Reviews"
+
+msgid "Wille Reviews design page"
+msgstr "Design-Seite von Wille Reviews"
 
 msgid "Wille Reviews is active."
 msgstr "Wille Reviews ist aktiv."

@@ -10,11 +10,69 @@ namespace WILLEREV\Tests;
 use WILLEREV_Admin;
 use WILLEREV_Avatars;
 use WILLEREV_Block;
+use WILLEREV_Elementor;
 use WILLEREV_Install;
 use WILLEREV_Review;
 use WILLEREV_Selftest;
 
 final class MiscTest extends TestCase {
+
+	public function test_elementor_settings_map_to_shortcode_options(): void {
+		// Fresh widget: everything on "Default" – the saved design applies.
+		$this->assertSame(
+			array(),
+			WILLEREV_Elementor::to_atts(
+				array(
+					'layout'     => '',
+					'columns'    => '',
+					'limit'      => '',
+					'min_rating' => '',
+					'header'     => '',
+					'accent'     => '',
+					'radius'     => array(
+						'unit' => 'px',
+						'size' => '',
+					),
+				)
+			)
+		);
+		$this->assertSame(
+			array(
+				'layout'     => 'carousel',
+				'style'      => 'dark',
+				'align'      => 'center',
+				'accent'     => '#f5b400',
+				'columns'    => 2,
+				'limit'      => 4,
+				'min_rating' => 0,
+				'lines'      => 0,
+				'radius'     => 16,
+				'header'     => 'yes',
+				'cta'        => 'no',
+			),
+			WILLEREV_Elementor::to_atts(
+				array(
+					'layout'     => 'carousel',
+					'style'      => 'dark',
+					'align'      => 'center',
+					'accent'     => '#f5b400',
+					'columns'    => 2, // Numeric select keys arrive as integers or strings.
+					'limit'      => '4',
+					'min_rating' => '0',
+					'lines'      => 0,
+					'radius'     => array(
+						'unit' => 'px',
+						'size' => 16,
+					),
+					'header'     => 'yes',
+					'cta'        => 'no',
+					'avatars'    => 'maybe',
+					'sort'       => array( 'not', 'a', 'string' ),
+				)
+			)
+		);
+		$this->assertSame( array( '', 'yes' ), array_keys( WILLEREV_Elementor::with_default( array( 'yes' => 'Show' ) ) ) );
+	}
 
 	public function test_block_attributes_map_to_shortcode_options(): void {
 		$this->assertSame(

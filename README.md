@@ -1,6 +1,6 @@
 # Wille Reviews – Review Widgets for Google
 
-WordPress-Plugin: Google-Bewertungen eines Unternehmensprofils in **6 Layouts × 5 Styles** anzeigen – ausgewählt auf einer Design-Seite mit Live-Vorschau und Shortcode-Generator, als Shortcode, als Block oder als schwebendes Badge. Die Daten holt der Server über die Google Places API (New) und cacht sie; Besucher stellen keine Anfrage an Google, Profilbilder werden lokal gespiegelt.
+WordPress-Plugin: Google-Bewertungen eines Unternehmensprofils in **6 Layouts × 5 Styles** anzeigen – ausgewählt auf einer Design-Seite mit Live-Vorschau und Shortcode-Generator, als Shortcode, als Block, als Elementor-Widget oder als schwebendes Badge. Die Daten holt der Server über die Google Places API (New) und cacht sie; Besucher stellen keine Anfrage an Google, Profilbilder werden lokal gespiegelt.
 
 Technische Umsetzung nach dem Vorbild des PlayersHUB Trust Badge (serverseitiger Abruf, Transient + Backup-Option, Cron-Refresh, lokale Avatare), aber als eigenständiges, wordpress.org-taugliches Plugin mit der Werkzeugkette aus wordpress-geo / wordpress-mails.
 
@@ -19,6 +19,7 @@ wille-reviews/                          Version 1.0.0
 │   ├── class-willerev-render.php       HTML für alle Layouts × Styles, Sterne, Badge, Social Proof, Demo-Daten
 │   ├── class-willerev-frontend.php     Shortcode [wille_reviews], schwebendes Badge
 │   ├── class-willerev-block.php        Block „Google Reviews“ (wille-reviews/reviews, Server-Side-Render)
+│   ├── class-willerev-elementor.php    Elementor-Widget „Google Reviews“ (nur bei aktivem Elementor; Widget-Klasse in elementor/)
 │   ├── class-willerev-selftest.php     Eingebauter Selbsttest (wp willerev selftest)
 │   ├── class-willerev-cli.php          wp willerev status/refresh/flush/selftest
 │   └── admin/                          Menü, Einstellungen, Design-Seite, Dashboard-Widget, Bewertungs-Bitte, Views

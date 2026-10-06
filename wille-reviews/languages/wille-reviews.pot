@@ -156,6 +156,9 @@ msgstr ""
 msgid "Dark page"
 msgstr ""
 
+msgid "Default"
+msgstr ""
+
 msgid "Delete all settings, cached reviews and photos when the plugin is deleted"
 msgstr ""
 
@@ -204,6 +207,9 @@ msgstr ""
 msgid "Google does not accept the API key. Copy it again from the Google Cloud Console (Credentials) without spaces and save the settings."
 msgstr ""
 
+msgid "Google profile"
+msgstr ""
+
 msgid "Google rating"
 msgstr ""
 
@@ -214,6 +220,9 @@ msgid "Google user"
 msgstr ""
 
 msgid "Grid"
+msgstr ""
+
+msgid "Hide"
 msgstr ""
 
 msgid "Hide rating"
@@ -252,6 +261,9 @@ msgstr ""
 msgid "Light page"
 msgstr ""
 
+msgid "Link"
+msgstr ""
+
 msgid "List"
 msgstr ""
 
@@ -285,6 +297,9 @@ msgstr ""
 msgid "No data available – the last request to Google failed."
 msgstr ""
 
+msgid "No link"
+msgstr ""
+
 msgid "No request yet. Test the connection."
 msgstr ""
 
@@ -313,6 +328,9 @@ msgid "Open the %s and create a project (or pick an existing one). Google asks f
 msgstr ""
 
 msgid "Option"
+msgstr ""
+
+msgid "Options left on \"Default\" follow the %s."
 msgstr ""
 
 msgid "Order"
@@ -543,6 +561,9 @@ msgid "Wall"
 msgstr ""
 
 msgid "Wille Reviews"
+msgstr ""
+
+msgid "Wille Reviews design page"
 msgstr ""
 
 msgid "Wille Reviews is active."

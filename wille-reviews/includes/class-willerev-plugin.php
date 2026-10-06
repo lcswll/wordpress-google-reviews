@@ -51,6 +51,7 @@ class WILLEREV_Plugin {
 		WILLEREV_Places::init();
 		WILLEREV_Frontend::init();
 		WILLEREV_Block::init();
+		WILLEREV_Elementor::init();
 
 		if ( is_admin() ) {
 			WILLEREV_Admin::init();

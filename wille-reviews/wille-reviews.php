@@ -31,6 +31,7 @@ require_once WILLEREV_DIR . 'includes/class-willerev-avatars.php';
 require_once WILLEREV_DIR . 'includes/class-willerev-render.php';
 require_once WILLEREV_DIR . 'includes/class-willerev-frontend.php';
 require_once WILLEREV_DIR . 'includes/class-willerev-block.php';
+require_once WILLEREV_DIR . 'includes/class-willerev-elementor.php';
 require_once WILLEREV_DIR . 'includes/class-willerev-selftest.php';
 require_once WILLEREV_DIR . 'includes/class-willerev-plugin.php';
 

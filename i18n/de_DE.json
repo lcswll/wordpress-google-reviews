@@ -190,5 +190,12 @@
 	"Google cannot find this Place ID. A Place ID usually starts with \"ChIJ\" – look it up with the Place ID Finder linked above; a Maps link or a CID does not work.": "Google findet diese Place ID nicht. Eine Place ID beginnt meist mit „ChIJ“ – suche sie mit dem oben verlinkten Place ID Finder; ein Maps-Link oder eine CID funktioniert nicht.",
 	"The project's quota is used up. Check the quotas of the Places API (New) in the Google Cloud Console; the plugin tries again automatically.": "Das Kontingent des Projekts ist aufgebraucht. Prüfe die Kontingente der Places API (New) in der Google Cloud Console; das Plugin versucht es automatisch erneut.",
 	"Your server could not reach Google. Ask your host whether outgoing connections to places.googleapis.com are allowed.": "Dein Server konnte Google nicht erreichen. Frag deinen Hoster, ob ausgehende Verbindungen zu places.googleapis.com erlaubt sind.",
-	"Accent": "Akzent"
+	"Accent": "Akzent",
+	"Google profile": "Google-Profil",
+	"Hide": "Ausblenden",
+	"Link": "Link",
+	"No link": "Kein Link",
+	"Options left on \"Default\" follow the %s.": "Optionen auf „Standard“ folgen der %s.",
+	"Wille Reviews design page": "Design-Seite von Wille Reviews",
+	"Default": "Standard"
 }

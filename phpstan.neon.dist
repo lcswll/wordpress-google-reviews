@@ -13,8 +13,10 @@ parameters:
     paths:
         - wille-reviews
     # WP-CLI is not a Composer dependency of the plugin; the commands (class-willerev-cli.php) only need the stubs.
+    # Same for Elementor (includes/elementor/ is only loaded when Elementor is active).
     scanFiles:
         - vendor/php-stubs/wp-cli-stubs/wp-cli-stubs.php
+        - tests/stubs/elementor.php
     bootstrapFiles:
         - tests/phpstan-bootstrap.php
     excludePaths:

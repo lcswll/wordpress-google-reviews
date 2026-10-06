@@ -603,6 +603,12 @@
 	gap: 8px;
 }
 
+.willerev-badge__score .willerev-stars,
+.willerev-social__score .willerev-stars {
+	/* The stars default to the top of a flex row (card bodies); next to the rating they sit on its centre line. */
+	align-self: center;
+}
+
 .willerev-badge__rating {
 	font-size: 1.25em;
 	font-weight: 600;
