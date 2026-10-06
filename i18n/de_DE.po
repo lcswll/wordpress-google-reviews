@@ -112,6 +112,9 @@ msgstr "Layout und Style wählen"
 msgid "Clear cache"
 msgstr "Cache leeren"
 
+msgid "Color of the review count"
+msgstr "Farbe der Bewertungsanzahl"
+
 msgid "Columns"
 msgstr "Spalten"
 
@@ -228,6 +231,9 @@ msgstr "Ausblenden"
 
 msgid "Hide rating"
 msgstr "Bewertung ausblenden"
+
+msgid "Highlights the number of reviews, e.g. \"283\" in \"283 reviews on Google\"."
+msgstr "Hebt die Anzahl der Bewertungen hervor, z. B. „283“ in „283 Bewertungen auf Google“."
 
 msgid "How do I get an API key? (5 minutes)"
 msgstr "Wie bekomme ich einen API-Schlüssel? (5 Minuten)"

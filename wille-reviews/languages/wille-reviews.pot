@@ -111,6 +111,9 @@ msgstr ""
 msgid "Clear cache"
 msgstr ""
 
+msgid "Color of the review count"
+msgstr ""
+
 msgid "Columns"
 msgstr ""
 
@@ -226,6 +229,9 @@ msgid "Hide"
 msgstr ""
 
 msgid "Hide rating"
+msgstr ""
+
+msgid "Highlights the number of reviews, e.g. \"283\" in \"283 reviews on Google\"."
 msgstr ""
 
 msgid "How do I get an API key? (5 minutes)"

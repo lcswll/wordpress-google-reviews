@@ -68,6 +68,27 @@ final class RenderTest extends TestCase {
 		$this->assertSame( 'a bx', $args['class'] );
 	}
 
+	public function test_count_color_highlights_the_number_of_reviews(): void {
+		$data = $this->place( array( $this->review() ) );
+		foreach ( array( 'social', 'badge', 'grid' ) as $layout ) {
+			$html = WILLEREV_Render::render(
+				WILLEREV_Render::args(
+					array(
+						'layout'      => $layout,
+						'count_color' => '#F5B400',
+					),
+					WILLEREV_Install::defaults()
+				),
+				$data
+			);
+			$this->assertStringContainsString( '--willerev-count:#f5b400', $html, $layout );
+			$this->assertMatchesRegularExpression( '/class="willerev-num">[0-9.,]+</', $html, $layout );
+		}
+		$plain = WILLEREV_Render::args( array( 'count_color' => 'red;}body{x' ), WILLEREV_Install::defaults() );
+		$this->assertSame( '', $plain['count_color'] );
+		$this->assertStringNotContainsString( '--willerev-count', WILLEREV_Render::render( $plain, $data ) );
+	}
+
 	public function test_pre_release_style_name_bubble_means_quote(): void {
 		$this->assertSame( 'quote', WILLEREV_Render::args( array( 'style' => 'bubble' ), WILLEREV_Install::defaults() )['style'] );
 	}

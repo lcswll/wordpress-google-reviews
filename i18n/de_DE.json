@@ -197,5 +197,7 @@
 	"No link": "Kein Link",
 	"Options left on \"Default\" follow the %s.": "Optionen auf „Standard“ folgen der %s.",
 	"Wille Reviews design page": "Design-Seite von Wille Reviews",
-	"Default": "Standard"
+	"Default": "Standard",
+	"Color of the review count": "Farbe der Bewertungsanzahl",
+	"Highlights the number of reviews, e.g. \"283\" in \"283 reviews on Google\".": "Hebt die Anzahl der Bewertungen hervor, z. B. „283“ in „283 Bewertungen auf Google“."
 }

@@ -111,7 +111,7 @@ class WILLEREV_Render {
 	 *
 	 * @param array<string,mixed> $atts     Attributes (any subset).
 	 * @param array<string,mixed> $defaults Settings (WILLEREV_Install::defaults() keys).
-	 * @return array{layout:string,style:string,limit:int,min_rating:int,columns:int,lines:int,header:bool,avatars:bool,cta:bool,accent:string,radius:int,sort:string,link:string,align:string,id:string,class:string}
+	 * @return array{layout:string,style:string,limit:int,min_rating:int,columns:int,lines:int,header:bool,avatars:bool,cta:bool,accent:string,count_color:string,radius:int,sort:string,link:string,align:string,id:string,class:string}
 	 */
 	public static function args( array $atts, array $defaults ) {
 		$pick = static function ( $key, $fallback ) use ( $atts ) {
@@ -126,22 +126,24 @@ class WILLEREV_Render {
 		$align  = sanitize_key( (string) $pick( 'align', 'left' ) );
 
 		return array(
-			'layout'     => in_array( $layout, self::LAYOUTS, true ) ? $layout : 'grid',
-			'style'      => in_array( $style, self::STYLES, true ) ? $style : 'light',
-			'limit'      => min( self::MAX_LIMIT, max( 1, (int) $pick( 'limit', $defaults['limit'] ) ) ),
-			'min_rating' => min( 5, max( 0, (int) $pick( 'min_rating', $defaults['min_rating'] ) ) ),
-			'columns'    => min( 4, max( 1, (int) $pick( 'columns', $defaults['columns'] ) ) ),
-			'lines'      => min( 30, max( 0, (int) $pick( 'lines', $defaults['lines'] ) ) ),
-			'header'     => self::to_bool( $pick( 'header', $defaults['show_header'] ) ),
-			'avatars'    => self::to_bool( $pick( 'avatars', $defaults['show_avatars'] ) ) && empty( $defaults['hide_avatars'] ),
-			'cta'        => self::to_bool( $pick( 'cta', $defaults['show_cta'] ) ),
-			'accent'     => self::hex_color( $accent, '#1a73e8' ),
-			'radius'     => min( 32, max( 0, (int) $pick( 'radius', $defaults['radius'] ) ) ),
-			'sort'       => in_array( $sort, array( 'newest', 'rating' ), true ) ? $sort : 'newest',
-			'link'       => trim( (string) $pick( 'link', 'auto' ) ),
-			'align'      => in_array( $align, array( 'left', 'center', 'right' ), true ) ? $align : 'left',
-			'id'         => sanitize_html_class( (string) $pick( 'id', '' ) ),
-			'class'      => trim( implode( ' ', array_map( 'sanitize_html_class', explode( ' ', (string) $pick( 'class', '' ) ) ) ) ),
+			'layout'      => in_array( $layout, self::LAYOUTS, true ) ? $layout : 'grid',
+			'style'       => in_array( $style, self::STYLES, true ) ? $style : 'light',
+			'limit'       => min( self::MAX_LIMIT, max( 1, (int) $pick( 'limit', $defaults['limit'] ) ) ),
+			'min_rating'  => min( 5, max( 0, (int) $pick( 'min_rating', $defaults['min_rating'] ) ) ),
+			'columns'     => min( 4, max( 1, (int) $pick( 'columns', $defaults['columns'] ) ) ),
+			'lines'       => min( 30, max( 0, (int) $pick( 'lines', $defaults['lines'] ) ) ),
+			'header'      => self::to_bool( $pick( 'header', $defaults['show_header'] ) ),
+			'avatars'     => self::to_bool( $pick( 'avatars', $defaults['show_avatars'] ) ) && empty( $defaults['hide_avatars'] ),
+			'cta'         => self::to_bool( $pick( 'cta', $defaults['show_cta'] ) ),
+			'accent'      => self::hex_color( $accent, '#1a73e8' ),
+			// Colour of the number of reviews ('' = text colour of the style).
+			'count_color' => self::hex_color( (string) $pick( 'count_color', '' ), '' ),
+			'radius'      => min( 32, max( 0, (int) $pick( 'radius', $defaults['radius'] ) ) ),
+			'sort'        => in_array( $sort, array( 'newest', 'rating' ), true ) ? $sort : 'newest',
+			'link'        => trim( (string) $pick( 'link', 'auto' ) ),
+			'align'       => in_array( $align, array( 'left', 'center', 'right' ), true ) ? $align : 'left',
+			'id'          => sanitize_html_class( (string) $pick( 'id', '' ) ),
+			'class'       => trim( implode( ' ', array_map( 'sanitize_html_class', explode( ' ', (string) $pick( 'class', '' ) ) ) ) ),
 		);
 	}
 
@@ -311,7 +313,7 @@ class WILLEREV_Render {
 			$args['radius'],
 			$args['columns'],
 			$args['lines'] > 0 ? $args['lines'] : 999
-		);
+		) . ( '' !== $args['count_color'] ? ';--willerev-count:' . $args['count_color'] : '' );
 		return 'class="' . esc_attr( implode( ' ', $classes ) ) . '" style="' . esc_attr( $style ) . '"';
 	}
 
@@ -389,7 +391,7 @@ class WILLEREV_Render {
 				<span class="willerev__count">
 					<?php
 					/* translators: %s: number of reviews */
-					echo esc_html( sprintf( _n( 'Based on %s review', 'Based on %s reviews', (int) $data['count'], 'wille-reviews' ), number_format_i18n( (int) $data['count'] ) ) );
+					printf( esc_html( _n( 'Based on %s review', 'Based on %s reviews', (int) $data['count'], 'wille-reviews' ) ), self::count_number( (int) $data['count'] ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- format escaped, number escaped in count_number().
 					?>
 				</span>
 			</div>
@@ -577,7 +579,7 @@ class WILLEREV_Render {
 					<span class="willerev-badge__count">
 						<?php
 						/* translators: %s: number of reviews */
-						echo esc_html( sprintf( _n( '%s review', '%s reviews', (int) $data['count'], 'wille-reviews' ), number_format_i18n( (int) $data['count'] ) ) );
+						printf( esc_html( _n( '%s review', '%s reviews', (int) $data['count'], 'wille-reviews' ) ), self::count_number( (int) $data['count'] ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- format escaped, number escaped in count_number().
 						?>
 					</span>
 				</span>
@@ -624,14 +626,8 @@ class WILLEREV_Render {
 						<?php echo self::google_logo( 14 ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- static SVG. ?>
 						<span>
 							<?php
-							echo wp_kses(
-								sprintf(
-									/* translators: %s: number of reviews (bold) */
-									_n( '%s review on Google', '%s reviews on Google', (int) $data['count'], 'wille-reviews' ),
-									'<strong>' . esc_html( number_format_i18n( (int) $data['count'] ) ) . '</strong>'
-								),
-								array( 'strong' => array() )
-							);
+							/* translators: %s: number of reviews (bold) */
+							printf( esc_html( _n( '%s review on Google', '%s reviews on Google', (int) $data['count'], 'wille-reviews' ) ), self::count_number( (int) $data['count'], 'strong' ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- format escaped, number escaped in count_number().
 							?>
 						</span>
 					</span>
@@ -640,6 +636,18 @@ class WILLEREV_Render {
 		</div>
 		<?php
 		return (string) ob_get_clean();
+	}
+
+	/**
+	 * The number of reviews inside a sentence, colourable via --willerev-count (count_color).
+	 *
+	 * @param int    $count Number of reviews.
+	 * @param string $tag   span|strong.
+	 * @return string
+	 */
+	protected static function count_number( $count, $tag = 'span' ) {
+		$tag = 'strong' === $tag ? 'strong' : 'span';
+		return '<' . $tag . ' class="willerev-num">' . esc_html( number_format_i18n( $count ) ) . '</' . $tag . '>';
 	}
 
 	/**

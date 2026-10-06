@@ -66,8 +66,10 @@ class WILLEREV_Elementor {
 				$atts[ $key ] = $settings[ $key ];
 			}
 		}
-		if ( isset( $settings['accent'] ) && is_string( $settings['accent'] ) && '' !== $settings['accent'] ) {
-			$atts['accent'] = $settings['accent'];
+		foreach ( array( 'accent', 'count_color' ) as $key ) {
+			if ( isset( $settings[ $key ] ) && is_string( $settings[ $key ] ) && '' !== $settings[ $key ] ) {
+				$atts[ $key ] = $settings[ $key ];
+			}
 		}
 		foreach ( array( 'columns', 'limit', 'min_rating', 'lines' ) as $key ) {
 			if ( isset( $settings[ $key ] ) && '' !== $settings[ $key ] && is_numeric( $settings[ $key ] ) ) {

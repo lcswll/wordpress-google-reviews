@@ -133,7 +133,7 @@ try {
 	check( true, 'shortcode renders all 30 layout × style combinations' );
 
 	$grid = do_shortcode( '[wille_reviews]' );
-	check( false !== strpos( $grid, 'Anna Becker' ) && false !== strpos( $grid, 'Based on 312 reviews' ), 'grid shows reviews and summary' );
+	check( false !== strpos( $grid, 'Anna Becker' ) && false !== strpos( wp_strip_all_tags( $grid ), 'Based on 312 reviews' ), 'grid shows reviews and summary' );
 	check( false === strpos( $grid, 'googleusercontent.com' ), 'no image is loaded from Google' );
 	check( false !== strpos( $grid, 'search.google.com/local/writereview?placeid=ChIJtest' ), 'write-a-review link' );
 	check( wp_style_is( 'willerev', 'enqueued' ) && wp_script_is( 'willerev', 'enqueued' ), 'assets enqueued with a widget' );

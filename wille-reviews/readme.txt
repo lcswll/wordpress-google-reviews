@@ -71,7 +71,7 @@ Styles are pure CSS custom properties, so your theme can fine-tune anything.
 
 = For developers =
 
-* Shortcode options `layout`, `style`, `accent`, `radius`, `columns`, `limit`, `min_rating`, `sort`, `lines`, `header`, `cta`, `avatars`, `link`, `align`, `id`, `class` – all documented on the design page.
+* Shortcode options `layout`, `style`, `accent`, `count_color`, `radius`, `columns`, `limit`, `min_rating`, `sort`, `lines`, `header`, `cta`, `avatars`, `link`, `align`, `id`, `class` – all documented on the design page.
 * Filters `willerev_html` (widget HTML) and `willerev_show_floating_badge`, action `willerev_refreshed`.
 * WP-CLI: `wp willerev status`, `refresh`, `flush`, `selftest`.
 

@@ -293,6 +293,17 @@ class WILLEREV_Elementor_Widget extends \Elementor\Widget_Base {
 			)
 		);
 		$this->add_control(
+			'count_color',
+			array(
+				'label'       => __( 'Color of the review count', 'wille-reviews' ),
+				'type'        => \Elementor\Controls_Manager::COLOR,
+				'alpha'       => false,
+				'global'      => array( 'active' => false ),
+				'default'     => '',
+				'description' => __( 'Highlights the number of reviews, e.g. "283" in "283 reviews on Google".', 'wille-reviews' ),
+			)
+		);
+		$this->add_control(
 			'radius',
 			array(
 				'label'      => __( 'Corner radius', 'wille-reviews' ),

@@ -566,6 +566,8 @@
 .willerev .willerev-badge {
 	position: relative;
 	display: inline-flex;
+	/* Top, not baseline: no descender gap below, the widget is exactly as tall as the badge. */
+	vertical-align: top;
 	align-items: center;
 	gap: 12px;
 	padding: 10px 16px 10px 12px;
@@ -624,6 +626,7 @@
 
 .willerev .willerev-social {
 	display: inline-flex;
+	vertical-align: top;
 	align-items: center;
 	gap: 14px;
 	color: var(--willerev-ink);
@@ -678,9 +681,12 @@
 }
 
 .willerev-social__caption strong {
-	/* Not var(--willerev-ink): that is currentColor here, i.e. the muted caption colour. Bold is enough. */
-	color: inherit;
 	font-weight: 600;
+}
+
+/* The number of reviews in header, badge and social proof: own colour via count_color, else the text around it. */
+.willerev .willerev-num {
+	color: var(--willerev-count, inherit);
 }
 
 /* --------------------------------------------------------- floating badge */
@@ -967,6 +973,11 @@
 }
 
 /* ------------------------------------------------------------------ misc */
+
+/* Elementor spaces its widgets itself – no extra margin that would push the widget out of line. */
+.elementor-widget-willerev-reviews .willerev {
+	margin-bottom: 0;
+}
 
 .willerev-notice {
 	padding: 12px 16px;
