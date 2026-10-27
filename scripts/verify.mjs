@@ -18,7 +18,8 @@ const script = (name, ...args) => [node, [path.join(root, 'scripts', name), ...a
 
 const steps = [
 	{ name: 'Secrets (tracked files)', run: script('secret-scan.mjs') },
-	{ name: 'PHPCS (WPCS, VIP, PHPCompatibility)', run: script('php.mjs', 'vendor/bin/phpcs', '-q') },
+	{ name: 'No suppression comments', run: script('suppressions.mjs') },
+	{ name: 'PHPCS (annotations ignored, all severities)', run: script('phpcs-strict.mjs') },
 	{ name: 'PHPStan (level 8)', run: script('php.mjs', 'vendor/bin/phpstan', 'analyse', '--no-progress', '--memory-limit=2G') },
 	{ name: 'PHPUnit', run: script('php.mjs', 'vendor/bin/phpunit') },
 	{ name: 'ESLint', run: [node, [path.join(root, 'node_modules', 'eslint', 'bin', 'eslint.js'), '--max-warnings=0', '.']] },

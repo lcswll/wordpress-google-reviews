@@ -7,7 +7,6 @@
  * Copied to wp-content/mu-plugins/ by the blueprints. Key "TEST-KEY" gets a place, any other key a 403 like
  * Google's. Every API call is counted in the option e2e_google_calls.
  *
- * phpcs:disable WordPress.NamingConventions.PrefixAllGlobals
  *
  * @package Wille_Reviews
  */

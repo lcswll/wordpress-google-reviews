@@ -15,27 +15,12 @@ $willerev_status   = WILLEREV_Places::status();
 $willerev_data     = WILLEREV_Places::is_configured() ? WILLEREV_Places::backup() : null;
 $willerev_next     = wp_next_scheduled( WILLEREV_Places::CRON );
 $willerev_format   = get_option( 'date_format' ) . ' ' . get_option( 'time_format' );
-// phpcs:disable WordPress.Security.NonceVerification.Recommended -- display-only flags set by our own redirects.
-$willerev_refreshed = isset( $_GET['willerev-refreshed'] ) ? sanitize_key( wp_unslash( $_GET['willerev-refreshed'] ) ) : '';
-$willerev_flushed   = isset( $_GET['willerev-flushed'] );
-$willerev_saved     = isset( $_GET['settings-updated'] );
-// phpcs:enable
 ?>
 <div class="wrap willerev-wrap">
 	<?php WILLEREV_Admin::header( 'wille-reviews-settings' ); ?>
 	<h1><?php esc_html_e( 'Settings', 'wille-reviews' ); ?></h1>
 
-	<?php if ( $willerev_saved ) : ?>
-		<div class="notice notice-success is-dismissible"><p><?php esc_html_e( 'Settings saved.', 'wille-reviews' ); ?></p></div>
-	<?php endif; ?>
-	<?php if ( 'ok' === $willerev_refreshed ) : ?>
-		<div class="notice notice-success is-dismissible"><p><?php esc_html_e( 'Connection works – the reviews were loaded from Google.', 'wille-reviews' ); ?></p></div>
-	<?php elseif ( 'error' === $willerev_refreshed ) : ?>
-		<div class="notice notice-error is-dismissible"><p><?php esc_html_e( 'Google did not return any data. See the error under "Status" below.', 'wille-reviews' ); ?></p></div>
-	<?php endif; ?>
-	<?php if ( $willerev_flushed ) : ?>
-		<div class="notice notice-success is-dismissible"><p><?php esc_html_e( 'Cache cleared. The next page view loads the reviews from Google again.', 'wille-reviews' ); ?></p></div>
-	<?php endif; ?>
+	<?php settings_errors(); ?>
 
 	<div class="willerev-columns">
 		<form method="post" action="options.php" class="willerev-settings">
@@ -189,13 +174,13 @@ $willerev_saved     = isset( $_GET['settings-updated'] );
 					<?php if ( '' !== $willerev_hint ) : ?>
 						<p class="willerev-status-hint"><?php echo esc_html( $willerev_hint ); ?></p>
 					<?php endif; ?>
-					<p class="description"><?php echo esc_html( (string) wp_date( $willerev_format, $willerev_status['time'] ) ); // wp_date() is false only for invalid timestamps. ?></p>
+					<p class="description"><?php echo esc_html( (string) wp_date( $willerev_format, $willerev_status['time'] ) ); ?></p>
 				<?php endif; ?>
 
 				<?php if ( null !== $willerev_data ) : ?>
 					<p class="willerev-status-place">
 						<strong><?php echo esc_html( (string) $willerev_data['name'] ); ?></strong><br />
-						<?php echo WILLEREV_Render::stars( (float) $willerev_data['rating'] ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- escaped in stars(). ?>
+						<?php echo wp_kses( WILLEREV_Render::stars( (float) $willerev_data['rating'] ), WILLEREV_Render::HTML ); ?>
 						<?php echo esc_html( number_format_i18n( (float) $willerev_data['rating'], 1 ) ); ?> ·
 						<?php
 						/* translators: %s: number of reviews */

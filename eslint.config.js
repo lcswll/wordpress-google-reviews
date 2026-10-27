@@ -20,6 +20,8 @@ export default [
 	{
 		ignores: ['node_modules/**', 'vendor/**', '.cache/**', 'dist/**', 'test-results/**', 'playwright-report/**'],
 	},
+	// Rules change centrally here, never by inline comments (scripts/suppressions.mjs).
+	{ linterOptions: { noInlineConfig: true, reportUnusedDisableDirectives: 'error' } },
 	js.configs.recommended,
 	{
 		// Plain browser scripts without a build step (ES5 style, wp.* globals from WordPress).

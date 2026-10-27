@@ -332,7 +332,7 @@ class WILLEREV_Elementor_Widget extends \Elementor\Widget_Base {
 	protected function render(): void {
 		$settings = $this->get_settings_for_display();
 		$editor   = current_user_can( 'edit_posts' ) && self::in_editor();
-		echo WILLEREV_Elementor::render( is_array( $settings ) ? $settings : array(), $editor ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- escaped in WILLEREV_Render.
+		echo wp_kses( WILLEREV_Elementor::render( is_array( $settings ) ? $settings : array(), $editor ), WILLEREV_Render::HTML );
 	}
 
 	/**

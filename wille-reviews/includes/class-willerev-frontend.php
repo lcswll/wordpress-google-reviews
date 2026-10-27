@@ -67,6 +67,6 @@ class WILLEREV_Frontend {
 		wp_enqueue_script( 'willerev' );
 		$args = WILLEREV_Render::args( array( 'layout' => 'badge' ), $settings );
 		$side = 'left' === $settings['floating_position'] ? 'left' : 'right';
-		echo WILLEREV_Render::badge( $args, $data, array( 'willerev--floating', 'willerev--floating-' . $side ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- escaped in badge().
+		echo wp_kses( WILLEREV_Render::badge( $args, $data, array( 'willerev--floating', 'willerev--floating-' . $side ) ), WILLEREV_Render::HTML );
 	}
 }

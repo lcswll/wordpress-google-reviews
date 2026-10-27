@@ -6,7 +6,6 @@
  * @package Wille_Reviews
  */
 
-// phpcs:disable Squiz.Commenting
 final class WILLEREV_Test_Plugin {
 	/** @var array<string,mixed> */
 	public static $settings = array();

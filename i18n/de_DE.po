@@ -444,9 +444,6 @@ msgstr "Alle auf Google ansehen"
 msgid "Settings"
 msgstr "Einstellungen"
 
-msgid "Settings saved."
-msgstr "Einstellungen gespeichert."
-
 msgid "Shortcode for this design"
 msgstr "Shortcode für dieses Design"
 

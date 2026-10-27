@@ -1,0 +1,10 @@
+{
+	"$schema": "https://playground.wordpress.net/blueprint-schema.json",
+	"landingPage": "/wp-admin/admin.php?page=wille-reviews",
+	"preferredVersions": { "php": "8.3", "wp": "latest" },
+	"login": true,
+	"steps": [
+		{ "step": "setSiteOptions", "options": { "blogname": "Wille Reviews Demo" } },
+		{ "step": "installPlugin", "pluginData": { "resource": "wordpress.org/plugins", "slug": "wille-reviews" }, "options": { "activate": true } }
+	]
+}

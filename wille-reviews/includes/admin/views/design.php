@@ -23,7 +23,7 @@ $willerev_styles  = WILLEREV_Render::styles();
 $willerev_name    = 'willerev_settings';
 
 // Layout pictograms (simple wireframes).
-$willerev_icons = array(
+$willerev_icons     = array(
 	'grid'     => '<rect x="2" y="4" width="11" height="16" rx="2"/><rect x="15" y="4" width="11" height="16" rx="2"/><rect x="28" y="4" width="11" height="16" rx="2"/>',
 	'carousel' => '<rect x="7" y="4" width="12" height="16" rx="2"/><rect x="21" y="4" width="12" height="16" rx="2"/><path d="M3 12l2-2v4zM37 12l-2-2v4z"/>',
 	'list'     => '<rect x="2" y="3" width="37" height="5" rx="1.5"/><rect x="2" y="10" width="37" height="5" rx="1.5"/><rect x="2" y="17" width="37" height="5" rx="1.5"/>',
@@ -31,15 +31,18 @@ $willerev_icons = array(
 	'badge'    => '<rect x="6" y="6" width="29" height="12" rx="4"/>',
 	'social'   => '<circle cx="8" cy="12" r="4"/><circle cx="14" cy="12" r="4"/><circle cx="20" cy="12" r="4"/><rect x="26" y="8" width="13" height="3" rx="1.5"/><rect x="26" y="13" width="9" height="3" rx="1.5"/>',
 );
+$willerev_icon_html = array(
+	'rect'   => array_fill_keys( array( 'x', 'y', 'width', 'height', 'rx' ), true ),
+	'circle' => array_fill_keys( array( 'cx', 'cy', 'r' ), true ),
+	'path'   => array( 'd' => true ),
+);
 ?>
 <div class="wrap willerev-wrap">
 	<?php WILLEREV_Admin::header( 'wille-reviews' ); ?>
 	<h1><?php esc_html_e( 'Design & shortcode', 'wille-reviews' ); ?></h1>
 	<p class="willerev-intro"><?php esc_html_e( 'Pick a layout and a style – the preview updates instantly. Save your choice as the default, or copy the shortcode to use a different design on a single page.', 'wille-reviews' ); ?></p>
 
-	<?php if ( isset( $_GET['settings-updated'] ) ) : // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- display only. ?>
-		<div class="notice notice-success is-dismissible"><p><?php esc_html_e( 'Design saved as default. Shortcodes and blocks without their own options use it now.', 'wille-reviews' ); ?></p></div>
-	<?php endif; ?>
+	<?php settings_errors(); ?>
 
 	<?php if ( $willerev_is_demo ) : ?>
 		<div class="notice notice-info inline willerev-demo-note">
@@ -62,7 +65,7 @@ $willerev_icons = array(
 						<label class="willerev-choice">
 							<input type="radio" name="<?php echo esc_attr( $willerev_name ); ?>[layout]" value="<?php echo esc_attr( $willerev_slug ); ?>" <?php checked( $willerev_settings['layout'], $willerev_slug ); ?> />
 							<span class="willerev-choice__card">
-								<svg viewBox="0 0 41 24" aria-hidden="true" focusable="false"><?php echo $willerev_icons[ $willerev_slug ]; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- static SVG shapes defined above. ?></svg>
+								<svg viewBox="0 0 41 24" aria-hidden="true" focusable="false"><?php echo wp_kses( $willerev_icons[ $willerev_slug ], $willerev_icon_html ); ?></svg>
 								<span class="willerev-choice__label"><?php echo esc_html( $willerev_layout['label'] ); ?></span>
 								<span class="willerev-choice__desc"><?php echo esc_html( $willerev_layout['description'] ); ?></span>
 							</span>
@@ -178,7 +181,7 @@ $willerev_icons = array(
 					);
 					?>
 					<div class="willerev-preview__item" data-layout="<?php echo esc_attr( $willerev_layout_slug ); ?>"<?php echo $willerev_layout_slug === $willerev_settings['layout'] ? '' : ' hidden'; ?>>
-						<?php echo WILLEREV_Render::render( $willerev_args, $willerev_data, $willerev_is_demo ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- escaped in the renderer. ?>
+						<?php echo wp_kses( WILLEREV_Render::render( $willerev_args, $willerev_data, $willerev_is_demo ), WILLEREV_Render::HTML ); ?>
 					</div>
 					<?php
 				}

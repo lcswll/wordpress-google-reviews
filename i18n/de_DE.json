@@ -1,10 +1,19 @@
 {
 	"%1$s reviews, average %2$s": "%1$s Bewertungen, Durchschnitt %2$s",
-	"%d line": ["%d Zeile", "%d Zeilen"],
+	"%d line": [
+		"%d Zeile",
+		"%d Zeilen"
+	],
 	"%s ago": "vor %s",
 	"%s out of 5 stars": "%s von 5 Sternen",
-	"%s review": ["%s Bewertung", "%s Bewertungen"],
-	"%s review on Google": ["%s Bewertung auf Google", "%s Bewertungen auf Google"],
+	"%s review": [
+		"%s Bewertung",
+		"%s Bewertungen"
+	],
+	"%s review on Google": [
+		"%s Bewertung auf Google",
+		"%s Bewertungen auf Google"
+	],
 	"(opens in a new tab)": "(öffnet in einem neuen Tab)",
 	"A Google Cloud API key with the \"Places API (New)\" enabled.": "Ein Google-Cloud-API-Schlüssel mit aktivierter „Places API (New)“.",
 	"A small rating badge in a corner of every page – trust at the moment a visitor decides. Visitors can close it for their session.": "Ein kleines Bewertungs-Badge in einer Ecke jeder Seite – Vertrauen genau in dem Moment, in dem Besucher sich entscheiden. Besucher können es für ihre Sitzung schließen.",
@@ -18,7 +27,10 @@
 	"Anchor and extra CSS classes. The first reviews section on a page gets the anchor #google-reviews automatically.": "Anker und zusätzliche CSS-Klassen. Der erste Bewertungsbereich einer Seite bekommt automatisch den Anker #google-reviews.",
 	"Anywhere else: the shortcode": "Überall sonst: der Shortcode",
 	"Badge": "Badge",
-	"Based on %s review": ["basierend auf %s Bewertung", "basierend auf %s Bewertungen"],
+	"Based on %s review": [
+		"basierend auf %s Bewertung",
+		"basierend auf %s Bewertungen"
+	],
 	"Best first": "Beste zuerst",
 	"Block editor: add the block \"Google Reviews\".": "Block-Editor: Block „Google-Bewertungen“ einfügen.",
 	"Bottom left": "Unten links",
@@ -115,7 +127,10 @@
 	"Profile photos": "Profilbilder",
 	"Rate Wille Reviews on WordPress.org (opens in a new tab)": "Wille Reviews auf WordPress.org bewerten (öffnet in einem neuen Tab)",
 	"Rate ★★★★★": "Bewerten ★★★★★",
-	"Rated %1$s out of 5 on Google, %2$s review": ["Auf Google mit %1$s von 5 bewertet, %2$s Bewertung", "Auf Google mit %1$s von 5 bewertet, %2$s Bewertungen"],
+	"Rated %1$s out of 5 on Google, %2$s review": [
+		"Auf Google mit %1$s von 5 bewertet, %2$s Bewertung",
+		"Auf Google mit %1$s von 5 bewertet, %2$s Bewertungen"
+	],
 	"Read more": "Mehr lesen",
 	"Recommended: restrict the key to \"Places API (New)\" and, if your host has a fixed IP address, to that IP.": "Empfohlen: Beschränke den Schlüssel auf „Places API (New)“ und – falls dein Hosting eine feste IP-Adresse hat – auf diese IP.",
 	"Refresh every": "Aktualisieren alle",
@@ -130,7 +145,6 @@
 	"Save settings": "Einstellungen speichern",
 	"See all on Google": "Alle auf Google ansehen",
 	"Settings": "Einstellungen",
-	"Settings saved.": "Einstellungen gespeichert.",
 	"Shortcode for this design": "Shortcode für dieses Design",
 	"Shorten long reviews after": "Lange Bewertungen kürzen nach",
 	"Shorten long reviews after this many lines with a \"Read more\" button (0 = full text).": "Lange Bewertungen nach so vielen Zeilen mit „Mehr lesen“-Button kürzen (0 = voller Text).",
@@ -175,7 +189,10 @@
 	"Write a review": "Bewertung schreiben",
 	"Your Google rating and latest reviews in the layout and style of your choice.": "Deine Google-Bewertung und die neuesten Rezensionen in Layout und Style deiner Wahl.",
 	"You know best how much a good review is worth. If Wille Reviews helps you, would you leave one on WordPress.org? It takes a minute and helps other site owners find the plugin. Thank you!": "Du weißt selbst am besten, wie viel eine gute Bewertung wert ist. Wenn dir Wille Reviews hilft, hinterlässt du eine auf WordPress.org? Das dauert eine Minute und hilft anderen, das Plugin zu finden. Danke!",
-	"Your Google rating of %1$s %2$s from %3$s review has been on your site for two weeks now.": ["Deine Google-Bewertung von %1$s %2$s aus %3$s Rezension ist jetzt seit zwei Wochen auf deiner Website.", "Deine Google-Bewertung von %1$s %2$s aus %3$s Rezensionen ist jetzt seit zwei Wochen auf deiner Website."],
+	"Your Google rating of %1$s %2$s from %3$s review has been on your site for two weeks now.": [
+		"Deine Google-Bewertung von %1$s %2$s aus %3$s Rezension ist jetzt seit zwei Wochen auf deiner Website.",
+		"Deine Google-Bewertung von %1$s %2$s aus %3$s Rezensionen ist jetzt seit zwei Wochen auf deiner Website."
+	],
 	"Your business": "Dein Unternehmen",
 	"Your reviews page": "Deine Bewertungsseite",
 	"by %s": "von %s",

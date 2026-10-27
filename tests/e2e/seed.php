@@ -6,7 +6,6 @@
  *
  * Writes /e2e-out/seeded last (tests/e2e/wait-for-wordpress.js waits for it).
  *
- * phpcs:disable WordPress.NamingConventions.PrefixAllGlobals, WordPress.WP.AlternativeFunctions
  *
  * @package Wille_Reviews
  */

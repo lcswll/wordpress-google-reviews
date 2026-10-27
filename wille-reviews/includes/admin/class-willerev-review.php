@@ -31,24 +31,6 @@ class WILLEREV_Review {
 	const SNOOZE = 30 * DAY_IN_SECONDS;
 
 	/**
-	 * Markup allowed in the title (the star row of WILLEREV_Render::stars()).
-	 */
-	const STARS_HTML = array(
-		'span' => array(
-			'class'      => true,
-			'role'       => true,
-			'aria-label' => true,
-			'style'      => true,
-		),
-		'svg'  => array(
-			'viewbox'     => true,
-			'aria-hidden' => true,
-			'focusable'   => true,
-		),
-		'path' => array( 'd' => true ),
-	);
-
-	/**
 	 * Hook up.
 	 *
 	 * @return void
@@ -117,7 +99,7 @@ class WILLEREV_Review {
 							WILLEREV_Render::stars( (float) $data['rating'] ),
 							esc_html( number_format_i18n( (int) $data['count'] ) )
 						),
-						self::STARS_HTML
+						WILLEREV_Render::HTML
 					);
 					?>
 				</p>

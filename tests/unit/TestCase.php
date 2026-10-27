@@ -32,16 +32,16 @@ abstract class TestCase extends PHPUnitTestCase {
 		Functions\stubs(
 			array(
 				'wp_json_encode'          => static function ( $data, $flags = 0 ) {
-					return json_encode( $data, $flags ); // phpcs:ignore WordPress.WP.AlternativeFunctions.json_encode_json_encode
+					return json_encode( $data, $flags );
 				},
 				'wp_parse_url'            => static function ( $url, $component = -1 ) {
-					return parse_url( $url, $component ); // phpcs:ignore WordPress.WP.AlternativeFunctions.parse_url_parse_url
+					return parse_url( $url, $component );
 				},
 				'sanitize_text_field'     => static function ( $text ) {
-					return trim( (string) preg_replace( '/\s+/', ' ', strip_tags( (string) $text ) ) ); // phpcs:ignore WordPress.WP.AlternativeFunctions.strip_tags_strip_tags, WordPressVIPMinimum.Functions.StripTags
+					return trim( (string) preg_replace( '/\s+/', ' ', strip_tags( (string) $text ) ) );
 				},
 				'sanitize_textarea_field' => static function ( $text ) {
-					return trim( strip_tags( (string) $text ) ); // phpcs:ignore WordPress.WP.AlternativeFunctions.strip_tags_strip_tags, WordPressVIPMinimum.Functions.StripTags
+					return trim( strip_tags( (string) $text ) );
 				},
 				'sanitize_key'            => static function ( $key ) {
 					return preg_replace( '/[^a-z0-9_\-]/', '', strtolower( (string) $key ) );
@@ -74,6 +74,8 @@ abstract class TestCase extends PHPUnitTestCase {
 				'wp_kses'                 => static function ( $html ) {
 					return $html;
 				},
+				'get_settings_errors'     => array(),
+				'add_settings_error'      => null,
 				'wp_enqueue_style'        => null,
 				'wp_enqueue_script'       => null,
 			)

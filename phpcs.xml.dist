@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <ruleset name="Wille Reviews">
-	<description>WordPress-Extra (security, DB, i18n, formatting), WordPress VIP security sniffs and PHPCompatibility for the plugin. No baseline: every finding fails the build.</description>
+	<description>WordPress-Extra (security, DB, i18n, formatting), WordPress VIP security sniffs and PHPCompatibility for the plugin. No baseline, warnings fail the build, and inline phpcs:ignore/disable comments have no effect (scripts/phpcs-strict.mjs runs with --ignore-annotations). The only exceptions live in this file, scoped and explained.</description>
 
 	<file>wille-reviews</file>
 	<file>tests</file>
@@ -25,7 +25,8 @@
 	<config name="minimum_wp_version" value="6.5"/>
 	<rule ref="PHPCompatibilityWP"/>
 
-	<rule ref="WordPress-Extra"/>
+	<!-- The full WordPress standard: Core + Docs + Extra. -->
+	<rule ref="WordPress"/>
 
 	<rule ref="WordPress.WP.I18n">
 		<properties>
@@ -72,5 +73,32 @@
 	</rule>
 	<rule ref="WordPress.WP.GlobalVariablesOverride">
 		<exclude-pattern>tests/*</exclude-pattern>
+	</rule>
+	<!-- Test harness and the WordPress stubs re-implement WP functions with PHP natives and query tables directly. -->
+	<rule ref="WordPress.DB.DirectDatabaseQuery">
+		<exclude-pattern>tests/*</exclude-pattern>
+	</rule>
+	<rule ref="Generic.Files.OneObjectStructurePerFile">
+		<exclude-pattern>tests/stubs/*</exclude-pattern>
+	</rule>
+	<!-- Docblocks are required for the plugin; test methods and stubs document themselves through their names. -->
+	<rule ref="Squiz.Commenting">
+		<exclude-pattern>tests/*</exclude-pattern>
+	</rule>
+	<rule ref="Generic.Commenting.DocComment">
+		<exclude-pattern>tests/*</exclude-pattern>
+	</rule>
+	<!-- The wp_strip_all_tags() stand-in of the unit tests is built on strip_tags(). -->
+	<rule ref="WordPress.WP.AlternativeFunctions.strip_tags_strip_tags">
+		<exclude-pattern>tests/unit/*</exclude-pattern>
+	</rule>
+	<rule ref="WordPressVIPMinimum.Functions.StripTags">
+		<exclude-pattern>tests/unit/*</exclude-pattern>
+	</rule>
+
+	<!-- The refresh interval is the cache duration setting (sanitized to 1–168 hours), so the sniff cannot read it
+	     from the code. It never goes below one hour: WILLEREV_Admin::sanitize_settings(). -->
+	<rule ref="WordPress.WP.CronInterval.ChangeDetected">
+		<exclude-pattern>wille-reviews/includes/class-willerev-places.php</exclude-pattern>
 	</rule>
 </ruleset>

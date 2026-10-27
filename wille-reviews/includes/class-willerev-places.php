@@ -69,7 +69,6 @@ class WILLEREV_Places {
 	 * @return void
 	 */
 	public static function init() {
-		// phpcs:ignore WordPress.WP.CronInterval.ChangeDetected -- Interval = cache duration (setting, sanitized to at least 1 hour).
 		add_filter( 'cron_schedules', array( __CLASS__, 'cron_schedules' ) );
 		add_action( self::CRON, array( __CLASS__, 'cron_refresh' ) );
 		add_action( 'admin_init', array( __CLASS__, 'schedule' ) );
@@ -385,7 +384,7 @@ class WILLEREV_Places {
 				'time'          => false !== $time ? $time : 0,
 				'relative'      => sanitize_text_field( (string) ( $review['relativePublishTimeDescription'] ?? '' ) ),
 			);
-		}
+		}//end foreach
 
 		// Newest first (the API sorts by relevance).
 		usort(

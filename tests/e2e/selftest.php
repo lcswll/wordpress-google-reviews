@@ -7,7 +7,6 @@
  *
  * Writes /e2e-out/selftest.json (scripts/e2e.mjs reads it and fails on any failed assertion).
  *
- * phpcs:disable WordPress.NamingConventions.PrefixAllGlobals, WordPress.WP.AlternativeFunctions, WordPress.Security.NonceVerification
  *
  * @package Wille_Reviews
  */
@@ -128,9 +127,20 @@ try {
 			if ( false === strpos( $html, 'willerev--layout-' . $layout ) || false === strpos( $html, 'willerev--style-' . $style ) ) {
 				check( false, "shortcode {$layout}/{$style}", substr( $html, 0, 300 ) );
 			}
+			// Elementor, the floating badge and the admin preview print the HTML through wp_kses( …, HTML ). kses
+			// lowercases viewBox; browsers restore it (HTML parser: "adjust SVG attributes").
+			$html = str_replace( 'viewBox', 'viewbox', $html );
+			$kept = wp_kses( $html, WILLEREV_Render::HTML );
+			if ( $kept !== $html ) {
+				$at = strspn( $html ^ $kept, "\0" ); // First differing byte.
+				check( false, "wp_kses() keeps {$layout}/{$style} unchanged", array( substr( $html, max( 0, $at - 80 ), 160 ), substr( $kept, max( 0, $at - 80 ), 160 ) ) );
+			}
 		}
 	}
 	check( true, 'shortcode renders all 30 layout × style combinations' );
+	$colored = do_shortcode( '[wille_reviews layout="social" count_color="#f5b400" radius="4"]' );
+	$colored = str_replace( 'viewBox', 'viewbox', $colored );
+	check( wp_kses( $colored, WILLEREV_Render::HTML ) === $colored && false !== strpos( $colored, '--willerev-count:#f5b400' ), 'wp_kses() keeps the CSS variables' );
 
 	$grid = do_shortcode( '[wille_reviews]' );
 	check( false !== strpos( $grid, 'Anna Becker' ) && false !== strpos( wp_strip_all_tags( $grid ), 'Based on 312 reviews' ), 'grid shows reviews and summary' );
@@ -206,7 +216,7 @@ try {
 	update_option( 'willerev_settings', array_merge( get_option( 'willerev_settings' ), array( 'delete_on_uninstall' => 1 ) ) );
 	uninstall_plugin( $plugin );
 	global $wpdb;
-	$leftover = $wpdb->get_col( $wpdb->prepare( 'SELECT option_name FROM %i WHERE option_name LIKE %s', $wpdb->options, '%' . $wpdb->esc_like( 'willerev' ) . '%' ) ); // phpcs:ignore WordPress.DB.DirectDatabaseQuery
+	$leftover = $wpdb->get_col( $wpdb->prepare( 'SELECT option_name FROM %i WHERE option_name LIKE %s', $wpdb->options, '%' . $wpdb->esc_like( 'willerev' ) . '%' ) );
 	check( array() === $leftover, 'uninstall leaves no options behind (opt-in)', $leftover );
 	check( ! is_dir( $dir ), 'uninstall removes the photo folder' );
 } catch ( Throwable $e ) {

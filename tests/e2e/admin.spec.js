@@ -120,7 +120,7 @@ test('settings show the status and test the connection', async ({ page }) => {
 	await expect(page.locator('.willerev-status-place')).toContainText('Café Sonnenschein');
 	await expect(page.getByText(/Next automatic refresh/)).toBeVisible();
 
-	await Promise.all([page.waitForURL(/willerev-refreshed=ok/), page.getByRole('button', { name: 'Test connection & load reviews' }).click()]);
+	await page.getByRole('button', { name: 'Test connection & load reviews' }).click();
 	await expect(page.getByText('Connection works – the reviews were loaded from Google.')).toBeVisible();
 
 	// Saving the connection page keeps the design (and the other way round).
@@ -132,7 +132,8 @@ test('settings show the status and test the connection', async ({ page }) => {
 	// A wrong key: error with Google's message, the site keeps showing the last good reviews.
 	await page.locator('#willerev-api-key').fill('WRONG-KEY');
 	await Promise.all([page.waitForURL(/settings-updated=true/), page.getByRole('button', { name: 'Save settings' }).click()]);
-	await Promise.all([page.waitForURL(/willerev-refreshed=error/), page.getByRole('button', { name: 'Test connection & load reviews' }).click()]);
+	await page.getByRole('button', { name: 'Test connection & load reviews' }).click();
+	await expect(page.getByText('Google did not return any data.', { exact: false })).toBeVisible();
 	await expect(page.getByText('Last request failed')).toBeVisible();
 	await expect(page.locator('.willerev-status-message')).toContainText('PERMISSION_DENIED');
 	await page.goto('/google-reviews/');
@@ -141,7 +142,8 @@ test('settings show the status and test the connection', async ({ page }) => {
 	await page.goto(SETTINGS);
 	await page.locator('#willerev-api-key').fill('TEST-KEY');
 	await Promise.all([page.waitForURL(/settings-updated=true/), page.getByRole('button', { name: 'Save settings' }).click()]);
-	await Promise.all([page.waitForURL(/willerev-refreshed=ok/), page.getByRole('button', { name: 'Test connection & load reviews' }).click()]);
+	await page.getByRole('button', { name: 'Test connection & load reviews' }).click();
+	await expect(page.getByText('Connection works – the reviews were loaded from Google.')).toBeVisible();
 
 	expect(seen.errors).toEqual([]);
 	expect(seen.external).toEqual([]);

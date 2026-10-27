@@ -32,7 +32,7 @@ wille-reviews/                          Version 1.0.0
 └── languages/                          POT + mitgelieferte deutsche Übersetzung (wille-reviews-de_DE.l10n.php, generiert)
 ```
 
-Alles außerhalb von `wille-reviews/` ist Entwicklungswerkzeug und wird nie mit ausgeliefert. Verzeichnis-Grafiken (Icon, Banner, Screenshots) liegen in [`.wordpress-org/`](.wordpress-org/).
+Alles außerhalb von `wille-reviews/` ist Entwicklungswerkzeug und wird nie mit ausgeliefert. Verzeichnis-Grafiken (Icon, Banner, Screenshots) und der Live-Preview-Blueprint (öffnet die Design-Seite mit Beispieldaten) liegen in [`.wordpress-org/`](.wordpress-org/).
 
 ## Kernkonzepte
 
@@ -64,7 +64,8 @@ npm run setup:php
 | `npm run verify -- --fast` | statische Prüfungen + Unit-Tests (auch als pre-push-Hook) |
 | `npm run playground` | WordPress mit Plugin, verbunden mit einer Google-Attrappe, auf http://127.0.0.1:9400 |
 | `npm run test:e2e -- --php 7.4 --wp 6.5` | Laufzeittests gegen eine bestimmte PHP-/WP-Version |
-| `npm run phpcs` / `npm run phpcbf` | Coding Standards prüfen / automatisch korrigieren |
+| `npm run phpcs` / `npm run phpcbf` | Coding Standards prüfen (voller WordPress-Standard, `phpcs:ignore` wirkungslos) / automatisch korrigieren |
+| `npm run suppressions` | schlägt bei jedem Abschalt-Kommentar fehl (`phpcs:ignore`, `@phpstan-ignore`, `eslint-disable`); Ausnahmen nur zentral in `phpcs.xml.dist` |
 | `npm run i18n` | POT, `languages/wille-reviews-de_DE.l10n.php` (wird ausgeliefert) und `i18n/de_DE.po` (Import für translate.wordpress.org) aus `i18n/de_DE.json` bauen (Pluralformen als `[singular, plural]`) |
 | `npm run build` | Release-ZIP nach `dist/` |
 | `node scripts/wporg-assets.mjs` | Icon, Banner und Screenshots für wordpress.org neu erzeugen |

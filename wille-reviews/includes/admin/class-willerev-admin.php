@@ -272,6 +272,12 @@ class WILLEREV_Admin {
 			}
 		}
 
+		// Replaces WordPress' "Settings saved." on the design page (once: a first save runs the sanitizer twice).
+		// The notice API only exists in wp-admin; saves from elsewhere (WP-CLI, REST) need no notice.
+		if ( 'design' === $section && function_exists( 'get_settings_errors' ) && ! in_array( 'willerev_design_saved', array_column( get_settings_errors( 'willerev_settings' ), 'code' ), true ) ) {
+			add_settings_error( 'willerev_settings', 'willerev_design_saved', __( 'Design saved as default. Shortcodes and blocks without their own options use it now.', 'wille-reviews' ), 'success' );
+		}
+
 		return $clean;
 	}
 
@@ -356,9 +362,10 @@ class WILLEREV_Admin {
 		}
 		check_admin_referer( 'willerev_refresh' );
 		delete_transient( WILLEREV_Places::LOCK );
-		$data = WILLEREV_Places::refresh();
-		wp_safe_redirect( add_query_arg( 'willerev-refreshed', null !== $data ? 'ok' : 'error', admin_url( 'admin.php?page=wille-reviews-settings' ) ) );
-		exit;
+		if ( null !== WILLEREV_Places::refresh() ) {
+			self::redirect_with_notice( __( 'Connection works – the reviews were loaded from Google.', 'wille-reviews' ), 'success' );
+		}
+		self::redirect_with_notice( __( 'Google did not return any data. See the error under "Status" below.', 'wille-reviews' ), 'error' );
 	}
 
 	/**
@@ -372,7 +379,20 @@ class WILLEREV_Admin {
 		}
 		check_admin_referer( 'willerev_flush' );
 		WILLEREV_Places::flush();
-		wp_safe_redirect( add_query_arg( 'willerev-flushed', '1', admin_url( 'admin.php?page=wille-reviews-settings' ) ) );
+		self::redirect_with_notice( __( 'Cache cleared. The next page view loads the reviews from Google again.', 'wille-reviews' ), 'success' );
+	}
+
+	/**
+	 * Back to the settings page with a notice – the way options.php does it (settings_errors() shows it once).
+	 *
+	 * @param string $message Notice text.
+	 * @param string $type    success|error.
+	 * @return never
+	 */
+	protected static function redirect_with_notice( $message, $type ) {
+		add_settings_error( 'willerev_settings', 'willerev_notice', $message, $type );
+		set_transient( 'settings_errors', get_settings_errors(), 30 );
+		wp_safe_redirect( add_query_arg( 'settings-updated', 'true', admin_url( 'admin.php?page=wille-reviews-settings' ) ) );
 		exit;
 	}
 

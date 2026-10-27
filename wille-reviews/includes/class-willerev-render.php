@@ -38,6 +38,78 @@ class WILLEREV_Render {
 	const ANCHOR = 'google-reviews';
 
 	/**
+	 * Every tag and attribute the widgets use: their HTML is printed through wp_kses( $html, self::HTML ).
+	 * The e2e self-test checks that this list keeps every layout and style unchanged.
+	 */
+	const HTML = array(
+		'section' => array(
+			'class'      => true,
+			'style'      => true,
+			'id'         => true,
+			'aria-label' => true,
+			'data-*'     => true,
+		),
+		'header'  => array( 'class' => true ),
+		'article' => array(
+			'class'  => true,
+			'data-*' => true,
+		),
+		'div'     => array(
+			'class'      => true,
+			'style'      => true,
+			'role'       => true,
+			'aria-label' => true,
+			'tabindex'   => true,
+		),
+		'span'    => array(
+			'class'       => true,
+			'style'       => true,
+			'role'        => true,
+			'aria-label'  => true,
+			'aria-hidden' => true,
+		),
+		'strong'  => array( 'class' => true ),
+		'p'       => array( 'class' => true ),
+		'br'      => array(),
+		'a'       => array(
+			'class'      => true,
+			'href'       => true,
+			'target'     => true,
+			'rel'        => true,
+			'aria-label' => true,
+		),
+		'button'  => array(
+			'type'          => true,
+			'class'         => true,
+			'aria-label'    => true,
+			'aria-expanded' => true,
+			'disabled'      => true,
+			'hidden'        => true,
+		),
+		'img'     => array(
+			'class'    => true,
+			'src'      => true,
+			'alt'      => true,
+			'width'    => true,
+			'height'   => true,
+			'loading'  => true,
+			'decoding' => true,
+		),
+		'svg'     => array(
+			'class'       => true,
+			'width'       => true,
+			'height'      => true,
+			'viewbox'     => true,
+			'aria-hidden' => true,
+			'focusable'   => true,
+		),
+		'path'    => array(
+			'd'    => true,
+			'fill' => true,
+		),
+	);
+
+	/**
 	 * Number of review sections rendered in this request (only the first gets the default anchor).
 	 *
 	 * @var int
@@ -120,7 +192,8 @@ class WILLEREV_Render {
 
 		$layout = sanitize_key( (string) $pick( 'layout', $defaults['layout'] ) );
 		$style  = sanitize_key( (string) $pick( 'style', $defaults['style'] ) );
-		$style  = 'bubble' === $style ? 'quote' : $style; // Name of the quote style in pre-release builds.
+		// "bubble": name of the quote style in pre-release builds.
+		$style  = 'bubble' === $style ? 'quote' : $style;
 		$accent = (string) $pick( 'accent', $defaults['accent'] );
 		$sort   = sanitize_key( (string) $pick( 'sort', 'newest' ) );
 		$align  = sanitize_key( (string) $pick( 'align', 'left' ) );
@@ -285,11 +358,11 @@ class WILLEREV_Render {
 	}
 
 	/**
-	 * Class list + CSS variables shared by every layout.
+	 * Class list + CSS variables shared by every layout (raw; escaped with esc_attr() where they are printed).
 	 *
 	 * @param array<string,mixed> $args  Normalized arguments.
 	 * @param string[]            $extra Extra classes.
-	 * @return string Attributes (class + style), escaped.
+	 * @return array{class:string,style:string}
 	 */
 	protected static function root_attributes( array $args, array $extra = array() ) {
 		$classes = array_merge(
@@ -314,7 +387,10 @@ class WILLEREV_Render {
 			$args['columns'],
 			$args['lines'] > 0 ? $args['lines'] : 999
 		) . ( '' !== $args['count_color'] ? ';--willerev-count:' . $args['count_color'] : '' );
-		return 'class="' . esc_attr( implode( ' ', $classes ) ) . '" style="' . esc_attr( $style ) . '"';
+		return array(
+			'class' => implode( ' ', $classes ),
+			'style' => $style,
+		);
 	}
 
 	/**
@@ -333,13 +409,14 @@ class WILLEREV_Render {
 		++self::$instances;
 		$anchor   = '' !== $args['id'] ? $args['id'] : ( 1 === self::$instances ? self::ANCHOR : '' );
 		$carousel = 'carousel' === $args['layout'];
+		$root     = self::root_attributes( $args );
 
 		ob_start();
 		?>
-		<section <?php echo self::root_attributes( $args ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- escaped in root_attributes(). ?><?php echo '' !== $anchor ? ' id="' . esc_attr( $anchor ) . '"' : ''; ?> aria-label="<?php esc_attr_e( 'Google reviews', 'wille-reviews' ); ?>" data-more="<?php esc_attr_e( 'Read more', 'wille-reviews' ); ?>" data-less="<?php esc_attr_e( 'Show less', 'wille-reviews' ); ?>">
+		<section class="<?php echo esc_attr( $root['class'] ); ?>" style="<?php echo esc_attr( $root['style'] ); ?>"<?php echo '' !== $anchor ? ' id="' . esc_attr( $anchor ) . '"' : ''; ?> aria-label="<?php esc_attr_e( 'Google reviews', 'wille-reviews' ); ?>" data-more="<?php esc_attr_e( 'Read more', 'wille-reviews' ); ?>" data-less="<?php esc_attr_e( 'Show less', 'wille-reviews' ); ?>">
 			<?php
 			if ( $args['header'] ) {
-				echo self::summary( $data, $is_demo ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- escaped in summary().
+				echo wp_kses( self::summary( $data, $is_demo ), self::HTML );
 			}
 			?>
 			<?php if ( ! empty( $reviews ) ) : ?>
@@ -347,16 +424,16 @@ class WILLEREV_Render {
 					<div class="willerev__items"<?php echo $carousel ? ' tabindex="0" role="group" aria-label="' . esc_attr__( 'Reviews, scroll horizontally', 'wille-reviews' ) . '"' : ''; ?>>
 						<?php
 						foreach ( $reviews as $rank => $review ) {
-							echo self::card( $review, $rank ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- escaped in card().
+							echo wp_kses( self::card( $review, $rank ), self::HTML );
 						}
 						?>
 					</div>
 					<?php if ( $carousel && count( $reviews ) > 1 ) : ?>
 						<button type="button" class="willerev__nav willerev__nav--prev" aria-label="<?php esc_attr_e( 'Previous reviews', 'wille-reviews' ); ?>" disabled>
-							<svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true" focusable="false"><path fill="currentColor" d="M12.7 15.3a1 1 0 0 1-1.4 1.4l-6-6a1 1 0 0 1 0-1.4l6-6a1 1 0 1 1 1.4 1.4L7.42 10l5.3 5.3Z"/></svg>
+							<svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true" focusable="false"><path fill="currentColor" d="M12.7 15.3a1 1 0 0 1-1.4 1.4l-6-6a1 1 0 0 1 0-1.4l6-6a1 1 0 1 1 1.4 1.4L7.42 10l5.3 5.3Z" /></svg>
 						</button>
 						<button type="button" class="willerev__nav willerev__nav--next" aria-label="<?php esc_attr_e( 'Next reviews', 'wille-reviews' ); ?>">
-							<svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true" focusable="false"><path fill="currentColor" d="M7.3 4.7a1 1 0 0 1 1.4-1.4l6 6a1 1 0 0 1 0 1.4l-6 6a1 1 0 1 1-1.4-1.4L12.58 10l-5.3-5.3Z"/></svg>
+							<svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true" focusable="false"><path fill="currentColor" d="M7.3 4.7a1 1 0 0 1 1.4-1.4l6 6a1 1 0 0 1 0 1.4l-6 6a1 1 0 1 1-1.4-1.4L12.58 10l-5.3-5.3Z" /></svg>
 						</button>
 					<?php endif; ?>
 				</div>
@@ -379,7 +456,7 @@ class WILLEREV_Render {
 		?>
 		<header class="willerev__header">
 			<div class="willerev__brand">
-				<?php echo self::google_logo( 22 ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- static SVG. ?>
+				<?php echo wp_kses( self::google_logo( 22 ), self::HTML ); ?>
 				<span class="willerev__brand-text"><?php esc_html_e( 'Google reviews', 'wille-reviews' ); ?></span>
 				<?php if ( $is_demo ) : ?>
 					<span class="willerev__demo"><?php esc_html_e( 'Sample data', 'wille-reviews' ); ?></span>
@@ -387,11 +464,11 @@ class WILLEREV_Render {
 			</div>
 			<div class="willerev__score">
 				<span class="willerev__rating"><?php echo esc_html( number_format_i18n( $rating, 1 ) ); ?></span>
-				<?php echo self::stars( $rating ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- escaped in stars(). ?>
+				<?php echo wp_kses( self::stars( $rating ), self::HTML ); ?>
 				<span class="willerev__count">
 					<?php
 					/* translators: %s: number of reviews */
-					printf( esc_html( _n( 'Based on %s review', 'Based on %s reviews', (int) $data['count'], 'wille-reviews' ) ), self::count_number( (int) $data['count'] ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- format escaped, number escaped in count_number().
+					echo wp_kses( sprintf( esc_html( _n( 'Based on %s review', 'Based on %s reviews', (int) $data['count'], 'wille-reviews' ) ), self::count_number( (int) $data['count'] ) ), self::HTML );
 					?>
 				</span>
 			</div>
@@ -421,7 +498,7 @@ class WILLEREV_Render {
 		?>
 		<article class="willerev-card" data-rating="<?php echo esc_attr( (string) (int) $review['rating'] ); ?>" data-rank="<?php echo esc_attr( (string) (int) $rank ); ?>">
 			<div class="willerev-card__head">
-				<?php echo self::avatar( $author, (string) $review['avatar'] ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- escaped in avatar(). ?>
+				<?php echo wp_kses( self::avatar( $author, (string) $review['avatar'] ), self::HTML ); ?>
 				<div class="willerev-card__meta">
 					<?php if ( '' !== (string) $review['author_url'] ) : ?>
 						<a class="willerev-card__author" href="<?php echo esc_url( (string) $review['author_url'] ); ?>" target="_blank" rel="noopener nofollow"><?php echo esc_html( $author ); ?></a>
@@ -430,12 +507,12 @@ class WILLEREV_Render {
 					<?php endif; ?>
 					<span class="willerev-card__time"><?php echo esc_html( self::when( $review ) ); ?></span>
 				</div>
-				<?php echo self::google_logo( 18 ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- static SVG. ?>
+				<?php echo wp_kses( self::google_logo( 18 ), self::HTML ); ?>
 			</div>
 			<div class="willerev-card__body">
-				<?php echo self::stars( (float) $review['rating'] ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- escaped in stars(). ?>
+				<?php echo wp_kses( self::stars( (float) $review['rating'] ), self::HTML ); ?>
 				<?php if ( '' !== (string) $review['text'] ) : ?>
-					<p class="willerev-card__text"><?php echo nl2br( esc_html( (string) $review['text'] ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- escaped before nl2br(). ?></p>
+					<p class="willerev-card__text"><?php echo wp_kses( nl2br( esc_html( (string) $review['text'] ) ), array( 'br' => array() ) ); ?></p>
 					<button type="button" class="willerev-card__more" aria-expanded="false" hidden><?php esc_html_e( 'Read more', 'wille-reviews' ); ?></button>
 				<?php endif; ?>
 			</div>
@@ -483,7 +560,7 @@ class WILLEREV_Render {
 	 */
 	public static function stars( $rating ) {
 		$rating = max( 0.0, min( 5.0, (float) $rating ) );
-		$star   = '<svg viewBox="0 0 20 20" aria-hidden="true" focusable="false"><path d="M10 1.6l2.35 4.76 5.25.76-3.8 3.7.9 5.23L10 14.5l-4.7 2.55.9-5.23-3.8-3.7 5.25-.76L10 1.6z"/></svg>';
+		$star   = '<svg viewBox="0 0 20 20" aria-hidden="true" focusable="false"><path d="M10 1.6l2.35 4.76 5.25.76-3.8 3.7.9 5.23L10 14.5l-4.7 2.55.9-5.23-3.8-3.7 5.25-.76L10 1.6z" /></svg>';
 		$row    = str_repeat( $star, 5 );
 		/* translators: %s: rating, e.g. 4.8 */
 		$label = sprintf( __( '%s out of 5 stars', 'wille-reviews' ), number_format_i18n( $rating, 1 ) );
@@ -565,28 +642,29 @@ class WILLEREV_Render {
 	 */
 	public static function badge( array $args, array $data, array $extra = array() ) {
 		$wrap = self::wrapper( self::link_target( $args['link'], $data ), 'willerev-badge', self::summary_label( $data ) );
+		$root = self::root_attributes( $args, $extra );
 		ob_start();
 		?>
-		<div <?php echo self::root_attributes( $args, $extra ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- escaped in root_attributes(). ?>>
-			<?php echo $wrap[0]; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- escaped in wrapper(). ?>
-				<?php echo self::google_logo( 26 ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- static SVG. ?>
+		<div class="<?php echo esc_attr( $root['class'] ); ?>" style="<?php echo esc_attr( $root['style'] ); ?>">
+			<?php echo wp_kses( $wrap[0], self::HTML ); ?>
+				<?php echo wp_kses( self::google_logo( 26 ), self::HTML ); ?>
 				<span class="willerev-badge__body" aria-hidden="true">
 					<span class="willerev-badge__title"><?php esc_html_e( 'Google rating', 'wille-reviews' ); ?></span>
 					<span class="willerev-badge__score">
 						<span class="willerev-badge__rating"><?php echo esc_html( number_format_i18n( (float) $data['rating'], 1 ) ); ?></span>
-						<?php echo self::stars( (float) $data['rating'] ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- escaped in stars(). ?>
+						<?php echo wp_kses( self::stars( (float) $data['rating'] ), self::HTML ); ?>
 					</span>
 					<span class="willerev-badge__count">
 						<?php
 						/* translators: %s: number of reviews */
-						printf( esc_html( _n( '%s review', '%s reviews', (int) $data['count'], 'wille-reviews' ) ), self::count_number( (int) $data['count'] ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- format escaped, number escaped in count_number().
+						echo wp_kses( sprintf( esc_html( _n( '%s review', '%s reviews', (int) $data['count'], 'wille-reviews' ) ), self::count_number( (int) $data['count'] ) ), self::HTML );
 						?>
 					</span>
 				</span>
-			<?php echo $wrap[1]; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- static closing tag. ?>
+			<?php echo wp_kses( $wrap[1], self::HTML ); ?>
 			<?php if ( in_array( 'willerev--floating', $extra, true ) ) : ?>
 				<button type="button" class="willerev-badge__close" aria-label="<?php esc_attr_e( 'Hide rating', 'wille-reviews' ); ?>">
-					<svg viewBox="0 0 20 20" width="12" height="12" aria-hidden="true" focusable="false"><path fill="currentColor" d="M4.3 4.3a1 1 0 0 1 1.4 0L10 8.6l4.3-4.3a1 1 0 1 1 1.4 1.4L11.4 10l4.3 4.3a1 1 0 0 1-1.4 1.4L10 11.4l-4.3 4.3a1 1 0 0 1-1.4-1.4L8.6 10 4.3 5.7a1 1 0 0 1 0-1.4Z"/></svg>
+					<svg viewBox="0 0 20 20" width="12" height="12" aria-hidden="true" focusable="false"><path fill="currentColor" d="M4.3 4.3a1 1 0 0 1 1.4 0L10 8.6l4.3-4.3a1 1 0 1 1 1.4 1.4L11.4 10l4.3 4.3a1 1 0 0 1-1.4 1.4L10 11.4l-4.3 4.3a1 1 0 0 1-1.4-1.4L8.6 10 4.3 5.7a1 1 0 0 1 0-1.4Z" /></svg>
 				</button>
 			<?php endif; ?>
 		</div>
@@ -604,35 +682,36 @@ class WILLEREV_Render {
 	protected static function social( array $args, array $data ) {
 		$faces = $args['avatars'] ? array_slice( self::select( (array) $data['reviews'], max( 4, $args['min_rating'] ), 5, 'newest' ), 0, 5 ) : array();
 		$wrap  = self::wrapper( self::link_target( $args['link'], $data ), 'willerev-social', self::summary_label( $data ) );
+		$root  = self::root_attributes( $args );
 		ob_start();
 		?>
-		<div <?php echo self::root_attributes( $args ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- escaped in root_attributes(). ?>>
-			<?php echo $wrap[0]; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- escaped in wrapper(). ?>
+		<div class="<?php echo esc_attr( $root['class'] ); ?>" style="<?php echo esc_attr( $root['style'] ); ?>">
+			<?php echo wp_kses( $wrap[0], self::HTML ); ?>
 				<?php if ( ! empty( $faces ) ) : ?>
 					<span class="willerev-social__faces" aria-hidden="true">
 						<?php
 						foreach ( $faces as $face ) {
-							echo self::avatar( '' !== (string) $face['author'] ? (string) $face['author'] : '?', (string) $face['avatar'] ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- escaped in avatar().
+							echo wp_kses( self::avatar( '' !== (string) $face['author'] ? (string) $face['author'] : '?', (string) $face['avatar'] ), self::HTML );
 						}
 						?>
 					</span>
 				<?php endif; ?>
 				<span class="willerev-social__body" aria-hidden="true">
 					<span class="willerev-social__score">
-						<?php echo self::stars( (float) $data['rating'] ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- escaped in stars(). ?>
+						<?php echo wp_kses( self::stars( (float) $data['rating'] ), self::HTML ); ?>
 						<span class="willerev-social__rating"><?php echo esc_html( number_format_i18n( (float) $data['rating'], 1 ) ); ?><span class="willerev-social__max">/5</span></span>
 					</span>
 					<span class="willerev-social__caption">
-						<?php echo self::google_logo( 14 ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- static SVG. ?>
+						<?php echo wp_kses( self::google_logo( 14 ), self::HTML ); ?>
 						<span>
 							<?php
 							/* translators: %s: number of reviews (bold) */
-							printf( esc_html( _n( '%s review on Google', '%s reviews on Google', (int) $data['count'], 'wille-reviews' ) ), self::count_number( (int) $data['count'], 'strong' ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- format escaped, number escaped in count_number().
+							echo wp_kses( sprintf( esc_html( _n( '%s review on Google', '%s reviews on Google', (int) $data['count'], 'wille-reviews' ) ), self::count_number( (int) $data['count'], 'strong' ) ), self::HTML );
 							?>
 						</span>
 					</span>
 				</span>
-			<?php echo $wrap[1]; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- static closing tag. ?>
+			<?php echo wp_kses( $wrap[1], self::HTML ); ?>
 		</div>
 		<?php
 		return (string) ob_get_clean();
@@ -659,10 +738,10 @@ class WILLEREV_Render {
 	public static function google_logo( $size = 20 ) {
 		return sprintf(
 			'<svg class="willerev-g" width="%1$d" height="%1$d" viewBox="0 0 24 24" aria-hidden="true" focusable="false">'
-			. '<path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z"/>'
-			. '<path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>'
-			. '<path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>'
-			. '<path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>'
+			. '<path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" />'
+			. '<path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" />'
+			. '<path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" />'
+			. '<path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" />'
 			. '</svg>',
 			(int) $size
 		);

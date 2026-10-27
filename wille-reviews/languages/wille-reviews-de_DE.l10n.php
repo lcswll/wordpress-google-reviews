@@ -148,7 +148,6 @@ return array(
 		'Save settings' => 'Einstellungen speichern',
 		'See all on Google' => 'Alle auf Google ansehen',
 		'Settings' => 'Einstellungen',
-		'Settings saved.' => 'Einstellungen gespeichert.',
 		'Shortcode for this design' => 'Shortcode für dieses Design',
 		'Shorten long reviews after' => 'Lange Bewertungen kürzen nach',
 		'Shorten long reviews after this many lines with a "Read more" button (0 = full text).' => 'Lange Bewertungen nach so vielen Zeilen mit „Mehr lesen“-Button kürzen (0 = voller Text).',
